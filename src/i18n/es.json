@@ -1,0 +1,121 @@
+{
+  "nav": {
+    "residence": "Residence",
+    "location": "Ubicación",
+    "houses": "Opciones casas",
+    "calculator": "Calcula tú hipoteca",
+    "contact": "Solicitar información"
+  },
+  "hero": {
+    "title": "A new way of luxury living",
+    "subtitle": "Calablanca Residences · Sitges",
+    "cta": "Solicitar Información"
+  },
+  "welcome": {
+    "title": "Bienvenidos a Calablanca Residences",
+    "subtitle": "Una colección exclusiva de viviendas donde el confort, la arquitectura y el Mediterráneo conviven en equilibrio.",
+    "description": "Un conjunto residencial privado formado por dos edificios de diseño contemporáneo, situados en La Plana, una de las zonas más tranquilas y valoradas de Sitges.",
+    "priceLabel": "Precio desde",
+    "priceValue": "850.000€",
+    "surfaceLabel": "Superficie desde",
+    "surfaceValue": "195 m2",
+    "bedroomsLabel": "Dormitorios",
+    "bedroomsValue": "3"
+  },
+  "architecture": {
+    "title": "Arquitectura",
+    "subtitle": "Arquitectura contemporánea en armonía con el entorno",
+    "description": "Dos edificios idénticos con fachadas perfectamente aisladas, grandes ventanales y voladizos que combinan piedra y madera, creando una estética sobria y atemporal. Una arquitectura pensada para integrarse, no para imponerse."
+  },
+  "passivhaus": {
+    "title": "Passivhaus",
+    "subtitle": "Vivir en una casa pasiva",
+    "description": "Calablanca Residences ha sido diseñada bajo los estándares Passivhaus, garantizando un consumo energético casi nulo junto a un elevado confort interior.",
+    "features": [
+      "Temperatura estable durante todo el año",
+      "Aislamiento térmico y acústico de altas prestaciones",
+      "Ventilación mecánica con recuperación de calor",
+      "Ahorro energético de hasta un 75%"
+    ],
+    "tagline": "Vivir mejor también es vivir de forma más eficiente."
+  },
+  "location": {
+    "title": "Ubicación",
+    "subtitle": "Sitges · Mediterráneo en estado puro",
+    "description": "A solo 30 minutos de Barcelona, Sitges es un enclave costero elegante y sofisticado, rodeado por el parque natural del Garraf y conocido por su estilo de vida mediterráneo.",
+    "distances": {
+      "beach": "10 minutos de la playa",
+      "airport": "20 minutos del aeropuerto",
+      "services": "Cerca de colegios internacionales y servicios"
+    }
+  },
+  "houses": {
+    "title": "Elige la casa que quieras",
+    "types": {
+      "type1": {
+        "bedrooms": "3 habitaciones",
+        "bathrooms": "2 baños",
+        "surface": "90-95 m²",
+        "price": "desde 820.000 €",
+        "description": "Pisos amplios con salón comedor y cocina abierta, terraza o balcón. Garaje y trastero incluidos"
+      },
+      "type2": {
+        "bedrooms": "4 habitaciones",
+        "bathrooms": "2-3 baños",
+        "surface": "100-105 m²",
+        "price": "desde 920.000 €",
+        "description": "Pisos amplios con salón comedor y cocina abierta, terraza o balcón. Garaje y trastero incluidos"
+      },
+      "type3": {
+        "bedrooms": "3-4 habitaciones",
+        "bathrooms": "2-3 baños",
+        "surface": "95-100 m²",
+        "price": "desde 980.000 €",
+        "description": "Planta baja con jardín. Pisos amplios con salón comedor y cocina abierta, terraza o balcón. Garaje y trastero incluidos"
+      }
+    }
+  },
+  "timeline": {
+    "title": "Estado obra",
+    "stages": [
+      "Comercialización",
+      "Permisos",
+      "Obra Iniciada",
+      "Últimos toques",
+      "Terminada"
+    ]
+  },
+  "contact": {
+    "title": "Calablanca Residences",
+    "subtitle": "Deja tu contacto para acceder al proceso de Venta Privada.",
+    "form": {
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "email": "Email",
+      "phone": "Teléfono",
+      "privacy": "Acepto la política de privacidad.",
+      "commercial": "Acepto recibir información comercial.",
+      "submit": "Enviar"
+    }
+  },
+  "calculator": {
+    "title": "Simulador de Hipoteca",
+    "propertyPrice": "Precio del inmueble",
+    "savings": "Ahorro aportado",
+    "years": "Plazo en años",
+    "interestType": "Tipo de interés",
+    "fixed": "Fijo",
+    "variable": "Variable",
+    "monthlyPayment": "Tu cuota mensual",
+    "mortgageAmount": "IMPORTE HIPOTECA",
+    "financingPercentage": "PORCENTAJE DE FINANCIACIÓN",
+    "propertyPriceLabel": "PRECIO DEL INMUEBLE",
+    "taxesLabel": "IMPUESTOS Y GASTOS COMPRA",
+    "totalCost": "COSTE TOTAL DEL INMUEBLE",
+    "totalWithMortgage": "COSTE TOTAL CON HIPOTECA",
+    "disclaimer": "Recuerda que los bancos suelen pedir una aportación mínima del 10% más gastos."
+  },
+  "footer": {
+    "partners": "AX Partners"
+  }
+}

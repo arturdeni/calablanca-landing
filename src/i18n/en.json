@@ -1,0 +1,121 @@
+{
+  "nav": {
+    "residence": "Residence",
+    "location": "Location",
+    "houses": "House options",
+    "calculator": "Calculate your mortgage",
+    "contact": "Request information"
+  },
+  "hero": {
+    "title": "A new way of luxury living",
+    "subtitle": "Calablanca Residences · Sitges",
+    "cta": "Request Information"
+  },
+  "welcome": {
+    "title": "Welcome to Calablanca Residences",
+    "subtitle": "An exclusive collection of homes where comfort, architecture and the Mediterranean coexist in balance.",
+    "description": "A private residential complex consisting of two contemporary design buildings, located in La Plana, one of the quietest and most valued areas of Sitges.",
+    "priceLabel": "Price from",
+    "priceValue": "€850,000",
+    "surfaceLabel": "Surface from",
+    "surfaceValue": "195 m2",
+    "bedroomsLabel": "Bedrooms",
+    "bedroomsValue": "3"
+  },
+  "architecture": {
+    "title": "Architecture",
+    "subtitle": "Contemporary architecture in harmony with the environment",
+    "description": "Two identical buildings with perfectly insulated facades, large windows and overhangs that combine stone and wood, creating a sober and timeless aesthetic. An architecture designed to integrate, not to impose."
+  },
+  "passivhaus": {
+    "title": "Passivhaus",
+    "subtitle": "Living in a passive house",
+    "description": "Calablanca Residences has been designed under Passivhaus standards, guaranteeing almost zero energy consumption together with high interior comfort.",
+    "features": [
+      "Stable temperature throughout the year",
+      "High performance thermal and acoustic insulation",
+      "Mechanical ventilation with heat recovery",
+      "Energy savings of up to 75%"
+    ],
+    "tagline": "Living better also means living more efficiently."
+  },
+  "location": {
+    "title": "Location",
+    "subtitle": "Sitges · Mediterranean in its purest form",
+    "description": "Just 30 minutes from Barcelona, Sitges is an elegant and sophisticated coastal enclave, surrounded by the Garraf natural park and known for its Mediterranean lifestyle.",
+    "distances": {
+      "beach": "10 minutes from the beach",
+      "airport": "20 minutes from the airport",
+      "services": "Close to international schools and services"
+    }
+  },
+  "houses": {
+    "title": "Choose the house you want",
+    "types": {
+      "type1": {
+        "bedrooms": "3 bedrooms",
+        "bathrooms": "2 bathrooms",
+        "surface": "90-95 m²",
+        "price": "from €820,000",
+        "description": "Spacious apartments with living room and open kitchen, terrace or balcony. Garage and storage room included"
+      },
+      "type2": {
+        "bedrooms": "4 bedrooms",
+        "bathrooms": "2-3 bathrooms",
+        "surface": "100-105 m²",
+        "price": "from €920,000",
+        "description": "Spacious apartments with living room and open kitchen, terrace or balcony. Garage and storage room included"
+      },
+      "type3": {
+        "bedrooms": "3-4 bedrooms",
+        "bathrooms": "2-3 bathrooms",
+        "surface": "95-100 m²",
+        "price": "from €980,000",
+        "description": "Ground floor with garden. Spacious apartments with living room and open kitchen, terrace or balcony. Garage and storage room included"
+      }
+    }
+  },
+  "timeline": {
+    "title": "Construction status",
+    "stages": [
+      "Marketing",
+      "Permits",
+      "Construction Started",
+      "Final touches",
+      "Completed"
+    ]
+  },
+  "contact": {
+    "title": "Calablanca Residences",
+    "subtitle": "Leave your contact to access the Private Sale process.",
+    "form": {
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email",
+      "phone": "Phone",
+      "privacy": "I accept the privacy policy.",
+      "commercial": "I accept receiving commercial information.",
+      "submit": "Send"
+    }
+  },
+  "calculator": {
+    "title": "Mortgage Calculator",
+    "propertyPrice": "Property price",
+    "savings": "Savings contributed",
+    "years": "Term in years",
+    "interestType": "Interest type",
+    "fixed": "Fixed",
+    "variable": "Variable",
+    "monthlyPayment": "Your monthly payment",
+    "mortgageAmount": "MORTGAGE AMOUNT",
+    "financingPercentage": "FINANCING PERCENTAGE",
+    "propertyPriceLabel": "PROPERTY PRICE",
+    "taxesLabel": "TAXES AND PURCHASE EXPENSES",
+    "totalCost": "TOTAL PROPERTY COST",
+    "totalWithMortgage": "TOTAL COST WITH MORTGAGE",
+    "disclaimer": "Remember that banks usually require a minimum contribution of 10% plus expenses."
+  },
+  "footer": {
+    "partners": "AX Partners"
+  }
+}

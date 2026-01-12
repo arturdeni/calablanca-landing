@@ -1,0 +1,117 @@
+---
+const { lang = 'es' } = Astro.props;
+import { useTranslations } from '../i18n';
+const t = useTranslations(lang);
+
+const isEnglish = lang === 'en';
+const toggleLangUrl = isEnglish ? '/' : '/en/';
+---
+
+<header class="header">
+  <div class="container">
+    <div class="header__inner">
+      <a href={`/${lang === 'en' ? 'en/' : ''}`} class="header__logo">
+        <span class="header__logo-text">Calablanca Residences</span>
+      </a>
+
+      <nav class="header__nav">
+        <ul class="header__nav-list">
+          <li><a href="#residence">{t('nav.residence')}</a></li>
+          <li><a href="#location">{t('nav.location')}</a></li>
+          <li><a href="#houses">{t('nav.houses')}</a></li>
+          <li><a href="#calculator">{t('nav.calculator')}</a></li>
+          <li><a href="#contact" class="header__cta">{t('nav.contact')}</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__lang">
+        <a href={toggleLangUrl} class="header__lang-toggle">
+          {isEnglish ? 'ES' : 'EN'}
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-sm) 0;
+    gap: var(--space-md);
+  }
+
+  .header__logo-text {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  .header__nav {
+    display: none;
+  }
+
+  .header__nav-list {
+    display: flex;
+    gap: var(--space-md);
+    list-style: none;
+    align-items: center;
+  }
+
+  .header__nav-list a {
+    font-size: var(--font-size-small);
+    font-weight: 500;
+    transition: color var(--transition-fast);
+
+    &:hover {
+      color: var(--color-secondary);
+      opacity: 1;
+    }
+  }
+
+  .header__cta {
+    padding: var(--space-xs) var(--space-sm);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-radius: 4px;
+    transition: background-color var(--transition-fast);
+
+    &:hover {
+      background-color: var(--color-secondary);
+      opacity: 1;
+    }
+  }
+
+  .header__lang-toggle {
+    font-size: var(--font-size-small);
+    font-weight: 600;
+    padding: var(--space-xs) var(--space-sm);
+    border: 1px solid var(--color-primary);
+    border-radius: 4px;
+    transition: all var(--transition-fast);
+
+    &:hover {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      opacity: 1;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .header__nav {
+      display: block;
+    }
+  }
+</style>

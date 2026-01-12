@@ -1,16 +1,116 @@
 ---
+import Layout from '../layouts/Layout.astro';
 
+const lang = 'es';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Calablanca Residences · Sitges" lang={lang}>
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <div class="container">
+      <!-- TODO: Hero - Título grande + imagen de fondo + CTA -->
+    </div>
+  </section>
+
+  <!-- Welcome Section -->
+  <section id="residence" class="welcome">
+    <div class="container">
+      <!-- TODO: Bienvenidos - Intro + datos (precio, superficie, dormitorios) + galería -->
+    </div>
+  </section>
+
+  <!-- Architecture Section -->
+  <section id="architecture" class="architecture">
+    <div class="container">
+      <!-- TODO: Arquitectura - Fondo oscuro + imagen complejo + texto -->
+    </div>
+  </section>
+
+  <!-- Passivhaus Section -->
+  <section id="passivhaus" class="passivhaus">
+    <div class="container">
+      <!-- TODO: Passivhaus - Beneficios casa pasiva + imagen interior -->
+    </div>
+  </section>
+
+  <!-- Location Section -->
+  <section id="location" class="location">
+    <div class="container">
+      <!-- TODO: Ubicación - Mapa Sitges + puntos de interés + distancias -->
+    </div>
+  </section>
+
+  <!-- Houses Section -->
+  <section id="houses" class="houses">
+    <div class="container">
+      <!-- TODO: Elige tu casa - Tabla con tipos de vivienda -->
+    </div>
+  </section>
+
+  <!-- Timeline Section -->
+  <section id="timeline" class="timeline">
+    <div class="container">
+      <!-- TODO: Estado obra - Timeline del estado actual -->
+    </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <!-- TODO: Formulario contacto - Nombre, apellido, email, teléfono + checkboxes -->
+    </div>
+  </section>
+
+  <!-- Calculator Section -->
+  <section id="calculator" class="calculator">
+    <div class="container">
+      <!-- TODO: Simulador hipoteca - Calculadora interactiva -->
+    </div>
+  </section>
+</Layout>
+
+<style>
+  section {
+    padding: var(--space-xl) 0;
+  }
+
+  /* Placeholder styles */
+  .hero {
+    min-height: 100vh;
+    background-color: var(--color-light);
+  }
+
+  .welcome {
+    background-color: var(--color-white);
+  }
+
+  .architecture {
+    background-color: var(--color-dark);
+    color: var(--color-white);
+  }
+
+  .passivhaus {
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+  }
+
+  .location {
+    background-color: var(--color-white);
+  }
+
+  .houses {
+    background-color: var(--color-accent);
+  }
+
+  .timeline {
+    background-color: var(--color-white);
+  }
+
+  .contact {
+    background-color: var(--color-light);
+  }
+
+  .calculator {
+    background-color: var(--color-white);
+  }
+</style>
