@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
+import Welcome from '../components/Welcome.astro';
 
 const lang = 'es';
 ---
@@ -9,11 +10,7 @@ const lang = 'es';
   <Hero lang={lang} />
 
   <!-- Welcome Section -->
-  <section id="residence" class="welcome">
-    <div class="container">
-      <!-- TODO: Bienvenidos - Intro + datos (precio, superficie, dormitorios) + galería -->
-    </div>
-  </section>
+  <Welcome lang={lang} />
 
   <!-- Architecture Section -->
   <section id="architecture" class="architecture">
@@ -71,10 +68,6 @@ const lang = 'es';
   }
 
   /* Placeholder styles */
-  .welcome {
-    background-color: var(--color-white);
-  }
-
   .architecture {
     background-color: var(--color-dark);
     color: var(--color-white);

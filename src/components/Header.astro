@@ -35,18 +35,27 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
     left: 0;
     right: 0;
     z-index: 100;
-    background-color: transparent;
-    transition: background-color var(--transition-base);
+    transition: transform 0.3s ease;
   }
 
+  /* Estado inicial: sin blend, texto blanco puro */
+  .header--top {
+    mix-blend-mode: normal;
+  }
+
+  .header--top .header__logo-text,
+  .header--top .header__nav-list a {
+    color: var(--color-white);
+  }
+
+  /* Estado scrolled: con blend para contraste */
   .header--scrolled {
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
+    mix-blend-mode: exclusion;
   }
 
-  .header--scrolled .header__logo-text,
-  .header--scrolled .header__nav-list a {
-    color: var(--color-primary);
+  /* Header oculto al hacer scroll hacia abajo */
+  .header--hidden {
+    transform: translateY(-100%);
   }
 
   .header__inner {
@@ -60,7 +69,7 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
   .header__logo-text {
     font-size: 1.25rem;
     font-weight: 600;
-    color: var(--color-white);
+    color: #e0e0e0;
     transition: color var(--transition-fast);
   }
 
@@ -78,7 +87,7 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
   .header__nav-list a {
     font-size: var(--font-size-small);
     font-weight: 500;
-    color: var(--color-white);
+    color: #e0e0e0;
     transition: color var(--transition-fast), opacity var(--transition-fast);
 
     &:hover {
@@ -95,13 +104,32 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
 
 <script>
   const header = document.querySelector('.header');
+  let lastScrollY = 0;
+  const scrollThreshold = 50;
 
   function handleScroll() {
-    if (window.scrollY > 50) {
-      header.classList.add('header--scrolled');
-    } else {
+    const currentScrollY = window.scrollY;
+
+    // Estado top vs scrolled
+    if (currentScrollY <= scrollThreshold) {
+      header.classList.add('header--top');
       header.classList.remove('header--scrolled');
+      header.classList.remove('header--hidden');
+    } else {
+      header.classList.remove('header--top');
+      header.classList.add('header--scrolled');
+
+      // Mostrar/ocultar según dirección del scroll
+      if (currentScrollY > lastScrollY) {
+        // Scroll hacia abajo: ocultar
+        header.classList.add('header--hidden');
+      } else {
+        // Scroll hacia arriba: mostrar
+        header.classList.remove('header--hidden');
+      }
     }
+
+    lastScrollY = currentScrollY;
   }
 
   window.addEventListener('scroll', handleScroll);

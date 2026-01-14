@@ -1,0 +1,288 @@
+---
+const { lang = 'es' } = Astro.props;
+
+const translations = await import(`../i18n/${lang}.json`);
+const t = translations.welcome;
+
+const galleryImages = [
+  '/images/loader/slide-1.jpg',
+  '/images/loader/slide-2.jpg',
+  '/images/loader/slide-3.jpg',
+  '/images/loader/slide-4.jpg',
+];
+---
+
+<section class="welcome" id="welcome">
+  <div class="welcome__container">
+    <!-- Left column: Text content -->
+    <div class="welcome__content">
+      <h2 class="welcome__title">{t.title}</h2>
+
+      <div class="welcome__text">
+        {t.paragraphs.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+      </div>
+    </div>
+
+    <!-- Right column: Gallery -->
+    <div class="welcome__gallery">
+      <div class="welcome__gallery-header">
+        <h3 class="welcome__gallery-title">{t.galleryTitle}</h3>
+        <div class="welcome__gallery-nav">
+          <button class="welcome__gallery-btn welcome__gallery-btn--prev" aria-label="Previous">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M19 12H5M5 12L12 19M5 12L12 5" />
+            </svg>
+          </button>
+          <button class="welcome__gallery-btn welcome__gallery-btn--next" aria-label="Next">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="welcome__gallery-slider">
+        <div class="welcome__gallery-track">
+          {galleryImages.map((src, index) => (
+            <div class="welcome__gallery-slide">
+              <img src={src} alt={`${t.galleryTitle} ${index + 1}`} loading="lazy" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats bar -->
+  <div class="welcome__stats">
+    <div class="welcome__stats-container">
+      <div class="welcome__stat">
+        <span class="welcome__stat-label">{t.priceLabel}</span>
+        <span class="welcome__stat-value">{t.priceValue}</span>
+      </div>
+
+      <div class="welcome__stat">
+        <span class="welcome__stat-label">{t.surfaceLabel}</span>
+        <span class="welcome__stat-value">{t.surfaceValue}</span>
+      </div>
+
+      <div class="welcome__stat">
+        <span class="welcome__stat-label">{t.bedroomsLabel}</span>
+        <span class="welcome__stat-value">{t.bedroomsValue}</span>
+      </div>
+
+      <a href="#contact" class="welcome__cta">{t.cta}</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .welcome {
+    padding: var(--space-xl) 0 0;
+  }
+
+  .welcome__container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--content-padding);
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  /* Content (left column) */
+  .welcome__content {
+    max-width: 500px;
+  }
+
+  .welcome__title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: var(--space-md);
+  }
+
+  .welcome__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .welcome__text p {
+    font-size: var(--font-size-small);
+    line-height: 1.7;
+    color: var(--color-primary);
+    opacity: 0.85;
+  }
+
+  /* Gallery (right column) */
+  .welcome__gallery {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .welcome__gallery-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .welcome__gallery-title {
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    font-weight: 400;
+  }
+
+  .welcome__gallery-nav {
+    display: flex;
+    gap: var(--space-xs);
+  }
+
+  .welcome__gallery-btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    transition: opacity var(--transition-fast);
+
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+
+  .welcome__gallery-slider {
+    overflow: hidden;
+    border-radius: 4px;
+  }
+
+  .welcome__gallery-track {
+    display: flex;
+    transition: transform var(--transition-slow);
+  }
+
+  .welcome__gallery-slide {
+    flex: 0 0 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  /* Stats bar */
+  .welcome__stats {
+    margin-top: var(--space-lg);
+    padding: var(--space-md) 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .welcome__stats-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--content-padding);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .welcome__stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .welcome__stat-label {
+    font-size: 0.875rem;
+    color: var(--color-primary);
+    opacity: 0.7;
+  }
+
+  .welcome__stat-value {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+  }
+
+  .welcome__cta {
+    margin-left: auto;
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--color-primary);
+    font-size: 0.875rem;
+    text-transform: none;
+    transition: all var(--transition-fast);
+
+    &:hover {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      opacity: 1;
+    }
+  }
+
+  /* Tablet and up */
+  @media (min-width: 768px) {
+    .welcome__container {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+      align-items: start;
+    }
+
+    .welcome__stats-container {
+      gap: var(--space-xl);
+    }
+  }
+
+  /* Desktop */
+  @media (min-width: 1024px) {
+    .welcome {
+      padding: var(--space-xxl) 0 0;
+    }
+
+    .welcome__container {
+      grid-template-columns: 0.8fr 1.2fr;
+    }
+
+    .welcome__content {
+      padding-top: var(--space-md);
+    }
+
+    .welcome__stats {
+      margin-top: var(--space-xl);
+      padding: var(--space-lg) 0;
+    }
+  }
+</style>
+
+<script>
+  // Simple gallery slider
+  const track = document.querySelector('.welcome__gallery-track');
+  const slides = document.querySelectorAll('.welcome__gallery-slide');
+  const prevBtn = document.querySelector('.welcome__gallery-btn--prev');
+  const nextBtn = document.querySelector('.welcome__gallery-btn--next');
+
+  let currentIndex = 0;
+  const totalSlides = slides.length;
+
+  function updateSlider() {
+    if (track) {
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+  }
+
+  prevBtn?.addEventListener('click', () => {
+    currentIndex = currentIndex === 0 ? totalSlides - 1 : currentIndex - 1;
+    updateSlider();
+  });
+
+  nextBtn?.addEventListener('click', () => {
+    currentIndex = currentIndex === totalSlides - 1 ? 0 : currentIndex + 1;
+    updateSlider();
+  });
+</script>

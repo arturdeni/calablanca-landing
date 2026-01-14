@@ -12,15 +12,21 @@
     "cta": "Request Information"
   },
   "welcome": {
-    "title": "Welcome to Calablanca Residences",
-    "subtitle": "An exclusive collection of homes where comfort, architecture and the Mediterranean coexist in balance.",
-    "description": "A private residential complex consisting of two contemporary design buildings, located in La Plana, one of the quietest and most valued areas of Sitges.",
+    "title": "Welcome to Cala Blanca Residences",
+    "paragraphs": [
+      "A new development property by AX Partners, consisting of two residential buildings with 29 homes and a commercial space, located in La Plana, one of the quietest and most valued areas of Sitges.",
+      "A place designed to enjoy space, natural light and well-being, without giving up luxury.",
+      "Most homes are over 100 m², featuring open interiors and spacious terraces with open views of the Mediterranean surroundings.",
+      "Each layout has been carefully designed to offer a comfortable, functional and elegant living experience. Homes with 1 to 4 bedrooms, terraces and private gardens, noble materials and high-quality finishes."
+    ],
+    "galleryTitle": "Spaces designed for comfort",
     "priceLabel": "Price from",
     "priceValue": "€850,000",
     "surfaceLabel": "Surface from",
-    "surfaceValue": "195 m2",
+    "surfaceValue": "100 m2",
     "bedroomsLabel": "Bedrooms",
-    "bedroomsValue": "3"
+    "bedroomsValue": "1-4",
+    "cta": "Request Information"
   },
   "architecture": {
     "title": "Architecture",
