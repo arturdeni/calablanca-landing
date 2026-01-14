@@ -1,0 +1,98 @@
+---
+const { lang = 'es', image = '/images/hero.jpg' } = Astro.props;
+import { useTranslations } from '../i18n';
+const t = useTranslations(lang);
+---
+
+<section class="hero" data-hero>
+  <div class="hero__background">
+    <img src={image} alt="Calablanca Residences" />
+  </div>
+
+  <div class="hero__content container">
+    <div class="hero__left">
+      <h1 class="hero__title" data-hero-title>{t('hero.title')}</h1>
+      <h3 class="hero__subtitle" data-hero-subtitle>{t('hero.subtitle')}</h3>
+    </div>
+
+    <div class="hero__right">
+      <p class="hero__intro" data-hero-intro>{t('welcome.subtitle')}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: stretch;
+    color: var(--color-white);
+  }
+
+  .hero__background {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: var(--color-dark);
+
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.3) 0%,
+        rgba(0, 0, 0, 0.1) 50%,
+        rgba(0, 0, 0, 0.4) 100%
+      );
+    }
+  }
+
+  .hero__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: var(--space-xxl);
+    padding-bottom: var(--space-xl);
+  }
+
+  .hero__left {
+    max-width: 500px;
+    padding: var(--space-lg) 0;
+  }
+
+  .hero__right {
+    max-width: 300px;
+    align-self: flex-end;
+  }
+
+  .hero__title {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: var(--space-sm);
+
+    & > :global(*) {
+      margin: -0.1em -0.05em;
+      padding: 0.1em 0.05em;
+    }
+  }
+
+  .hero__subtitle {
+    opacity: 0.9;
+  }
+
+  .hero__intro {
+    font-size: var(--font-size-small);
+    line-height: 1.6;
+    text-align: right;
+  }
+</style>

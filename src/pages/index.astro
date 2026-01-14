@@ -1,16 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
 
 const lang = 'es';
 ---
 
 <Layout title="Calablanca Residences · Sitges" lang={lang}>
-  <!-- Hero Section -->
-  <section id="hero" class="hero">
-    <div class="container">
-      <!-- TODO: Hero - Título grande + imagen de fondo + CTA -->
-    </div>
-  </section>
+  <Hero lang={lang} />
 
   <!-- Welcome Section -->
   <section id="residence" class="welcome">
@@ -75,11 +71,6 @@ const lang = 'es';
   }
 
   /* Placeholder styles */
-  .hero {
-    min-height: 100vh;
-    background-color: var(--color-light);
-  }
-
   .welcome {
     background-color: var(--color-white);
   }

@@ -1,0 +1,177 @@
+---
+/**
+ * Loader - Animación de carga global de la página
+ *
+ * Muestra thumbnails que se desplazan horizontalmente,
+ * luego una imagen se expande a fullscreen revelando el Hero.
+ *
+ * Props:
+ * - images: Array de objetos { src, alt } para las miniaturas
+ */
+
+const { images = [] } = Astro.props;
+
+// Imágenes por defecto
+// La imagen central (índice 2) usa hero.jpg para transición seamless
+const defaultImages = [
+  { src: '/images/loader/slide-1.jpg', alt: 'Calablanca Residences vista 1' },
+  { src: '/images/loader/slide-2.jpg', alt: 'Calablanca Residences vista 2' },
+  { src: '/images/hero.jpg', alt: 'Calablanca Residences' },
+  { src: '/images/loader/slide-3.jpg', alt: 'Calablanca Residences vista 3' },
+  { src: '/images/loader/slide-4.jpg', alt: 'Calablanca Residences vista 4' },
+];
+
+const loaderImages = images.length > 0 ? images : defaultImages;
+---
+
+<div class="loader is--loading is--hidden" data-loader>
+  <div class="loader__wrap">
+    <div class="loader__groups">
+      <!-- Grupo duplicado (posición absoluta, para efecto carrusel) -->
+      <div class="loader__group is--duplicate">
+        {loaderImages.map((img, index) => (
+          <div class="loader__single">
+            <div class="loader__media">
+              <img
+                src={img.src}
+                alt={img.alt}
+                class="loader__img"
+                loading="eager"
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Grupo principal (posición relativa) -->
+      <div class="loader__group is--relative">
+        {loaderImages.map((img, index) => (
+          <div class="loader__single">
+            <div class:list={[
+              'loader__media',
+              index === 2 && 'is--scaling is--radius'
+            ]}>
+              <img
+                src={img.src}
+                alt={img.alt}
+                class:list={[
+                  'loader__img',
+                  index !== 2 && 'is--scale-down'
+                ]}
+                loading="eager"
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Gradientes laterales -->
+    <div class="loader__fade"></div>
+    <div class="loader__fade is--right"></div>
+  </div>
+</div>
+
+<style>
+  .loader {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-loader);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-loader-bg);
+    overflow: hidden;
+  }
+
+  .loader.is--hidden {
+    display: none;
+  }
+
+  .loader.is--done {
+    pointer-events: none;
+  }
+
+  .loader__wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--loader-font-size);
+  }
+
+  .loader__groups {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .loader__group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5em;
+  }
+
+  .loader__group.is--duplicate {
+    position: absolute;
+  }
+
+  .loader__group.is--relative {
+    position: relative;
+    left: 100%;
+  }
+
+  .loader__single {
+    position: relative;
+    padding: 0 1em;
+  }
+
+  .loader__media {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10em;
+    height: 10em;
+    border-radius: 0.5em;
+  }
+
+  .loader__media.is--scaling {
+    display: flex;
+    border-radius: 0;
+    will-change: transform;
+    transition: border-radius 0.5s cubic-bezier(1, 0, 0, 1);
+  }
+
+  .loader__media.is--scaling.is--radius {
+    border-radius: 0.5em;
+  }
+
+  .loader__img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+  }
+
+  .loader__img.is--scale-down {
+    will-change: transform;
+  }
+
+  .loader__fade {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 5em;
+    height: calc(100% + 2px);
+    background-image: linear-gradient(90deg, var(--color-loader-bg) 20%, transparent);
+    pointer-events: none;
+  }
+
+  .loader__fade.is--right {
+    left: auto;
+    right: -1px;
+    transform: scaleX(-1);
+  }
+</style>

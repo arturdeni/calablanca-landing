@@ -20,15 +20,10 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
           <li><a href="#location">{t('nav.location')}</a></li>
           <li><a href="#houses">{t('nav.houses')}</a></li>
           <li><a href="#calculator">{t('nav.calculator')}</a></li>
-          <li><a href="#contact" class="header__cta">{t('nav.contact')}</a></li>
+          <li><a href="#contact">{t('nav.contact')}</a></li>
+          <li><a href={toggleLangUrl}>{isEnglish ? 'ES' : 'EN'}</a></li>
         </ul>
       </nav>
-
-      <div class="header__lang">
-        <a href={toggleLangUrl} class="header__lang-toggle">
-          {isEnglish ? 'ES' : 'EN'}
-        </a>
-      </div>
     </div>
   </div>
 </header>
@@ -40,23 +35,33 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
     left: 0;
     right: 0;
     z-index: 100;
+    background-color: transparent;
+    transition: background-color var(--transition-base);
+  }
+
+  .header--scrolled {
     background-color: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .header--scrolled .header__logo-text,
+  .header--scrolled .header__nav-list a {
+    color: var(--color-primary);
   }
 
   .header__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--space-sm) 0;
+    padding: var(--space-md) 0;
     gap: var(--space-md);
   }
 
   .header__logo-text {
     font-size: 1.25rem;
     font-weight: 600;
-    color: var(--color-primary);
+    color: var(--color-white);
+    transition: color var(--transition-fast);
   }
 
   .header__nav {
@@ -65,7 +70,7 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
 
   .header__nav-list {
     display: flex;
-    gap: var(--space-md);
+    gap: var(--space-lg);
     list-style: none;
     align-items: center;
   }
@@ -73,39 +78,11 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
   .header__nav-list a {
     font-size: var(--font-size-small);
     font-weight: 500;
-    transition: color var(--transition-fast);
-
-    &:hover {
-      color: var(--color-secondary);
-      opacity: 1;
-    }
-  }
-
-  .header__cta {
-    padding: var(--space-xs) var(--space-sm);
-    background-color: var(--color-primary);
     color: var(--color-white);
-    border-radius: 4px;
-    transition: background-color var(--transition-fast);
+    transition: color var(--transition-fast), opacity var(--transition-fast);
 
     &:hover {
-      background-color: var(--color-secondary);
-      opacity: 1;
-    }
-  }
-
-  .header__lang-toggle {
-    font-size: var(--font-size-small);
-    font-weight: 600;
-    padding: var(--space-xs) var(--space-sm);
-    border: 1px solid var(--color-primary);
-    border-radius: 4px;
-    transition: all var(--transition-fast);
-
-    &:hover {
-      background-color: var(--color-primary);
-      color: var(--color-white);
-      opacity: 1;
+      opacity: 0.8;
     }
   }
 
@@ -115,3 +92,18 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
     }
   }
 </style>
+
+<script>
+  const header = document.querySelector('.header');
+
+  function handleScroll() {
+    if (window.scrollY > 50) {
+      header.classList.add('header--scrolled');
+    } else {
+      header.classList.remove('header--scrolled');
+    }
+  }
+
+  window.addEventListener('scroll', handleScroll);
+  handleScroll();
+</script>
