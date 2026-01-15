@@ -192,16 +192,9 @@ export function initLoader() {
   });
 }
 
-// Forzar scroll al top inmediatamente
-if (typeof window !== 'undefined') {
-  window.history.scrollRestoration = 'manual';
-  window.scrollTo(0, 0);
-}
-
 // Inicializar cuando el DOM y las fuentes estén listas
 if (typeof window !== 'undefined') {
   document.addEventListener('DOMContentLoaded', () => {
-    window.scrollTo(0, 0);
     document.fonts.ready.then(() => {
       initLoader();
     });

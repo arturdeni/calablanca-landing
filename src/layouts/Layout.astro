@@ -23,6 +23,14 @@ const { title = "Calablanca Residences · Sitges", lang = "es" } = Astro.props;
       name="description"
       content="Calablanca Residences - Viviendas de lujo en Sitges con certificación Passivhaus"
     />
+
+    <!-- Force scroll to top on page load - must be in head to run before browser restores scroll -->
+    <script is:inline>
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      window.scrollTo(0, 0);
+    </script>
   </head>
   <body>
     <Loader />
