@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import Welcome from '../components/Welcome.astro';
+import Characteristics from '../components/Characteristics.astro';
 
 const lang = 'es';
 ---
@@ -12,12 +13,8 @@ const lang = 'es';
   <!-- Welcome Section -->
   <Welcome lang={lang} />
 
-  <!-- Architecture Section -->
-  <section id="architecture" class="architecture">
-    <div class="container">
-      <!-- TODO: Arquitectura - Fondo oscuro + imagen complejo + texto -->
-    </div>
-  </section>
+  <!-- Characteristics Section -->
+  <Characteristics lang={lang} />
 
   <!-- Passivhaus Section -->
   <section id="passivhaus" class="passivhaus">
@@ -68,11 +65,6 @@ const lang = 'es';
   }
 
   /* Placeholder styles */
-  .architecture {
-    background-color: var(--color-dark);
-    color: var(--color-white);
-  }
-
   .passivhaus {
     background-color: var(--color-secondary);
     color: var(--color-white);

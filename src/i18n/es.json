@@ -28,10 +28,18 @@
     "bedroomsValue": "1-4",
     "cta": "Solicitar Información"
   },
-  "architecture": {
-    "title": "Arquitectura",
-    "subtitle": "Arquitectura contemporánea en armonía con el entorno",
-    "description": "Dos edificios idénticos con fachadas perfectamente aisladas, grandes ventanales y voladizos que combinan piedra y madera, creando una estética sobria y atemporal. Una arquitectura pensada para integrarse, no para imponerse."
+  "characteristics": {
+    "title": "Características de la promoción",
+    "features": {
+      "parking": "Parking comunitario",
+      "pool": "Piscina comunitaria",
+      "chill": "Cubierta chill out",
+      "garden": "Jardinería de bajo mantenimiento",
+      "kitchen": "Cocina comedor abierta al salón",
+      "storage": "Trastero",
+      "elevator": "Ascensor",
+      "terraces": "Terrazas y jardines privados"
+    }
   },
   "passivhaus": {
     "title": "Passivhaus",

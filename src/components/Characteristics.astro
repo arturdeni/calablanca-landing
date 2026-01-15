@@ -1,0 +1,221 @@
+---
+const { lang = "es" } = Astro.props;
+
+const translations = await import(`../i18n/${lang}.json`);
+const t = translations.characteristics;
+
+const features = [
+  { id: "parking", icon: "icon-parking.svg" },
+  { id: "pool", icon: "icon-pool.svg" },
+  { id: "chill", icon: "icon-chill.svg" },
+  { id: "garden", icon: "icon-garden.svg" },
+  { id: "kitchen", icon: "icon-kitchen.svg" },
+  { id: "storage", icon: "icon-storage.svg" },
+  { id: "elevator", icon: "icon-elevator.svg" },
+  { id: "terraces", icon: "icon-terraces.svg" },
+];
+---
+
+<section class="characteristics" id="characteristics">
+  <div class="characteristics__background">
+    <img
+      src="/images/characteristics-bg.webp"
+      alt=""
+      class="characteristics__bg-image"
+      loading="lazy"
+    />
+  </div>
+
+  <div class="characteristics__content">
+    <div class="characteristics__header">
+      <h2 class="characteristics__title">{t.title}</h2>
+
+      <ul class="characteristics__features">
+        {
+          features.map((feature) => (
+            <li class="characteristics__feature">
+              <span
+                class="characteristics__feature-icon"
+                data-icon={feature.id}
+              >
+                <!-- Icon will be inserted here via SVG import -->
+              </span>
+              <span class="characteristics__feature-label">
+                {t.features[feature.id]}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .characteristics {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    overflow: hidden;
+  }
+
+  /* Background image */
+  .characteristics__background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.4) 0%,
+        rgba(0, 0, 0, 0.15) 40%,
+        rgba(0, 0, 0, 0.1) 100%
+      );
+    }
+  }
+
+  .characteristics__bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+  }
+
+  /* Content overlay */
+  .characteristics__content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding: var(--space-lg) var(--content-padding);
+  }
+
+  .characteristics__header {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .characteristics__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.1;
+    color: var(--color-white);
+  }
+
+  /* Features grid */
+  .characteristics__features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .characteristics__feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .characteristics__feature-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+
+    & :global(svg) {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .characteristics__feature-label {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    color: var(--color-white);
+    line-height: 1.3;
+    max-width: 100px;
+  }
+
+  /* Tablet */
+  @media (min-width: 768px) {
+    .characteristics__header {
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-xl);
+    }
+
+    .characteristics__title {
+      flex-shrink: 0;
+      max-width: 400px;
+    }
+
+    .characteristics__features {
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-lg);
+    }
+
+    .characteristics__feature-icon {
+      width: 56px;
+      height: 56px;
+    }
+
+    .characteristics__feature-label {
+      font-size: 0.8125rem;
+    }
+  }
+
+  /* Desktop */
+  @media (min-width: 1024px) {
+    .characteristics__features {
+      grid-template-columns: repeat(8, 1fr);
+      gap: var(--space-md);
+    }
+
+    .characteristics__feature-icon {
+      width: 64px;
+      height: 64px;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const features = document.querySelectorAll(".characteristics__feature");
+
+  if (features.length) {
+    gsap.to(features, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      stagger: 0.1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: ".characteristics",
+        start: "top 70%",
+        once: true,
+      },
+    });
+  }
+</script>

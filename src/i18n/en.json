@@ -28,10 +28,18 @@
     "bedroomsValue": "1-4",
     "cta": "Request Information"
   },
-  "architecture": {
-    "title": "Architecture",
-    "subtitle": "Contemporary architecture in harmony with the environment",
-    "description": "Two identical buildings with perfectly insulated facades, large windows and overhangs that combine stone and wood, creating a sober and timeless aesthetic. An architecture designed to integrate, not to impose."
+  "characteristics": {
+    "title": "Development features",
+    "features": {
+      "parking": "Community parking",
+      "pool": "Community pool",
+      "chill": "Chill out rooftop",
+      "garden": "Low maintenance landscaping",
+      "kitchen": "Open kitchen living room",
+      "storage": "Storage room",
+      "elevator": "Elevator",
+      "terraces": "Private terraces and gardens"
+    }
   },
   "passivhaus": {
     "title": "Passivhaus",
