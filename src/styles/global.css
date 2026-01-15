@@ -93,3 +93,8 @@ button {
   white-space: nowrap;
   border: 0;
 }
+
+/* Text reveal animation - hide until JS initializes */
+[data-text-reveal] {
+  visibility: hidden;
+}

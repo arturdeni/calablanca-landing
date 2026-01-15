@@ -1,14 +1,14 @@
 ---
-const { lang = 'es' } = Astro.props;
+const { lang = "es" } = Astro.props;
 
 const translations = await import(`../i18n/${lang}.json`);
 const t = translations.welcome;
 
 const galleryImages = [
-  '/images/loader/slide-1.jpg',
-  '/images/loader/slide-2.jpg',
-  '/images/loader/slide-3.jpg',
-  '/images/loader/slide-4.jpg',
+  "/images/loader/slide-1.jpg",
+  "/images/loader/slide-2.jpg",
+  "/images/loader/slide-3.jpg",
+  "/images/loader/slide-4.jpg",
 ];
 ---
 
@@ -16,28 +16,48 @@ const galleryImages = [
   <div class="welcome__container">
     <!-- Left column: Text content -->
     <div class="welcome__content">
-      <h2 class="welcome__title">{t.title}</h2>
+      <h2 class="welcome__title" data-text-reveal="lines">{t.title}</h2>
 
-      <div class="welcome__text">
-        {t.paragraphs.map((paragraph) => (
-          <p>{paragraph}</p>
-        ))}
+      <div class="welcome__text" data-text-reveal="lines">
+        {t.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
       </div>
     </div>
 
     <!-- Right column: Gallery -->
     <div class="welcome__gallery">
       <div class="welcome__gallery-header">
-        <h3 class="welcome__gallery-title">{t.galleryTitle}</h3>
+        <h3 class="welcome__gallery-title" data-text-reveal="words">
+          {t.galleryTitle}
+        </h3>
         <div class="welcome__gallery-nav">
-          <button class="welcome__gallery-btn welcome__gallery-btn--prev" aria-label="Previous">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M19 12H5M5 12L12 19M5 12L12 5" />
+          <button
+            class="welcome__gallery-btn welcome__gallery-btn--prev"
+            aria-label="Previous"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path d="M19 12H5M5 12L12 19M5 12L12 5"></path>
             </svg>
           </button>
-          <button class="welcome__gallery-btn welcome__gallery-btn--next" aria-label="Next">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M5 12H19M19 12L12 5M19 12L12 19" />
+          <button
+            class="welcome__gallery-btn welcome__gallery-btn--next"
+            aria-label="Next"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path d="M5 12H19M19 12L12 5M19 12L12 19"></path>
             </svg>
           </button>
         </div>
@@ -45,11 +65,17 @@ const galleryImages = [
 
       <div class="welcome__gallery-slider">
         <div class="welcome__gallery-track">
-          {galleryImages.map((src, index) => (
-            <div class="welcome__gallery-slide">
-              <img src={src} alt={`${t.galleryTitle} ${index + 1}`} loading="lazy" />
-            </div>
-          ))}
+          {
+            galleryImages.map((src, index) => (
+              <div class="welcome__gallery-slide">
+                <img
+                  src={src}
+                  alt={`${t.galleryTitle} ${index + 1}`}
+                  loading="lazy"
+                />
+              </div>
+            ))
+          }
         </div>
       </div>
     </div>
@@ -80,7 +106,7 @@ const galleryImages = [
 
 <style>
   .welcome {
-    padding: var(--space-xl) 0 0;
+    padding: var(--space-lg) 0 0;
   }
 
   .welcome__container {
@@ -106,7 +132,6 @@ const galleryImages = [
   .welcome__text {
     display: flex;
     flex-direction: column;
-    gap: var(--space-sm);
   }
 
   .welcome__text p {
@@ -180,7 +205,6 @@ const galleryImages = [
   .welcome__stats {
     margin-top: var(--space-lg);
     padding: var(--space-md) 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
   }
 
   .welcome__stats-container {
@@ -206,6 +230,7 @@ const galleryImages = [
   }
 
   .welcome__stat-value {
+    font-family: var(--font-heading);
     font-size: clamp(1.75rem, 4vw, 2.5rem);
     font-weight: 300;
     letter-spacing: -0.02em;
@@ -215,6 +240,8 @@ const galleryImages = [
     margin-left: auto;
     padding: var(--space-sm) var(--space-md);
     border: 1px solid var(--color-primary);
+    border-radius: 8px;
+    font-family: var(--font-heading);
     font-size: 0.875rem;
     text-transform: none;
     transition: all var(--transition-fast);
@@ -241,31 +268,25 @@ const galleryImages = [
 
   /* Desktop */
   @media (min-width: 1024px) {
-    .welcome {
-      padding: var(--space-xxl) 0 0;
-    }
-
     .welcome__container {
       grid-template-columns: 0.8fr 1.2fr;
-    }
-
-    .welcome__content {
-      padding-top: var(--space-md);
-    }
-
-    .welcome__stats {
-      margin-top: var(--space-xl);
-      padding: var(--space-lg) 0;
     }
   }
 </style>
 
 <script>
+  import { initTextReveal } from "../scripts/text-reveal.js";
+
+  // Initialize text reveal animation
+  document.fonts.ready.then(() => {
+    initTextReveal("[data-text-reveal]", { once: true });
+  });
+
   // Simple gallery slider
-  const track = document.querySelector('.welcome__gallery-track');
-  const slides = document.querySelectorAll('.welcome__gallery-slide');
-  const prevBtn = document.querySelector('.welcome__gallery-btn--prev');
-  const nextBtn = document.querySelector('.welcome__gallery-btn--next');
+  const track = document.querySelector(".welcome__gallery-track");
+  const slides = document.querySelectorAll(".welcome__gallery-slide");
+  const prevBtn = document.querySelector(".welcome__gallery-btn--prev");
+  const nextBtn = document.querySelector(".welcome__gallery-btn--next");
 
   let currentIndex = 0;
   const totalSlides = slides.length;
@@ -276,12 +297,12 @@ const galleryImages = [
     }
   }
 
-  prevBtn?.addEventListener('click', () => {
+  prevBtn?.addEventListener("click", () => {
     currentIndex = currentIndex === 0 ? totalSlides - 1 : currentIndex - 1;
     updateSlider();
   });
 
-  nextBtn?.addEventListener('click', () => {
+  nextBtn?.addEventListener("click", () => {
     currentIndex = currentIndex === totalSlides - 1 ? 0 : currentIndex + 1;
     updateSlider();
   });
