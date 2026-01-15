@@ -13,6 +13,10 @@ const { title = "Calablanca Residences · Sitges", lang = "es" } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Preload fonts for performance -->
+    <link rel="preload" href="/fonts/lora-regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/roboto-regular.woff2" as="font" type="font/woff2" crossorigin />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta

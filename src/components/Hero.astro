@@ -1,6 +1,6 @@
 ---
-const { lang = 'es', image = '/images/hero.jpg' } = Astro.props;
-import { useTranslations } from '../i18n';
+const { lang = "es", image = "/images/hero.webp" } = Astro.props;
+import { useTranslations } from "../i18n";
 const t = useTranslations(lang);
 ---
 
@@ -10,14 +10,11 @@ const t = useTranslations(lang);
   </div>
 
   <div class="hero__content container">
-    <div class="hero__left">
-      <h1 class="hero__title" data-hero-title>{t('hero.title')}</h1>
-      <h3 class="hero__subtitle" data-hero-subtitle>{t('hero.subtitle')}</h3>
+    <div class="hero__text">
+      <h1 class="hero__title" data-hero-title>{t("hero.title")}</h1>
+      <h3 class="hero__subtitle" data-hero-subtitle>{t("hero.subtitle")}</h3>
     </div>
-
-    <div class="hero__right">
-      <p class="hero__intro" data-hero-intro>{t('welcome.subtitle')}</p>
-    </div>
+    <p class="hero__intro" data-hero-intro>{t("hero.description")}</p>
   </div>
 </section>
 
@@ -43,7 +40,7 @@ const t = useTranslations(lang);
     }
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       inset: 0;
       background: linear-gradient(
@@ -62,16 +59,7 @@ const t = useTranslations(lang);
     width: 100%;
     padding-top: var(--space-xxl);
     padding-bottom: var(--space-xl);
-  }
-
-  .hero__left {
-    max-width: 500px;
-    padding: var(--space-lg) 0;
-  }
-
-  .hero__right {
-    max-width: 300px;
-    align-self: flex-end;
+    min-height: 100vh;
   }
 
   .hero__title {
@@ -79,10 +67,11 @@ const t = useTranslations(lang);
     font-weight: 400;
     line-height: 1.1;
     margin-bottom: var(--space-sm);
+    max-width: 85%;
 
     & > :global(*) {
-      margin: -0.1em -0.05em;
-      padding: 0.1em 0.05em;
+      margin: -2px -2px;
+      padding: 7px 6px;
     }
   }
 
@@ -93,6 +82,23 @@ const t = useTranslations(lang);
   .hero__intro {
     font-size: var(--font-size-small);
     line-height: 1.6;
-    text-align: right;
+    max-width: 300px;
+  }
+
+  @media (min-width: 1110px) {
+    .hero__content {
+      justify-content: flex-start;
+      min-height: auto;
+    }
+
+    .hero__text {
+      padding: 60px 190px 0;
+    }
+
+    .hero__intro {
+      margin-top: var(--space-md);
+      padding-left: 190px;
+      max-width: 460px;
+    }
   }
 </style>
