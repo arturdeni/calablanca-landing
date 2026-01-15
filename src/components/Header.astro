@@ -11,7 +11,7 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
   <div class="container">
     <div class="header__inner">
       <a href={`/${lang === 'en' ? 'en/' : ''}`} class="header__logo">
-        <span class="header__logo-text">Calablanca Residences</span>
+        <img src="/images/header-logo.svg" alt="Calablanca Residences" class="header__logo-img" />
       </a>
 
       <nav class="header__nav">
@@ -26,7 +26,6 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
       </nav>
 
       <button class="header__hamburger" aria-label="Menu" aria-expanded="false">
-        <span class="header__hamburger-line"></span>
         <span class="header__hamburger-line"></span>
         <span class="header__hamburger-line"></span>
       </button>
@@ -62,7 +61,6 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
     mix-blend-mode: normal;
   }
 
-  .header--top .header__logo-text,
   .header--top .header__nav-list a {
     color: var(--color-white);
   }
@@ -85,11 +83,9 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
     gap: var(--space-md);
   }
 
-  .header__logo-text {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #e0e0e0;
-    transition: color var(--transition-fast);
+  .header__logo-img {
+    height: 2rem;
+    width: auto;
   }
 
   .header__nav {
@@ -104,8 +100,9 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
   }
 
   .header__nav-list a {
+    font-family: var(--font-heading);
     font-size: var(--font-size-small);
-    font-weight: 500;
+    font-weight: 400;
     color: #e0e0e0;
     transition: color var(--transition-fast), opacity var(--transition-fast);
 
@@ -119,7 +116,7 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 5px;
+    gap: 8px;
     width: 32px;
     height: 32px;
     background: transparent;
@@ -134,7 +131,7 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
     width: 100%;
     height: 2px;
     background-color: #e0e0e0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: transform 0.3s ease;
   }
 
   .header--top .header__hamburger-line {
@@ -143,15 +140,11 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
 
   /* Hamburger animación a X cuando está abierto */
   .header__hamburger--open .header__hamburger-line:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
+    transform: translateY(5px) rotate(45deg);
   }
 
   .header__hamburger--open .header__hamburger-line:nth-child(2) {
-    opacity: 0;
-  }
-
-  .header__hamburger--open .header__hamburger-line:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
+    transform: translateY(-5px) rotate(-45deg);
   }
 
   /* Mobile menu */
@@ -185,8 +178,9 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
   }
 
   .mobile-menu__list a {
+    font-family: var(--font-heading);
     font-size: 1.5rem;
-    font-weight: 500;
+    font-weight: 400;
     color: var(--color-white);
     transition: opacity var(--transition-fast);
 

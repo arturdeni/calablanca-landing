@@ -67,10 +67,10 @@ const t = useTranslations(lang);
     font-weight: 400;
     line-height: 1.1;
     margin-bottom: var(--space-sm);
-    max-width: 85%;
+    max-width: 75%;
 
     & > :global(*) {
-      margin: -2px -2px;
+      margin: -7px -6px;
       padding: 7px 6px;
     }
   }
@@ -81,7 +81,7 @@ const t = useTranslations(lang);
 
   .hero__intro {
     font-size: var(--font-size-small);
-    line-height: 1.6;
+    line-height: 1.35;
     max-width: 300px;
   }
 
@@ -96,9 +96,15 @@ const t = useTranslations(lang);
     }
 
     .hero__intro {
-      margin-top: var(--space-md);
+      margin-top: var(--space-lg);
       padding-left: 190px;
       max-width: 460px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero__subtitle {
+      font-size: 1.15rem;
     }
   }
 </style>
