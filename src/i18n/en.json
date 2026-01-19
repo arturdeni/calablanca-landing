@@ -42,16 +42,48 @@
     }
   },
   "passivhaus": {
-    "title": "Passivhaus",
-    "subtitle": "Living in a passive house",
-    "description": "Calablanca Residences has been designed under Passivhaus standards, guaranteeing almost zero energy consumption together with high interior comfort.",
-    "features": [
-      "Stable temperature throughout the year",
-      "High performance thermal and acoustic insulation",
-      "Mechanical ventilation with heat recovery",
-      "Energy savings of up to 75%"
-    ],
-    "tagline": "Living better also means living more efficiently."
+    "cta": "Request Information",
+    "sections": [
+      {
+        "id": "passivhaus",
+        "title": "Passivhaus",
+        "tagline": "A home that cares for you and the environment",
+        "description": "Calablanca Residences has been designed under Passivhaus standards, guaranteeing minimal energy consumption together with high interior comfort.",
+        "features": [
+          "Stable temperature throughout the year",
+          "High performance thermal and acoustic insulation",
+          "Mechanical ventilation with heat recovery",
+          "Energy savings of up to 75%"
+        ],
+        "closing": "Living better also means living more efficiently."
+      },
+      {
+        "id": "zonas-comunes",
+        "title": "Common Areas",
+        "tagline": "Spaces designed for gathering",
+        "description": "A residential environment where every common space has been carefully designed to foster community and the well-being of all residents.",
+        "features": [
+          "Community pool with solarium area",
+          "Gardens and landscaped areas",
+          "Chill out rooftop with views",
+          "Underground community parking"
+        ],
+        "closing": "Enjoying the best of community life."
+      },
+      {
+        "id": "interiores",
+        "title": "Interiors",
+        "tagline": "Design that inspires calm",
+        "description": "Bright and functional interiors, where every detail has been selected to create an atmosphere of comfort and timeless elegance.",
+        "features": [
+          "Open kitchen to living dining room",
+          "High quality finishes",
+          "Spacious terraces with views",
+          "Noble and sustainable materials"
+        ],
+        "closing": "A home where every detail matters."
+      }
+    ]
   },
   "location": {
     "title": "Location",

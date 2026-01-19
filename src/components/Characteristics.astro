@@ -5,14 +5,14 @@ const translations = await import(`../i18n/${lang}.json`);
 const t = translations.characteristics;
 
 const features = [
-  { id: "parking", icon: "icon-parking.svg" },
-  { id: "pool", icon: "icon-pool.svg" },
-  { id: "chill", icon: "icon-chill.svg" },
-  { id: "garden", icon: "icon-garden.svg" },
-  { id: "kitchen", icon: "icon-kitchen.svg" },
-  { id: "storage", icon: "icon-storage.svg" },
-  { id: "elevator", icon: "icon-elevator.svg" },
-  { id: "terraces", icon: "icon-terraces.svg" },
+  { id: "parking", icon: "/images/icons/parking.svg" },
+  { id: "pool", icon: "/images/icons/piscina.svg" },
+  { id: "chill", icon: "/images/icons/cubierta.svg" },
+  { id: "garden", icon: "/images/icons/jardineria.svg" },
+  { id: "kitchen", icon: "/images/icons/cocina.svg" },
+  { id: "storage", icon: "/images/icons/trastero.svg" },
+  { id: "elevator", icon: "/images/icons/ascensor.svg" },
+  { id: "terraces", icon: "/images/icons/terrazas.svg" },
 ];
 ---
 
@@ -34,11 +34,8 @@ const features = [
         {
           features.map((feature) => (
             <li class="characteristics__feature">
-              <span
-                class="characteristics__feature-icon"
-                data-icon={feature.id}
-              >
-                <!-- Icon will be inserted here via SVG import -->
+              <span class="characteristics__feature-icon">
+                <img src={feature.icon} alt="" />
               </span>
               <span class="characteristics__feature-label">
                 {t.features[feature.id]}
@@ -65,18 +62,18 @@ const features = [
     position: absolute;
     inset: 0;
     z-index: 0;
+  }
 
-    &::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.4) 0%,
-        rgba(0, 0, 0, 0.15) 40%,
-        rgba(0, 0, 0, 0.1) 100%
-      );
-    }
+  .characteristics__background::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.65) 0%,
+      rgba(0, 0, 0, 0.45) 40%,
+      rgba(0, 0, 0, 0.35) 100%
+    );
   }
 
   .characteristics__bg-image {
@@ -99,7 +96,7 @@ const features = [
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: var(--space-md);
+    gap: var(--space-xl);
   }
 
   .characteristics__title {
@@ -137,11 +134,11 @@ const features = [
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-white);
 
-    & :global(svg) {
+    & img {
       width: 100%;
       height: 100%;
+      object-fit: contain;
     }
   }
 
@@ -154,12 +151,21 @@ const features = [
   }
 
   /* Tablet */
-  @media (min-width: 768px) {
+  @media (min-width: 865px) {
+    .characteristics__background::after {
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.4) 0%,
+        rgba(0, 0, 0, 0.15) 40%,
+        rgba(0, 0, 0, 0.1) 100%
+      );
+    }
+
     .characteristics__header {
       flex-direction: row;
       align-items: flex-start;
       justify-content: space-between;
-      gap: var(--space-xl);
+      gap: var(--space-md);
     }
 
     .characteristics__title {
@@ -169,7 +175,7 @@ const features = [
 
     .characteristics__features {
       grid-template-columns: repeat(4, 1fr);
-      gap: var(--space-lg);
+      gap: var(--space-sm);
     }
 
     .characteristics__feature-icon {
@@ -183,7 +189,7 @@ const features = [
   }
 
   /* Desktop */
-  @media (min-width: 1024px) {
+  @media (min-width: 1370px) {
     .characteristics__features {
       grid-template-columns: repeat(8, 1fr);
       gap: var(--space-md);

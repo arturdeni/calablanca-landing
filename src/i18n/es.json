@@ -42,16 +42,48 @@
     }
   },
   "passivhaus": {
-    "title": "Passivhaus",
-    "subtitle": "Vivir en una casa pasiva",
-    "description": "Calablanca Residences ha sido diseñada bajo los estándares Passivhaus, garantizando un consumo energético casi nulo junto a un elevado confort interior.",
-    "features": [
-      "Temperatura estable durante todo el año",
-      "Aislamiento térmico y acústico de altas prestaciones",
-      "Ventilación mecánica con recuperación de calor",
-      "Ahorro energético de hasta un 75%"
-    ],
-    "tagline": "Vivir mejor también es vivir de forma más eficiente."
+    "cta": "Solicitar Información",
+    "sections": [
+      {
+        "id": "passivhaus",
+        "title": "Passivhaus",
+        "tagline": "Un hogar que cuida de ti y del entorno",
+        "description": "Calablanca Residences ha sido diseñada bajo los estándares Passivhaus, garantizando un consumo energético mínimo junto a un elevado confort interior.",
+        "features": [
+          "Temperatura estable durante todo el año",
+          "Aislamiento térmico y acústico de altas prestaciones",
+          "Ventilación mecánica con recuperación de calor",
+          "Ahorro energético de hasta un 75%"
+        ],
+        "closing": "Vivir mejor también es vivir de forma más eficiente."
+      },
+      {
+        "id": "zonas-comunes",
+        "title": "Zonas Comunes",
+        "tagline": "Espacios pensados para el encuentro",
+        "description": "Un entorno residencial donde cada espacio común ha sido cuidadosamente diseñado para fomentar la convivencia y el bienestar de todos los residentes.",
+        "features": [
+          "Piscina comunitaria con zona de solárium",
+          "Jardines y zonas ajardinadas",
+          "Cubierta chill out con vistas",
+          "Parking comunitario subterráneo"
+        ],
+        "closing": "Disfrutar de lo mejor de la vida en comunidad."
+      },
+      {
+        "id": "interiores",
+        "title": "Interiores",
+        "tagline": "Diseño que inspira calma",
+        "description": "Interiores luminosos y funcionales, donde cada detalle ha sido seleccionado para crear un ambiente de confort y elegancia atemporal.",
+        "features": [
+          "Cocina abierta al salón comedor",
+          "Acabados de alta calidad",
+          "Amplias terrazas con vistas",
+          "Materiales nobles y sostenibles"
+        ],
+        "closing": "Un hogar donde cada detalle cuenta."
+      }
+    ]
   },
   "location": {
     "title": "Ubicación",

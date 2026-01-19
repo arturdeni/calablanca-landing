@@ -1,0 +1,108 @@
+---
+const { lang = "es" } = Astro.props;
+
+const translations = await import(`../i18n/${lang}.json`);
+const t = translations.passivhaus;
+
+const sectionImages = [
+  "/images/passivhaus-sections/passivhaus.webp",
+  "/images/passivhaus-sections/zonas-comunes.webp",
+  "/images/passivhaus-sections/interiores.webp",
+];
+---
+
+<section class="passivhaus-section" id="passivhaus">
+  {t.sections.map((section, index) => (
+    <article class="passivhaus-card">
+      <img
+        src={sectionImages[index]}
+        alt={section.title}
+        class="passivhaus-card__image"
+        loading="lazy"
+      />
+
+      <div class="passivhaus-card__left">
+        <h2 class="passivhaus-card__title">{section.title}</h2>
+        <p class="passivhaus-card__description">{section.description}</p>
+        <ul class="passivhaus-card__features">
+          {section.features.map((feature) => (
+            <li>{feature}</li>
+          ))}
+        </ul>
+        <p class="passivhaus-card__closing">{section.closing}</p>
+      </div>
+
+      <div class="passivhaus-card__right">
+        <p class="passivhaus-card__tagline">{section.tagline}</p>
+        <a href="#contact" class="passivhaus-card__cta">{t.cta}</a>
+      </div>
+    </article>
+  ))}
+</section>
+
+<style>
+  .passivhaus-section {
+    background-color: var(--color-dark);
+  }
+
+  .passivhaus-card {
+    position: relative;
+    min-height: 100vh;
+    padding: var(--space-lg) var(--content-padding);
+    color: var(--color-white);
+  }
+
+  .passivhaus-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .passivhaus-card__left {
+  }
+
+  .passivhaus-card__title {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h2);
+    font-weight: 400;
+  }
+
+  .passivhaus-card__description {
+    font-family: var(--font-body);
+    font-size: var(--font-size-body);
+    line-height: 1.6;
+  }
+
+  .passivhaus-card__features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .passivhaus-card__features li {
+    font-family: var(--font-body);
+    font-size: var(--font-size-small);
+  }
+
+  .passivhaus-card__closing {
+    font-family: var(--font-body);
+    font-size: var(--font-size-body);
+    font-style: italic;
+  }
+
+  .passivhaus-card__right {
+  }
+
+  .passivhaus-card__tagline {
+    font-family: var(--font-heading);
+    font-style: italic;
+  }
+
+  .passivhaus-card__cta {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--color-white);
+    color: var(--color-white);
+    text-decoration: none;
+  }
+</style>

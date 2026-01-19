@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import Welcome from '../components/Welcome.astro';
 import Characteristics from '../components/Characteristics.astro';
+import Passivhaus from '../components/Passivhaus.astro';
 
 const lang = 'es';
 ---
@@ -17,11 +18,7 @@ const lang = 'es';
   <Characteristics lang={lang} />
 
   <!-- Passivhaus Section -->
-  <section id="passivhaus" class="passivhaus">
-    <div class="container">
-      <!-- TODO: Passivhaus - Beneficios casa pasiva + imagen interior -->
-    </div>
-  </section>
+  <Passivhaus lang={lang} />
 
   <!-- Location Section -->
   <section id="location" class="location">
@@ -65,11 +62,6 @@ const lang = 'es';
   }
 
   /* Placeholder styles */
-  .passivhaus {
-    background-color: var(--color-secondary);
-    color: var(--color-white);
-  }
-
   .location {
     background-color: var(--color-white);
   }
