@@ -13,14 +13,10 @@ const sectionImages = [
 
 <section class="passivhaus-section" id="passivhaus">
   {t.sections.map((section, index) => (
-    <article class="passivhaus-card">
-      <img
-        src={sectionImages[index]}
-        alt={section.title}
-        class="passivhaus-card__image"
-        loading="lazy"
-      />
-
+    <article
+      class="passivhaus-card"
+      style={`background-image: url(${sectionImages[index]})`}
+    >
       <div class="passivhaus-card__left">
         <h2 class="passivhaus-card__title">{section.title}</h2>
         <p class="passivhaus-card__description">{section.description}</p>
@@ -46,16 +42,33 @@ const sectionImages = [
   }
 
   .passivhaus-card {
-    position: relative;
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
     padding: var(--space-lg) var(--content-padding);
     color: var(--color-white);
-  }
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 
-  .passivhaus-card__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.2);
+      z-index: 0;
+    }
+
+    & > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (min-width: 768px) {
+      position: relative;
+    }
   }
 
   .passivhaus-card__left {
@@ -65,32 +78,27 @@ const sectionImages = [
     font-family: var(--font-heading);
     font-size: var(--font-size-h2);
     font-weight: 400;
+    margin-bottom: var(--space-md);
   }
 
-  .passivhaus-card__description {
+  .passivhaus-card__description,
+  .passivhaus-card__features li,
+  .passivhaus-card__closing {
     font-family: var(--font-body);
     font-size: var(--font-size-body);
     line-height: 1.6;
   }
 
   .passivhaus-card__features {
-    list-style: none;
-    padding: 0;
+    padding-left: 1.2em;
     margin: 0;
   }
 
-  .passivhaus-card__features li {
-    font-family: var(--font-body);
-    font-size: var(--font-size-small);
-  }
-
-  .passivhaus-card__closing {
-    font-family: var(--font-body);
-    font-size: var(--font-size-body);
-    font-style: italic;
-  }
-
   .passivhaus-card__right {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    margin-top: auto;
   }
 
   .passivhaus-card__tagline {
@@ -104,5 +112,6 @@ const sectionImages = [
     border: 1px solid var(--color-white);
     color: var(--color-white);
     text-decoration: none;
+    text-align: center;
   }
 </style>
