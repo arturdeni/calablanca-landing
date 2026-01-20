@@ -112,30 +112,31 @@
     ]
   },
   "houses": {
-    "title": "Choose the house you want",
-    "types": {
-      "type1": {
-        "bedrooms": "3 bedrooms",
-        "bathrooms": "2 bathrooms",
-        "surface": "90-95 m²",
-        "price": "from €820,000",
-        "description": "Spacious apartments with living room and open kitchen, terrace or balcony. Garage and storage room included"
-      },
-      "type2": {
-        "bedrooms": "4 bedrooms",
-        "bathrooms": "2-3 bathrooms",
-        "surface": "100-105 m²",
-        "price": "from €920,000",
-        "description": "Spacious apartments with living room and open kitchen, terrace or balcony. Garage and storage room included"
-      },
-      "type3": {
-        "bedrooms": "3-4 bedrooms",
-        "bathrooms": "2-3 bathrooms",
-        "surface": "95-100 m²",
-        "price": "from €980,000",
-        "description": "Ground floor with garden. Spacious apartments with living room and open kitchen, terrace or balcony. Garage and storage room included"
-      }
-    }
+    "title": "Development Units",
+    "calculatorCta": "Calculate Mortgage",
+    "columns": {
+      "floor": "Floor",
+      "bedrooms": "Bedrooms",
+      "bathrooms": "Bathrooms",
+      "surface": "Surface",
+      "terrace": "Terrace",
+      "price": "Price (*)",
+      "plan": "Plan"
+    },
+    "download": "Download",
+    "units": [
+      { "floor": "Ground", "bedrooms": 2, "bathrooms": 2, "surface": "83.40", "terrace": "53.44", "price": "752,000" },
+      { "floor": "Ground", "bedrooms": 3, "bathrooms": 2, "surface": "106.30", "terrace": "229", "price": "999,000" },
+      { "floor": "First", "bedrooms": 3, "bathrooms": 2, "surface": "113.45", "terrace": "47.3", "price": "987,000" },
+      { "floor": "First", "bedrooms": 4, "bathrooms": 2, "surface": "120.00", "terrace": "35.47", "price": "909,000" },
+      { "floor": "Ground", "bedrooms": 3, "bathrooms": 2, "surface": "113.45", "terrace": "107.04", "price": "994,000" },
+      { "floor": "First", "bedrooms": 4, "bathrooms": 2, "surface": "120.00", "terrace": "52.28", "price": "896,000" },
+      { "floor": "First", "bedrooms": 3, "bathrooms": 2, "surface": "106.30", "terrace": "37.28", "price": "741,000" },
+      { "floor": "Second", "bedrooms": 4, "bathrooms": 2, "surface": "120.00", "terrace": "52.14", "price": "1,110,000" }
+    ],
+    "disclaimer": "(*) VAT must be added to these prices at the rate in force at the time of accrual. The current rate is 10%.",
+    "includes": "All units include a parking space and a storage room in the price.",
+    "checkAll": "Check all available units."
   },
   "timeline": {
     "title": "Construction status",

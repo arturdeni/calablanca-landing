@@ -1,0 +1,399 @@
+---
+const { lang = "es" } = Astro.props;
+
+const translations = await import(`../i18n/${lang}.json`);
+const t = translations.houses;
+---
+
+<section class="houses" id="houses">
+  <div class="houses__container">
+    <!-- Header -->
+    <header class="houses__header">
+      <h2 class="houses__title">{t.title}</h2>
+      <a href="#calculator" class="houses__calculator-cta">{t.calculatorCta}</a>
+    </header>
+
+    <!-- List with directional hover -->
+    <div class="houses__list" data-directional-hover data-type="y">
+      <!-- Header row -->
+      <div class="houses__list-header">
+        <span class="houses__col houses__col--floor">{t.columns.floor}</span>
+        <span class="houses__col houses__col--bedrooms">{t.columns.bedrooms}</span>
+        <span class="houses__col houses__col--bathrooms">{t.columns.bathrooms}</span>
+        <span class="houses__col houses__col--surface">{t.columns.surface}</span>
+        <span class="houses__col houses__col--terrace">{t.columns.terrace}</span>
+        <span class="houses__col houses__col--price">{t.columns.price}</span>
+        <span class="houses__col houses__col--plan">{t.columns.plan}</span>
+      </div>
+
+      <!-- Data rows -->
+      {t.units.map((unit) => (
+        <div class="houses__row" data-directional-hover-item>
+          <div class="houses__row-tile" data-directional-hover-tile></div>
+          <div class="houses__row-border"></div>
+          <div class="houses__row-content">
+            <span class="houses__cell houses__cell--floor" data-label={t.columns.floor}>{unit.floor}</span>
+            <span class="houses__cell houses__cell--bedrooms" data-label={t.columns.bedrooms}>{unit.bedrooms}</span>
+            <span class="houses__cell houses__cell--bathrooms" data-label={t.columns.bathrooms}>{unit.bathrooms}</span>
+            <span class="houses__cell houses__cell--surface" data-label={t.columns.surface}>{unit.surface} m²</span>
+            <span class="houses__cell houses__cell--terrace" data-label={t.columns.terrace}>{unit.terrace} m²</span>
+            <span class="houses__cell houses__cell--price" data-label={t.columns.price}>{unit.price} &euro;</span>
+            <span class="houses__cell houses__cell--plan" data-label={t.columns.plan}>
+              <a href="#contact" class="houses__download">{t.download}</a>
+            </span>
+          </div>
+        </div>
+      ))}
+
+      <!-- Bottom border -->
+      <div class="houses__list-border"></div>
+    </div>
+
+    <!-- Disclaimer -->
+    <footer class="houses__footer">
+      <p class="houses__disclaimer">{t.disclaimer}</p>
+      <p class="houses__includes">{t.includes}</p>
+      <p class="houses__check-all">{t.checkAll}</p>
+    </footer>
+  </div>
+</section>
+
+<style>
+  .houses {
+    padding: var(--space-lg) 0;
+    background-color: var(--color-dark);
+    color: var(--color-white);
+  }
+
+  .houses__container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--content-padding);
+  }
+
+  /* Header */
+  .houses__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+
+  .houses__title {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h2);
+    font-weight: 400;
+    margin: 0;
+  }
+
+  .houses__calculator-cta {
+    display: inline-block;
+    padding: var(--space-xs) var(--space-md);
+    border: 1px solid var(--color-white);
+    border-radius: 8px;
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    color: var(--color-white);
+    text-decoration: none;
+    text-align: center;
+    transition: all var(--transition-fast);
+    align-self: flex-start;
+
+    &:hover {
+      background-color: var(--color-white);
+      color: var(--color-dark);
+      opacity: 1;
+    }
+  }
+
+  /* List container */
+  .houses__list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: var(--space-lg);
+    position: relative;
+  }
+
+  /* Header row */
+  .houses__list-header {
+    display: none;
+  }
+
+  .houses__col {
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Data rows */
+  .houses__row {
+    position: relative;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    margin-bottom: var(--space-sm);
+  }
+
+  .houses__row-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm) var(--space-md);
+    padding: var(--space-md);
+    position: relative;
+    z-index: 1;
+  }
+
+  .houses__row-tile {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.08);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(-100%);
+    will-change: transform;
+    z-index: 0;
+  }
+
+  .houses__row-border {
+    display: none;
+  }
+
+  .houses__cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: var(--font-size-small);
+
+    &::before {
+      content: attr(data-label);
+      font-size: 0.625rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  .houses__cell--price {
+    grid-column: 1 / -1;
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+
+  .houses__cell--plan {
+    grid-column: 1 / -1;
+  }
+
+  .houses__download {
+    display: inline-block;
+    padding: var(--space-xs) var(--space-sm);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    text-align: center;
+    font-size: 0.75rem;
+    transition: all var(--transition-fast);
+    position: relative;
+
+    &:hover {
+      color: var(--color-white);
+      border-color: var(--color-white);
+      opacity: 1;
+    }
+  }
+
+  .houses__list-border {
+    display: none;
+  }
+
+  /* Footer */
+  .houses__footer {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+  }
+
+  .houses__footer p {
+    margin: 0 0 var(--space-xs);
+  }
+
+  .houses__footer p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Desktop */
+  @media (min-width: 768px) {
+    .houses {
+      padding: var(--space-xl) 0;
+    }
+
+    .houses__header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Header row visible */
+    .houses__list-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      gap: 1em;
+      padding-bottom: 1.5em;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .houses__col {
+      text-align: center;
+      place-self: center;
+    }
+
+    .houses__col--floor {
+      text-align: left;
+      place-self: center start;
+    }
+
+    .houses__col--plan {
+      text-align: right;
+      place-self: center end;
+    }
+
+    /* Data rows */
+    .houses__row {
+      margin-bottom: 0;
+      border-radius: 0;
+      background-color: transparent;
+    }
+
+    .houses__row-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      gap: 1em;
+      align-items: center;
+      padding: 1.75em 0;
+    }
+
+    .houses__row-border {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: currentColor;
+      opacity: 0.1;
+      z-index: 2;
+    }
+
+    .houses__cell {
+      flex-direction: row;
+      text-align: center;
+      font-size: 1em;
+      line-height: 1;
+      place-self: center;
+
+      &::before {
+        display: none;
+      }
+    }
+
+    .houses__cell--floor {
+      text-align: left;
+      place-self: center start;
+    }
+
+    .houses__cell--price {
+      grid-column: auto;
+      font-size: 1em;
+      font-weight: 400;
+    }
+
+    .houses__cell--plan {
+      grid-column: auto;
+      text-align: right;
+      place-self: center end;
+    }
+
+    .houses__download {
+      display: inline;
+      padding: 0;
+      border: none;
+      border-radius: 0;
+      font-size: 1em;
+    }
+
+    .houses__list-border {
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: currentColor;
+      opacity: 0.2;
+      z-index: 2;
+    }
+  }
+</style>
+
+<script>
+  function initDirectionalListHover() {
+    const directionMap = {
+      top: 'translateY(-100%)',
+      bottom: 'translateY(100%)',
+      left: 'translateX(-100%)',
+      right: 'translateX(100%)'
+    };
+
+    document.querySelectorAll('[data-directional-hover]').forEach(container => {
+      const type = container.getAttribute('data-type') || 'all';
+
+      container.querySelectorAll('[data-directional-hover-item]').forEach(item => {
+        const tile = item.querySelector('[data-directional-hover-tile]');
+        if (!tile) return;
+
+        item.addEventListener('mouseenter', e => {
+          const dir = getDirection(e, item, type);
+          tile.style.transition = 'none';
+          tile.style.transform = directionMap[dir] || 'translate(0, 0)';
+          void tile.offsetHeight;
+          tile.style.transition = '';
+          tile.style.transform = 'translate(0%, 0%)';
+          item.setAttribute('data-status', `enter-${dir}`);
+        });
+
+        item.addEventListener('mouseleave', e => {
+          const dir = getDirection(e, item, type);
+          item.setAttribute('data-status', `leave-${dir}`);
+          tile.style.transform = directionMap[dir] || 'translate(0, 0)';
+        });
+      });
+
+      function getDirection(event, el, type) {
+        const { left, top, width: w, height: h } = el.getBoundingClientRect();
+        const x = event.clientX - left;
+        const y = event.clientY - top;
+
+        if (type === 'y') return y < h / 2 ? 'top' : 'bottom';
+        if (type === 'x') return x < w / 2 ? 'left' : 'right';
+
+        const distances = {
+          top: y,
+          right: w - x,
+          bottom: h - y,
+          left: x
+        };
+
+        return Object.entries(distances).reduce((a, b) => (a[1] < b[1] ? a : b))[0];
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initDirectionalListHover();
+  });
+</script>

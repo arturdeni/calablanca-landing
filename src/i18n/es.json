@@ -112,30 +112,31 @@
     ]
   },
   "houses": {
-    "title": "Elige la casa que quieras",
-    "types": {
-      "type1": {
-        "bedrooms": "3 habitaciones",
-        "bathrooms": "2 baños",
-        "surface": "90-95 m²",
-        "price": "desde 820.000 €",
-        "description": "Pisos amplios con salón comedor y cocina abierta, terraza o balcón. Garaje y trastero incluidos"
-      },
-      "type2": {
-        "bedrooms": "4 habitaciones",
-        "bathrooms": "2-3 baños",
-        "surface": "100-105 m²",
-        "price": "desde 920.000 €",
-        "description": "Pisos amplios con salón comedor y cocina abierta, terraza o balcón. Garaje y trastero incluidos"
-      },
-      "type3": {
-        "bedrooms": "3-4 habitaciones",
-        "bathrooms": "2-3 baños",
-        "surface": "95-100 m²",
-        "price": "desde 980.000 €",
-        "description": "Planta baja con jardín. Pisos amplios con salón comedor y cocina abierta, terraza o balcón. Garaje y trastero incluidos"
-      }
-    }
+    "title": "Unidades de la Promoción",
+    "calculatorCta": "Calcular Hipoteca",
+    "columns": {
+      "floor": "Planta",
+      "bedrooms": "Dormitorios",
+      "bathrooms": "Baños",
+      "surface": "Superficie",
+      "terrace": "Terraza",
+      "price": "Precio (*)",
+      "plan": "Plano"
+    },
+    "download": "Descargar",
+    "units": [
+      { "floor": "Baja", "bedrooms": 2, "bathrooms": 2, "surface": "83,40", "terrace": "53,44", "price": "752.000" },
+      { "floor": "Baja", "bedrooms": 3, "bathrooms": 2, "surface": "106,30", "terrace": "229", "price": "999.000" },
+      { "floor": "Primera", "bedrooms": 3, "bathrooms": 2, "surface": "113,45", "terrace": "47,3", "price": "987.000" },
+      { "floor": "Primera", "bedrooms": 4, "bathrooms": 2, "surface": "120,00", "terrace": "35,47", "price": "909.000" },
+      { "floor": "Baja", "bedrooms": 3, "bathrooms": 2, "surface": "113,45", "terrace": "107,04", "price": "994.000" },
+      { "floor": "Primera", "bedrooms": 4, "bathrooms": 2, "surface": "120,00", "terrace": "52,28", "price": "896.000" },
+      { "floor": "Primera", "bedrooms": 3, "bathrooms": 2, "surface": "106,30", "terrace": "37,28", "price": "741.000" },
+      { "floor": "Segunda", "bedrooms": 4, "bathrooms": 2, "surface": "120,00", "terrace": "52,14", "price": "1.110.000" }
+    ],
+    "disclaimer": "(*) A estos precios debe añadirse el IVA. al tipo vigente en cada momento en que se produzca el devengo. El tipo actual es de 10%.",
+    "includes": "Todas las unidades incluyen una plaza de garaje y un trastero en el precio.",
+    "checkAll": "Consulta todas las unidades disponibles."
   },
   "timeline": {
     "title": "Estado obra",

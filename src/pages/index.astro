@@ -5,6 +5,7 @@ import Welcome from '../components/Welcome.astro';
 import Characteristics from '../components/Characteristics.astro';
 import Passivhaus from '../components/Passivhaus.astro';
 import Location from '../components/Location.astro';
+import Houses from '../components/Houses.astro';
 
 const lang = 'es';
 ---
@@ -25,11 +26,7 @@ const lang = 'es';
   <Location lang={lang} />
 
   <!-- Houses Section -->
-  <section id="houses" class="houses">
-    <div class="container">
-      <!-- TODO: Elige tu casa - Tabla con tipos de vivienda -->
-    </div>
-  </section>
+  <Houses lang={lang} />
 
   <!-- Timeline Section -->
   <section id="timeline" class="timeline">
@@ -59,10 +56,6 @@ const lang = 'es';
   }
 
   /* Placeholder styles */
-  .houses {
-    background-color: var(--color-accent);
-  }
-
   .timeline {
     background-color: var(--color-white);
   }
