@@ -1,4 +1,17 @@
 ---
+/**
+ * Passivhaus Section
+ *
+ * Muestra 3 secciones (Passivhaus, Zonas Comunes, Interiores) con dos layouts diferentes:
+ *
+ * MOBILE: 3 cards apiladas con efecto sticky (cada card se queda fija mientras
+ *         la siguiente la tapa al hacer scroll)
+ *
+ * DESKTOP: 1 vista fija con 3 elementos que se animan con scroll:
+ *          - Izquierda: textos que se desplazan verticalmente
+ *          - Centro: imágenes que se desplazan verticalmente
+ *          - Derecha: tagline que cambia con transición fade+slide
+ */
 const { lang = "es" } = Astro.props;
 
 const translations = await import(`../i18n/${lang}.json`);
@@ -11,96 +24,141 @@ const sectionImages = [
 ];
 ---
 
-<section class="passivhaus-section" id="passivhaus">
-  <!-- Mobile: 3 cards separadas -->
-  <div class="passivhaus-mobile">
+<section class="passivhaus" id="passivhaus">
+  <!-- MOBILE: 3 cards con efecto sticky stacking -->
+  <div class="passivhaus__mobile">
     {t.sections.map((section, index) => (
       <article
-        class="passivhaus-card"
+        class="passivhaus__card"
         style={`background-image: url(${sectionImages[index]})`}
       >
-        <div class="passivhaus-card__left">
-          <h2 class="passivhaus-card__title">{section.title}</h2>
-          <p class="passivhaus-card__description">{section.description}</p>
-          <ul class="passivhaus-card__features">
-            {section.features.map((feature) => (
-              <li>{feature}</li>
-            ))}
+        <div class="passivhaus__content">
+          <h2 class="passivhaus__title">{section.title}</h2>
+          <p class="passivhaus__description">{section.description}</p>
+          <ul class="passivhaus__features">
+            {section.features.map((feature) => <li>{feature}</li>)}
           </ul>
-          <p class="passivhaus-card__closing">{section.closing}</p>
+          <p class="passivhaus__closing">{section.closing}</p>
         </div>
 
-        <div class="passivhaus-card__right">
-          <p class="passivhaus-card__tagline">{section.tagline}</p>
-          <a href="#contact" class="passivhaus-card__cta">{t.cta}</a>
+        <div class="passivhaus__footer">
+          <p class="passivhaus__tagline">{section.tagline}</p>
+          <a href="#contact" class="passivhaus__cta">{t.cta}</a>
         </div>
       </article>
     ))}
   </div>
 
-  <!-- Desktop: 1 card con scroll interno -->
-  <div class="passivhaus-desktop">
-    <div class="passivhaus-desktop__left">
-      <div class="passivhaus-desktop__left-track">
+  <!-- DESKTOP: Vista única con scroll sincronizado -->
+  <div class="passivhaus__desktop">
+    <!-- Columna izquierda: textos animados -->
+    <div class="passivhaus__texts">
+      <div class="passivhaus__texts-track" data-scroll-track="texts">
         {t.sections.map((section) => (
-          <div class="passivhaus-desktop__left-item">
-            <h2 class="passivhaus-card__title">{section.title}</h2>
-            <p class="passivhaus-card__description">{section.description}</p>
-            <ul class="passivhaus-card__features">
-              {section.features.map((feature) => (
-                <li>{feature}</li>
-              ))}
+          <div class="passivhaus__text-item">
+            <h2 class="passivhaus__title">{section.title}</h2>
+            <p class="passivhaus__description">{section.description}</p>
+            <ul class="passivhaus__features">
+              {section.features.map((feature) => <li>{feature}</li>)}
             </ul>
-            <p class="passivhaus-card__closing">{section.closing}</p>
+            <p class="passivhaus__closing">{section.closing}</p>
           </div>
         ))}
       </div>
     </div>
 
-    <div class="passivhaus-desktop__images">
-      <div class="passivhaus-desktop__images-track">
+    <!-- Centro: imágenes animadas -->
+    <div class="passivhaus__images">
+      <div class="passivhaus__images-track" data-scroll-track="images">
         {sectionImages.map((src, index) => (
           <img
             src={src}
             alt={t.sections[index].title}
-            class="passivhaus-desktop__image"
+            class="passivhaus__image"
             loading="lazy"
           />
         ))}
       </div>
     </div>
 
-    <div class="passivhaus-desktop__right">
-      <div class="passivhaus-desktop__taglines">
+    <!-- Columna derecha: taglines con transición -->
+    <div class="passivhaus__sidebar">
+      <div class="passivhaus__taglines">
         {t.sections.map((section, index) => (
-          <p class={`passivhaus-card__tagline ${index === 0 ? 'is-active' : ''}`}>{section.tagline}</p>
+          <p
+            class={`passivhaus__tagline ${index === 0 ? "is-active" : ""}`}
+            data-tagline-index={index}
+          >
+            {section.tagline}
+          </p>
         ))}
       </div>
-      <a href="#contact" class="passivhaus-card__cta">{t.cta}</a>
+      <a href="#contact" class="passivhaus__cta">{t.cta}</a>
     </div>
   </div>
 </section>
 
 <style>
-  .passivhaus-section {
+  /* =============================================
+     BASE STYLES
+     ============================================= */
+  .passivhaus {
     background-color: var(--color-dark);
     color: var(--color-white);
 
     @media (min-width: 768px) {
-      height: 300vh;
+      height: 300vh; /* Altura para permitir scroll en desktop */
     }
   }
 
-  /* ===== MOBILE ===== */
-  .passivhaus-mobile {
+  /* Tipografía compartida */
+  .passivhaus__title {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h2);
+    font-weight: 400;
+    margin-bottom: var(--space-md);
+  }
+
+  .passivhaus__description,
+  .passivhaus__features li,
+  .passivhaus__closing {
+    font-family: var(--font-body);
+    font-size: var(--font-size-body);
+    line-height: 1.6;
+  }
+
+  .passivhaus__features {
+    padding-left: 1.2em;
+    margin: 0;
+  }
+
+  .passivhaus__tagline {
+    font-family: var(--font-heading);
+    font-style: italic;
+    margin: 0;
+  }
+
+  .passivhaus__cta {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--color-white);
+    color: var(--color-white);
+    text-decoration: none;
+    text-align: center;
+  }
+
+  /* =============================================
+     MOBILE LAYOUT
+     ============================================= */
+  .passivhaus__mobile {
     display: block;
   }
 
-  .passivhaus-desktop {
+  .passivhaus__desktop {
     display: none;
   }
 
-  .passivhaus-card {
+  .passivhaus__card {
     position: sticky;
     top: 0;
     display: flex;
@@ -111,6 +169,7 @@ const sectionImages = [
     background-position: center;
     background-repeat: no-repeat;
 
+    /* Overlay oscuro para mejorar legibilidad */
     &::before {
       content: "";
       position: absolute;
@@ -119,64 +178,29 @@ const sectionImages = [
       z-index: 0;
     }
 
+    /* Contenido sobre el overlay */
     & > * {
       position: relative;
       z-index: 1;
     }
   }
 
-  .passivhaus-card__left {
-  }
-
-  .passivhaus-card__title {
-    font-family: var(--font-heading);
-    font-size: var(--font-size-h2);
-    font-weight: 400;
-    margin-bottom: var(--space-md);
-  }
-
-  .passivhaus-card__description,
-  .passivhaus-card__features li,
-  .passivhaus-card__closing {
-    font-family: var(--font-body);
-    font-size: var(--font-size-body);
-    line-height: 1.6;
-  }
-
-  .passivhaus-card__features {
-    padding-left: 1.2em;
-    margin: 0;
-  }
-
-  .passivhaus-card__right {
+  .passivhaus__footer {
     display: flex;
     flex-direction: column;
     gap: var(--space-md);
     margin-top: auto;
   }
 
-  .passivhaus-card__tagline {
-    font-family: var(--font-heading);
-    font-style: italic;
-    margin: 0;
-  }
-
-  .passivhaus-card__cta {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    border: 1px solid var(--color-white);
-    color: var(--color-white);
-    text-decoration: none;
-    text-align: center;
-  }
-
-  /* ===== DESKTOP ===== */
+  /* =============================================
+     DESKTOP LAYOUT
+     ============================================= */
   @media (min-width: 768px) {
-    .passivhaus-mobile {
+    .passivhaus__mobile {
       display: none;
     }
 
-    .passivhaus-desktop {
+    .passivhaus__desktop {
       display: block;
       position: sticky;
       top: 0;
@@ -184,7 +208,8 @@ const sectionImages = [
       padding: 0 var(--content-padding);
     }
 
-    .passivhaus-desktop__left {
+    /* --- Columna izquierda: Textos --- */
+    .passivhaus__texts {
       position: absolute;
       left: var(--content-padding);
       width: 35%;
@@ -193,19 +218,20 @@ const sectionImages = [
       z-index: 2;
     }
 
-    .passivhaus-desktop__left-track {
+    .passivhaus__texts-track {
       display: flex;
       flex-direction: column;
     }
 
-    .passivhaus-desktop__left-item {
+    .passivhaus__text-item {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
 
-    .passivhaus-desktop__images {
+    /* --- Centro: Imágenes --- */
+    .passivhaus__images {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -215,6 +241,7 @@ const sectionImages = [
       overflow: hidden;
       z-index: 1;
 
+      /* Overlay sobre las imágenes */
       &::after {
         content: "";
         position: absolute;
@@ -224,18 +251,19 @@ const sectionImages = [
       }
     }
 
-    .passivhaus-desktop__images-track {
+    .passivhaus__images-track {
       display: flex;
       flex-direction: column;
     }
 
-    .passivhaus-desktop__image {
+    .passivhaus__image {
       width: 100%;
       aspect-ratio: 5 / 3;
       object-fit: cover;
     }
 
-    .passivhaus-desktop__right {
+    /* --- Columna derecha: Sidebar --- */
+    .passivhaus__sidebar {
       position: absolute;
       right: var(--content-padding);
       top: 50%;
@@ -248,24 +276,26 @@ const sectionImages = [
       z-index: 2;
     }
 
-    .passivhaus-desktop__taglines {
+    .passivhaus__taglines {
       position: relative;
       width: 100%;
       min-width: 200px;
       height: 2em;
     }
 
-    .passivhaus-desktop__taglines .passivhaus-card__tagline {
+    .passivhaus__taglines .passivhaus__tagline {
       position: absolute;
       top: 0;
       right: 0;
       white-space: nowrap;
       transform: translateY(100%);
       opacity: 0;
-      transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+      transition:
+        transform 0.2s ease-out,
+        opacity 0.2s ease-out;
     }
 
-    .passivhaus-desktop__taglines .passivhaus-card__tagline.is-active {
+    .passivhaus__taglines .passivhaus__tagline.is-active {
       transform: translateY(0);
       opacity: 1;
     }
@@ -273,61 +303,76 @@ const sectionImages = [
 </style>
 
 <script>
+  /**
+   * Inicializa las animaciones de scroll para la sección Passivhaus (solo desktop)
+   *
+   * Funcionamiento:
+   * 1. La sección tiene altura 300vh para crear espacio de scroll
+   * 2. El contenedor desktop es sticky (100vh) y se queda fijo
+   * 3. Al hacer scroll, calculamos el progreso (0-1) dentro de la sección
+   * 4. Ese progreso mueve los tracks de textos e imágenes con translateY
+   * 5. Los taglines cambian con una transición CSS cuando el índice cambia
+   */
   function initPassivhausScroll() {
-    const section = document.querySelector('.passivhaus-section');
-    const desktop = document.querySelector('.passivhaus-desktop');
-    if (!section || !desktop) return;
+    const section = document.querySelector(".passivhaus");
+    const desktop = document.querySelector(".passivhaus__desktop");
 
-    const leftTrack = desktop.querySelector('.passivhaus-desktop__left-track');
-    const imagesTrack = desktop.querySelector('.passivhaus-desktop__images-track');
-    const taglinesContainer = desktop.querySelector('.passivhaus-desktop__taglines');
+    if (!section || !desktop || window.innerWidth < 768) return;
 
-    if (!leftTrack || !imagesTrack || !taglinesContainer) return;
+    // Elementos animables
+    const textsTrack = desktop.querySelector(".passivhaus__texts-track");
+    const imagesTrack = desktop.querySelector(".passivhaus__images-track");
+    const taglines = desktop.querySelectorAll(".passivhaus__tagline");
 
-    const leftItems = leftTrack.querySelectorAll('.passivhaus-desktop__left-item');
-    const images = imagesTrack.querySelectorAll('.passivhaus-desktop__image');
-    const taglines = taglinesContainer.querySelectorAll('.passivhaus-card__tagline');
+    if (!textsTrack || !imagesTrack || !taglines.length) return;
 
-    const totalSections = leftItems.length;
+    // Referencias para calcular alturas
+    const textItems = textsTrack.querySelectorAll(".passivhaus__text-item");
+    const images = imagesTrack.querySelectorAll(".passivhaus__image");
+    const totalSections = textItems.length;
+
     if (totalSections === 0) return;
 
-    let currentActiveIndex = 0;
+    let currentTaglineIndex = 0;
 
     function handleScroll() {
+      // Solo ejecutar en desktop
       if (window.innerWidth < 768) return;
 
+      // Calcular progreso del scroll dentro de la sección
       const sectionRect = section.getBoundingClientRect();
-      const sectionHeight = section.offsetHeight;
-      const viewportHeight = window.innerHeight;
-
-      const scrollableDistance = sectionHeight - viewportHeight;
+      const scrollableDistance = section.offsetHeight - window.innerHeight;
       const scrolled = -sectionRect.top;
       const progress = Math.max(0, Math.min(1, scrolled / scrollableDistance));
 
+      // Convertir progreso (0-1) a índice de sección (0 a totalSections-1)
       const sectionProgress = progress * (totalSections - 1);
-      const newIndex = Math.round(sectionProgress);
 
-      const leftItemHeight = leftItems[0]?.offsetHeight || 0;
+      // Animar textos
+      const textItemHeight = textItems[0]?.offsetHeight || 0;
+      textsTrack.style.transform = `translateY(-${sectionProgress * textItemHeight}px)`;
+
+      // Animar imágenes
       const imageHeight = images[0]?.offsetHeight || 0;
+      imagesTrack.style.transform = `translateY(-${sectionProgress * imageHeight}px)`;
 
-      const translateY = sectionProgress * leftItemHeight;
-      leftTrack.style.transform = `translateY(-${translateY}px)`;
-
-      const imgTranslateY = sectionProgress * imageHeight;
-      imagesTrack.style.transform = `translateY(-${imgTranslateY}px)`;
-
-      // Actualizar tagline activo con transición
-      if (newIndex !== currentActiveIndex) {
-        taglines[currentActiveIndex]?.classList.remove('is-active');
-        taglines[newIndex]?.classList.add('is-active');
-        currentActiveIndex = newIndex;
+      // Cambiar tagline activo (con transición CSS)
+      const newIndex = Math.round(sectionProgress);
+      if (newIndex !== currentTaglineIndex && taglines[newIndex]) {
+        taglines[currentTaglineIndex]?.classList.remove("is-active");
+        taglines[newIndex].classList.add("is-active");
+        currentTaglineIndex = newIndex;
       }
     }
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll, { passive: true });
+    // Event listeners
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll, { passive: true });
+
+    // Ejecutar una vez al inicio
     handleScroll();
   }
 
-  document.addEventListener('DOMContentLoaded', initPassivhausScroll);
+  // Inicializar cuando el DOM esté listo
+  document.addEventListener("DOMContentLoaded", initPassivhausScroll);
 </script>
