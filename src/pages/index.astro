@@ -4,6 +4,7 @@ import Hero from '../components/Hero.astro';
 import Welcome from '../components/Welcome.astro';
 import Characteristics from '../components/Characteristics.astro';
 import Passivhaus from '../components/Passivhaus.astro';
+import Location from '../components/Location.astro';
 
 const lang = 'es';
 ---
@@ -21,11 +22,7 @@ const lang = 'es';
   <Passivhaus lang={lang} />
 
   <!-- Location Section -->
-  <section id="location" class="location">
-    <div class="container">
-      <!-- TODO: Ubicación - Mapa Sitges + puntos de interés + distancias -->
-    </div>
-  </section>
+  <Location lang={lang} />
 
   <!-- Houses Section -->
   <section id="houses" class="houses">
@@ -62,10 +59,6 @@ const lang = 'es';
   }
 
   /* Placeholder styles */
-  .location {
-    background-color: var(--color-white);
-  }
-
   .houses {
     background-color: var(--color-accent);
   }

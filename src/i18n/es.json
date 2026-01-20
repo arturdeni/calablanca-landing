@@ -89,11 +89,27 @@
     "title": "Ubicación",
     "subtitle": "Sitges · Mediterráneo en estado puro",
     "description": "A solo 30 minutos de Barcelona, Sitges es un enclave costero elegante y sofisticado, rodeado por el parque natural del Garraf y conocido por su estilo de vida mediterráneo.",
+    "distancesTitle": "Calablanca Residences se encuentra a:",
     "distances": {
-      "beach": "10 minutos de la playa",
+      "beach": "A pocos minutos de la playa y del centro de Sitges",
       "airport": "20 minutos del aeropuerto",
       "services": "Cerca de colegios internacionales y servicios"
-    }
+    },
+    "cta": "Solicitar Información",
+    "mapAlt": "Mapa de ubicación de Calablanca Residences en Sitges",
+    "poi": [
+      "Puerto deportivo Aiguadolç",
+      "Estación de tren",
+      "Playa de Sant Sebastià",
+      "Plaza Ayuntamiento",
+      "Iglesia de Sant Bartomeu i Santa Tecla",
+      "Parc Can Robert",
+      "Club Náutico",
+      "Playa Sitges",
+      "",
+      "Paseo Marítimo",
+      "Parque de Terramar"
+    ]
   },
   "houses": {
     "title": "Elige la casa que quieras",

@@ -1,0 +1,201 @@
+---
+const { lang = "es" } = Astro.props;
+
+const translations = await import(`../i18n/${lang}.json`);
+const t = translations.location;
+---
+
+<section class="location" id="location">
+  <div class="location__container">
+    <!-- Header -->
+    <header class="location__header">
+      <h2 class="location__title" data-text-reveal="lines">{t.title}</h2>
+    </header>
+
+    <!-- Content -->
+    <div class="location__content">
+      <h3 class="location__subtitle" data-text-reveal="lines">{t.subtitle}</h3>
+
+      <div class="location__info">
+        <p class="location__description" data-text-reveal="lines">
+          {t.description}
+        </p>
+
+        <div class="location__distances">
+          <h4 class="location__distances-title">{t.distancesTitle}</h4>
+          <ul class="location__distances-list">
+            <li>{t.distances.beach}</li>
+            <li>{t.distances.airport}</li>
+            <li>{t.distances.services}</li>
+          </ul>
+        </div>
+      </div>
+
+      <a href="#contact" class="location__cta">{t.cta}</a>
+    </div>
+
+    <!-- Map -->
+    <div class="location__map-wrapper">
+      <img
+        src="/images/location-map.jpg"
+        alt={t.mapAlt}
+        class="location__map-image"
+        loading="lazy"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .location {
+    padding: var(--space-lg) 0;
+    background-color: var(--color-white);
+  }
+
+  .location__container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--content-padding);
+  }
+
+  /* Header */
+  .location__header {
+    margin-bottom: var(--space-md);
+  }
+
+  .location__title {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h2);
+    font-weight: 400;
+    margin: 0;
+  }
+
+  /* Content grid */
+  .location__content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+
+  .location__subtitle {
+    font-family: var(--font-heading);
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 400;
+    margin: 0;
+  }
+
+  .location__info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .location__description {
+    font-size: var(--font-size-small);
+    line-height: 1.7;
+    color: var(--color-primary);
+    opacity: 0.85;
+    margin: 0;
+  }
+
+  /* Distances */
+  .location__distances {
+    margin-top: var(--space-xs);
+  }
+
+  .location__distances-title {
+    font-family: var(--font-body);
+    font-size: var(--font-size-small);
+    font-weight: 400;
+    margin: 0 0 var(--space-xs);
+    opacity: 0.7;
+  }
+
+  .location__distances-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: var(--font-size-small);
+    line-height: 1.8;
+
+    & li {
+      position: relative;
+      padding-left: 1em;
+
+      &::before {
+        content: "·";
+        position: absolute;
+        left: 0;
+      }
+    }
+  }
+
+  /* CTA Button */
+  .location__cta {
+    display: inline-block;
+    padding: var(--space-xs) var(--space-md);
+    border: 1px solid var(--color-primary);
+    border-radius: 8px;
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    text-align: center;
+    transition: all var(--transition-fast);
+    align-self: flex-start;
+
+    &:hover {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      opacity: 1;
+    }
+  }
+
+  /* Map */
+  .location__map-wrapper {
+    width: 100%;
+  }
+
+  .location__map-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Tablet and up */
+  @media (min-width: 768px) {
+    .location {
+      padding: var(--space-xl) 0;
+    }
+
+    .location__content {
+      grid-template-columns: 3fr 2fr;
+      grid-template-rows: auto auto;
+      align-items: start;
+      gap: var(--space-md);
+    }
+
+    .location__subtitle {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .location__info {
+      grid-column: 1;
+      grid-row: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+    }
+
+    .location__cta {
+      align-self: flex-end;
+      grid-column: 2;
+      grid-row: 2;
+      justify-self: end;
+    }
+
+    .location__distances {
+      margin-top: 0;
+    }
+  }
+</style>
