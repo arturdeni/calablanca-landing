@@ -12,33 +12,92 @@ const sectionImages = [
 ---
 
 <section class="passivhaus-section" id="passivhaus">
-  {t.sections.map((section, index) => (
-    <article
-      class="passivhaus-card"
-      style={`background-image: url(${sectionImages[index]})`}
-    >
-      <div class="passivhaus-card__left">
-        <h2 class="passivhaus-card__title">{section.title}</h2>
-        <p class="passivhaus-card__description">{section.description}</p>
-        <ul class="passivhaus-card__features">
-          {section.features.map((feature) => (
-            <li>{feature}</li>
-          ))}
-        </ul>
-        <p class="passivhaus-card__closing">{section.closing}</p>
-      </div>
+  <!-- Mobile: 3 cards separadas -->
+  <div class="passivhaus-mobile">
+    {t.sections.map((section, index) => (
+      <article
+        class="passivhaus-card"
+        style={`background-image: url(${sectionImages[index]})`}
+      >
+        <div class="passivhaus-card__left">
+          <h2 class="passivhaus-card__title">{section.title}</h2>
+          <p class="passivhaus-card__description">{section.description}</p>
+          <ul class="passivhaus-card__features">
+            {section.features.map((feature) => (
+              <li>{feature}</li>
+            ))}
+          </ul>
+          <p class="passivhaus-card__closing">{section.closing}</p>
+        </div>
 
-      <div class="passivhaus-card__right">
-        <p class="passivhaus-card__tagline">{section.tagline}</p>
-        <a href="#contact" class="passivhaus-card__cta">{t.cta}</a>
+        <div class="passivhaus-card__right">
+          <p class="passivhaus-card__tagline">{section.tagline}</p>
+          <a href="#contact" class="passivhaus-card__cta">{t.cta}</a>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <!-- Desktop: 1 card con scroll interno -->
+  <div class="passivhaus-desktop">
+    <div class="passivhaus-desktop__left">
+      <div class="passivhaus-desktop__left-track">
+        {t.sections.map((section) => (
+          <div class="passivhaus-desktop__left-item">
+            <h2 class="passivhaus-card__title">{section.title}</h2>
+            <p class="passivhaus-card__description">{section.description}</p>
+            <ul class="passivhaus-card__features">
+              {section.features.map((feature) => (
+                <li>{feature}</li>
+              ))}
+            </ul>
+            <p class="passivhaus-card__closing">{section.closing}</p>
+          </div>
+        ))}
       </div>
-    </article>
-  ))}
+    </div>
+
+    <div class="passivhaus-desktop__images">
+      <div class="passivhaus-desktop__images-track">
+        {sectionImages.map((src, index) => (
+          <img
+            src={src}
+            alt={t.sections[index].title}
+            class="passivhaus-desktop__image"
+            loading="lazy"
+          />
+        ))}
+      </div>
+    </div>
+
+    <div class="passivhaus-desktop__right">
+      <div class="passivhaus-desktop__taglines">
+        {t.sections.map((section, index) => (
+          <p class={`passivhaus-card__tagline ${index === 0 ? 'is-active' : ''}`}>{section.tagline}</p>
+        ))}
+      </div>
+      <a href="#contact" class="passivhaus-card__cta">{t.cta}</a>
+    </div>
+  </div>
 </section>
 
 <style>
   .passivhaus-section {
     background-color: var(--color-dark);
+    color: var(--color-white);
+
+    @media (min-width: 768px) {
+      height: 300vh;
+    }
+  }
+
+  /* ===== MOBILE ===== */
+  .passivhaus-mobile {
+    display: block;
+  }
+
+  .passivhaus-desktop {
+    display: none;
   }
 
   .passivhaus-card {
@@ -48,7 +107,6 @@ const sectionImages = [
     flex-direction: column;
     min-height: 100vh;
     padding: var(--space-lg) var(--content-padding);
-    color: var(--color-white);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -64,10 +122,6 @@ const sectionImages = [
     & > * {
       position: relative;
       z-index: 1;
-    }
-
-    @media (min-width: 768px) {
-      position: relative;
     }
   }
 
@@ -104,6 +158,7 @@ const sectionImages = [
   .passivhaus-card__tagline {
     font-family: var(--font-heading);
     font-style: italic;
+    margin: 0;
   }
 
   .passivhaus-card__cta {
@@ -114,4 +169,165 @@ const sectionImages = [
     text-decoration: none;
     text-align: center;
   }
+
+  /* ===== DESKTOP ===== */
+  @media (min-width: 768px) {
+    .passivhaus-mobile {
+      display: none;
+    }
+
+    .passivhaus-desktop {
+      display: block;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 0 var(--content-padding);
+    }
+
+    .passivhaus-desktop__left {
+      position: absolute;
+      left: var(--content-padding);
+      width: 35%;
+      height: 100vh;
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    .passivhaus-desktop__left-track {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .passivhaus-desktop__left-item {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .passivhaus-desktop__images {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60%;
+      aspect-ratio: 5 / 3;
+      overflow: hidden;
+      z-index: 1;
+
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.2);
+        pointer-events: none;
+      }
+    }
+
+    .passivhaus-desktop__images-track {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .passivhaus-desktop__image {
+      width: 100%;
+      aspect-ratio: 5 / 3;
+      object-fit: cover;
+    }
+
+    .passivhaus-desktop__right {
+      position: absolute;
+      right: var(--content-padding);
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      text-align: right;
+      gap: var(--space-sm);
+      z-index: 2;
+    }
+
+    .passivhaus-desktop__taglines {
+      position: relative;
+      width: 100%;
+      min-width: 200px;
+      height: 2em;
+    }
+
+    .passivhaus-desktop__taglines .passivhaus-card__tagline {
+      position: absolute;
+      top: 0;
+      right: 0;
+      white-space: nowrap;
+      transform: translateY(100%);
+      opacity: 0;
+      transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+    }
+
+    .passivhaus-desktop__taglines .passivhaus-card__tagline.is-active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
 </style>
+
+<script>
+  function initPassivhausScroll() {
+    const section = document.querySelector('.passivhaus-section');
+    const desktop = document.querySelector('.passivhaus-desktop');
+    if (!section || !desktop) return;
+
+    const leftTrack = desktop.querySelector('.passivhaus-desktop__left-track');
+    const imagesTrack = desktop.querySelector('.passivhaus-desktop__images-track');
+    const taglinesContainer = desktop.querySelector('.passivhaus-desktop__taglines');
+
+    if (!leftTrack || !imagesTrack || !taglinesContainer) return;
+
+    const leftItems = leftTrack.querySelectorAll('.passivhaus-desktop__left-item');
+    const images = imagesTrack.querySelectorAll('.passivhaus-desktop__image');
+    const taglines = taglinesContainer.querySelectorAll('.passivhaus-card__tagline');
+
+    const totalSections = leftItems.length;
+    if (totalSections === 0) return;
+
+    let currentActiveIndex = 0;
+
+    function handleScroll() {
+      if (window.innerWidth < 768) return;
+
+      const sectionRect = section.getBoundingClientRect();
+      const sectionHeight = section.offsetHeight;
+      const viewportHeight = window.innerHeight;
+
+      const scrollableDistance = sectionHeight - viewportHeight;
+      const scrolled = -sectionRect.top;
+      const progress = Math.max(0, Math.min(1, scrolled / scrollableDistance));
+
+      const sectionProgress = progress * (totalSections - 1);
+      const newIndex = Math.round(sectionProgress);
+
+      const leftItemHeight = leftItems[0]?.offsetHeight || 0;
+      const imageHeight = images[0]?.offsetHeight || 0;
+
+      const translateY = sectionProgress * leftItemHeight;
+      leftTrack.style.transform = `translateY(-${translateY}px)`;
+
+      const imgTranslateY = sectionProgress * imageHeight;
+      imagesTrack.style.transform = `translateY(-${imgTranslateY}px)`;
+
+      // Actualizar tagline activo con transición
+      if (newIndex !== currentActiveIndex) {
+        taglines[currentActiveIndex]?.classList.remove('is-active');
+        taglines[newIndex]?.classList.add('is-active');
+        currentActiveIndex = newIndex;
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
+    handleScroll();
+  }
+
+  document.addEventListener('DOMContentLoaded', initPassivhausScroll);
+</script>
