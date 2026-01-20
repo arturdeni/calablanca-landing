@@ -7,6 +7,7 @@ const isEnglish = lang === 'en';
 const toggleLangUrl = isEnglish ? '/' : '/en/';
 ---
 
+<!-- Header principal (visible siempre, nav desktop solo >= 1120px) -->
 <header class="header">
   <div class="container">
     <div class="header__inner">
@@ -24,29 +25,61 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
           <li><a href={toggleLangUrl}>{isEnglish ? 'ES' : 'EN'}</a></li>
         </ul>
       </nav>
-
-      <button class="header__hamburger" aria-label="Menu" aria-expanded="false">
-        <span class="header__hamburger-line"></span>
-        <span class="header__hamburger-line"></span>
-      </button>
     </div>
   </div>
 </header>
 
-<div class="mobile-menu">
-  <nav class="mobile-menu__nav">
-    <ul class="mobile-menu__list">
-      <li><a href="#residence">{t('nav.residence')}</a></li>
-      <li><a href="#location">{t('nav.location')}</a></li>
-      <li><a href="#houses">{t('nav.houses')}</a></li>
-      <li><a href="#calculator">{t('nav.calculator')}</a></li>
-      <li><a href="#contact">{t('nav.contact')}</a></li>
-      <li><a href={toggleLangUrl}>{isEnglish ? 'ES' : 'EN'}</a></li>
+<!-- Navegación fullscreen mobile (solo < 1120px) -->
+<nav data-navigation-status="not-active" class="bold-nav-full">
+  <div class="bold-nav-full__bar">
+    <a href={`/${lang === 'en' ? 'en/' : ''}`} class="bold-nav-full__logo">
+      <img src="/images/header-logo.svg" alt="Calablanca Residences" />
+    </a>
+    <button data-navigation-toggle="toggle" class="bold-nav-full__hamburger" aria-label="Menu">
+      <div class="bold-nav-full__hamburger-bar"></div>
+      <div class="bold-nav-full__hamburger-bar"></div>
+      <div class="bold-nav-full__hamburger-bar"></div>
+    </button>
+  </div>
+  <div class="bold-nav-full__tile">
+    <ul class="bold-nav-full__ul">
+      <li class="bold-nav-full__li">
+        <a href="#residence" data-navigation-toggle="close" class="bold-nav-full__link">
+          <span class="bold-nav-full__link-text">{t('nav.residence')}</span>
+        </a>
+      </li>
+      <li class="bold-nav-full__li">
+        <a href="#location" data-navigation-toggle="close" class="bold-nav-full__link">
+          <span class="bold-nav-full__link-text">{t('nav.location')}</span>
+        </a>
+      </li>
+      <li class="bold-nav-full__li">
+        <a href="#houses" data-navigation-toggle="close" class="bold-nav-full__link">
+          <span class="bold-nav-full__link-text">{t('nav.houses')}</span>
+        </a>
+      </li>
+      <li class="bold-nav-full__li">
+        <a href="#calculator" data-navigation-toggle="close" class="bold-nav-full__link">
+          <span class="bold-nav-full__link-text">{t('nav.calculator')}</span>
+        </a>
+      </li>
+      <li class="bold-nav-full__li">
+        <a href="#contact" data-navigation-toggle="close" class="bold-nav-full__link">
+          <span class="bold-nav-full__link-text">{t('nav.contact')}</span>
+        </a>
+      </li>
     </ul>
-  </nav>
-</div>
+    <div class="bold-nav__bottom">
+      <a href={toggleLangUrl} class="bold-nav__lang">{isEnglish ? 'ES' : 'EN'}</a>
+      <p class="bold-nav__word">info@calablanca.es</p>
+    </div>
+  </div>
+</nav>
 
 <style>
+  /* ================================
+     HEADER DESKTOP (>= 1120px)
+     ================================ */
   .header {
     position: fixed;
     top: 0;
@@ -54,9 +87,9 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
     right: 0;
     z-index: 100;
     transition: transform 0.3s ease;
+    display: none;
   }
 
-  /* Estado inicial: sin blend, texto blanco puro */
   .header--top {
     mix-blend-mode: normal;
   }
@@ -65,12 +98,10 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
     color: var(--color-white);
   }
 
-  /* Estado scrolled: con blend para contraste */
   .header--scrolled {
     mix-blend-mode: exclusion;
   }
 
-  /* Header oculto al hacer scroll hacia abajo */
   .header--hidden {
     transform: translateY(-100%);
   }
@@ -86,10 +117,6 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
   .header__logo-img {
     height: 2rem;
     width: auto;
-  }
-
-  .header__nav {
-    display: none;
   }
 
   .header__nav-list {
@@ -111,112 +138,258 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
     }
   }
 
-  /* Hamburger button */
-  .header__hamburger {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 8px;
-    width: 32px;
-    height: 32px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 4px;
-    z-index: 101;
-  }
-
-  .header__hamburger-line {
-    display: block;
-    width: 100%;
-    height: 2px;
-    background-color: #e0e0e0;
-    transition: transform 0.3s ease;
-  }
-
-  .header--top .header__hamburger-line {
-    background-color: var(--color-white);
-  }
-
-  /* Hamburger animación a X cuando está abierto */
-  .header__hamburger--open .header__hamburger-line:nth-child(1) {
-    transform: translateY(5px) rotate(45deg);
-  }
-
-  .header__hamburger--open .header__hamburger-line:nth-child(2) {
-    transform: translateY(-5px) rotate(-45deg);
-  }
-
-  /* Mobile menu */
-  .mobile-menu {
+  /* ================================
+     BOLD NAV FULLSCREEN (< 1120px)
+     ================================ */
+  .bold-nav-full {
+    z-index: 100;
+    pointer-events: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--color-dark);
-    z-index: 99;
+    inset: 0;
+  }
+
+  .bold-nav-full__bar {
+    z-index: 1;
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--space-md);
+    display: flex;
+    position: absolute;
+  }
+
+  .bold-nav-full__logo {
+    pointer-events: auto;
     display: flex;
     align-items: center;
-    justify-content: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
   }
 
-  .mobile-menu--open {
-    opacity: 1;
-    visibility: visible;
+  .bold-nav-full__logo img {
+    height: 2rem;
+    width: auto;
   }
 
-  .mobile-menu__list {
-    list-style: none;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
-  }
-
-  .mobile-menu__list a {
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    font-weight: 400;
+  /* Hamburger */
+  .bold-nav-full__hamburger {
+    pointer-events: auto;
     color: var(--color-white);
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    width: 3em;
+    height: 3em;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bold-nav-full__hamburger .bold-nav-full__hamburger-bar {
+    background-color: currentColor;
+    width: 2em;
+    height: 2px;
+    position: absolute;
+    transform: translate(0, 0) rotate(0.001deg);
+    transition: transform 0.5s cubic-bezier(.7, 0, .3, 1);
+  }
+
+  .bold-nav-full__hamburger .bold-nav-full__hamburger-bar:nth-child(1) {
+    transform: translate(0, -0.45em) scale(1, 1) rotate(0.001deg);
+  }
+
+  .bold-nav-full__hamburger .bold-nav-full__hamburger-bar:nth-child(3) {
+    transform: translate(0, 0.45em) scale(1, 1) rotate(0.001deg);
+  }
+
+  /* Hamburger Hover */
+  .bold-nav-full__hamburger:hover .bold-nav-full__hamburger-bar:nth-child(1) {
+    transform: translate(0, -0.45em) scale(0.5, 1) rotate(0.001deg);
+  }
+
+  .bold-nav-full__hamburger:hover .bold-nav-full__hamburger-bar:nth-child(3) {
+    transform: translate(0, 0.45em) scale(0.5, 1) rotate(0.001deg);
+  }
+
+  /* Hamburger activo (X) */
+  [data-navigation-status="active"] .bold-nav-full__hamburger-bar:nth-child(1) {
+    transform: translate(0, 0) rotate(45deg) scale(1, 1);
+  }
+
+  [data-navigation-status="active"] .bold-nav-full__hamburger-bar:nth-child(2) {
+    transform: translate(-150%, 0) rotate(0.001deg) scale(1, 1);
+  }
+
+  [data-navigation-status="active"] .bold-nav-full__hamburger-bar:nth-child(3) {
+    transform: translate(0, 0) rotate(-45deg) scale(1, 1);
+  }
+
+  /* Hamburger Hover cuando activo */
+  [data-navigation-status="active"] .bold-nav-full__hamburger:hover .bold-nav-full__hamburger-bar:nth-child(1) {
+    transform: translate(0, 0) rotate(45deg) scale(0.7, 1);
+  }
+
+  [data-navigation-status="active"] .bold-nav-full__hamburger:hover .bold-nav-full__hamburger-bar:nth-child(3) {
+    transform: translate(0, 0) rotate(-45deg) scale(0.7, 1);
+  }
+
+  /* Tile (panel fullscreen) */
+  .bold-nav-full__tile {
+    pointer-events: auto;
+    background-color: var(--color-dark);
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: clip-path 1s cubic-bezier(.9, 0, .1, 1);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+  }
+
+  [data-navigation-status="active"] .bold-nav-full__tile {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+
+  .bold-nav-full__ul {
+    flex-flow: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+  }
+
+  .bold-nav-full__li {
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bold-nav-full__link {
+    color: var(--color-white);
+    letter-spacing: -0.04em;
+    padding-left: 0.075em;
+    padding-right: 0.075em;
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 8vw, 4rem);
+    font-weight: 400;
+    line-height: 1.2;
+    text-decoration: none;
+    transform: translateY(100%) rotate(5deg);
+    transition: transform 0.75s cubic-bezier(.7, 0, .3, 1);
+  }
+
+  .bold-nav-full__li:nth-child(1) .bold-nav-full__link { transition-delay: 0.2s; }
+  .bold-nav-full__li:nth-child(2) .bold-nav-full__link { transition-delay: 0.15s; }
+  .bold-nav-full__li:nth-child(3) .bold-nav-full__link { transition-delay: 0.1s; }
+  .bold-nav-full__li:nth-child(4) .bold-nav-full__link { transition-delay: 0.05s; }
+  .bold-nav-full__li:nth-child(5) .bold-nav-full__link { transition-delay: 0s; }
+
+  /* Links cuando nav activa */
+  [data-navigation-status="active"] .bold-nav-full__link {
+    transform: translateY(0%) rotate(0.001deg);
+    transition-delay: 0.3s;
+  }
+
+  [data-navigation-status="active"] .bold-nav-full__li:nth-child(1) .bold-nav-full__link { transition-delay: 0.3s; }
+  [data-navigation-status="active"] .bold-nav-full__li:nth-child(2) .bold-nav-full__link { transition-delay: 0.35s; }
+  [data-navigation-status="active"] .bold-nav-full__li:nth-child(3) .bold-nav-full__link { transition-delay: 0.4s; }
+  [data-navigation-status="active"] .bold-nav-full__li:nth-child(4) .bold-nav-full__link { transition-delay: 0.45s; }
+  [data-navigation-status="active"] .bold-nav-full__li:nth-child(5) .bold-nav-full__link { transition-delay: 0.5s; }
+
+  .bold-nav-full__link-text {
+    text-shadow: 0 1.1em 0;
+    display: block;
+    position: relative;
+  }
+
+  /* Links hover efecto opacidad */
+  .bold-nav-full__li {
+    transition: opacity 0.5s cubic-bezier(.7, 0, .3, 1);
+  }
+
+  .bold-nav-full__ul:has(.bold-nav-full__li:hover) .bold-nav-full__li {
+    opacity: 0.15;
+  }
+
+  .bold-nav-full__ul:has(.bold-nav-full__li:hover) .bold-nav-full__li:hover {
+    opacity: 1;
+  }
+
+  /* Links hover texto slide */
+  .bold-nav-full__link .bold-nav-full__link-text {
+    transition: transform 0.5s cubic-bezier(.7, 0, .3, 1);
+    transform: translateY(0%) rotate(0.001deg);
+  }
+
+  .bold-nav-full__link:hover .bold-nav-full__link-text {
+    transform: translateY(-100%) rotate(0.001deg);
+  }
+
+  /* Bottom bar */
+  .bold-nav__bottom {
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: var(--space-lg);
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
+  .bold-nav__word {
+    opacity: 0.5;
+    margin-bottom: 0;
+    font-size: 1rem;
+    color: var(--color-white);
+  }
+
+  .bold-nav__lang {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    color: var(--color-white);
+    opacity: 0.7;
     transition: opacity var(--transition-fast);
 
     &:hover {
-      opacity: 0.7;
+      opacity: 1;
     }
   }
 
-  /* Mostrar nav desktop y ocultar hamburguesa en >= 1120px */
+  /* ================================
+     RESPONSIVE: Desktop >= 1120px
+     ================================ */
   @media (min-width: 1120px) {
-    .header__nav {
+    .header {
       display: block;
     }
 
-    .header__hamburger {
-      display: none;
-    }
-
-    .mobile-menu {
+    .bold-nav-full {
       display: none;
     }
   }
 </style>
 
 <script>
+  // ================================
+  // Header Desktop - Scroll behavior
+  // ================================
   const header = document.querySelector('.header');
-  const hamburger = document.querySelector('.header__hamburger');
-  const mobileMenu = document.querySelector('.mobile-menu');
-  const mobileMenuLinks = document.querySelectorAll('.mobile-menu__list a');
   let lastScrollY = 0;
   const scrollThreshold = 50;
 
   function handleScroll() {
     const currentScrollY = window.scrollY;
 
-    // Estado top vs scrolled
     if (currentScrollY <= scrollThreshold) {
       header.classList.add('header--top');
       header.classList.remove('header--scrolled');
@@ -225,12 +398,9 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
       header.classList.remove('header--top');
       header.classList.add('header--scrolled');
 
-      // Mostrar/ocultar según dirección del scroll
       if (currentScrollY > lastScrollY) {
-        // Scroll hacia abajo: ocultar
         header.classList.add('header--hidden');
       } else {
-        // Scroll hacia arriba: mostrar
         header.classList.remove('header--hidden');
       }
     }
@@ -238,27 +408,51 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
     lastScrollY = currentScrollY;
   }
 
-  function toggleMobileMenu() {
-    const isOpen = hamburger.classList.toggle('header__hamburger--open');
-    mobileMenu.classList.toggle('mobile-menu--open');
-    hamburger.setAttribute('aria-expanded', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-  }
-
-  function closeMobileMenu() {
-    hamburger.classList.remove('header__hamburger--open');
-    mobileMenu.classList.remove('mobile-menu--open');
-    hamburger.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  }
-
-  hamburger.addEventListener('click', toggleMobileMenu);
-
-  // Cerrar menú al hacer click en un enlace
-  mobileMenuLinks.forEach(link => {
-    link.addEventListener('click', closeMobileMenu);
-  });
-
   window.addEventListener('scroll', handleScroll);
   handleScroll();
+
+  // ================================
+  // Bold Nav Fullscreen (Mobile)
+  // ================================
+  function initBoldFullScreenNavigation() {
+    // Toggle Navigation
+    document.querySelectorAll('[data-navigation-toggle="toggle"]').forEach(toggleBtn => {
+      toggleBtn.addEventListener('click', () => {
+        const navStatusEl = document.querySelector('[data-navigation-status]');
+        if (!navStatusEl) return;
+
+        if (navStatusEl.getAttribute('data-navigation-status') === 'not-active') {
+          navStatusEl.setAttribute('data-navigation-status', 'active');
+          document.body.style.overflow = 'hidden';
+        } else {
+          navStatusEl.setAttribute('data-navigation-status', 'not-active');
+          document.body.style.overflow = '';
+        }
+      });
+    });
+
+    // Close Navigation (para links del menú)
+    document.querySelectorAll('[data-navigation-toggle="close"]').forEach(closeBtn => {
+      closeBtn.addEventListener('click', () => {
+        const navStatusEl = document.querySelector('[data-navigation-status]');
+        if (!navStatusEl) return;
+        navStatusEl.setAttribute('data-navigation-status', 'not-active');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // ESC key - Close Navigation
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        const navStatusEl = document.querySelector('[data-navigation-status]');
+        if (!navStatusEl) return;
+        if (navStatusEl.getAttribute('data-navigation-status') === 'active') {
+          navStatusEl.setAttribute('data-navigation-status', 'not-active');
+          document.body.style.overflow = '';
+        }
+      }
+    });
+  }
+
+  initBoldFullScreenNavigation();
 </script>
