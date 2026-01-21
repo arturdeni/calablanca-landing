@@ -20,8 +20,8 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
           <li><a href="#residence">{t('nav.residence')}</a></li>
           <li><a href="#location">{t('nav.location')}</a></li>
           <li><a href="#houses">{t('nav.houses')}</a></li>
-          <li><a href="#calculator">{t('nav.calculator')}</a></li>
           <li><a href="#contact">{t('nav.contact')}</a></li>
+          <li><a href="#calculator">{t('nav.calculator')}</a></li>
           <li><a href={toggleLangUrl}>{isEnglish ? 'ES' : 'EN'}</a></li>
         </ul>
       </nav>
@@ -61,13 +61,13 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
         </a>
       </li>
       <li class="mobile-nav__item">
-        <a href="#calculator" data-navigation-toggle="close" class="mobile-nav__link">
-          <span class="mobile-nav__link-text">{t('nav.calculator')}</span>
+        <a href="#contact" data-navigation-toggle="close" class="mobile-nav__link">
+          <span class="mobile-nav__link-text">{t('nav.contact')}</span>
         </a>
       </li>
       <li class="mobile-nav__item">
-        <a href="#contact" data-navigation-toggle="close" class="mobile-nav__link">
-          <span class="mobile-nav__link-text">{t('nav.contact')}</span>
+        <a href="#calculator" data-navigation-toggle="close" class="mobile-nav__link">
+          <span class="mobile-nav__link-text">{t('nav.calculator')}</span>
         </a>
       </li>
     </ul>
