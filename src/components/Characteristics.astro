@@ -7,11 +7,11 @@ const t = translations.characteristics;
 const features = [
   { id: "parking", icon: "/images/icons/parking.svg" },
   { id: "pool", icon: "/images/icons/piscina.svg" },
-  { id: "chill", icon: "/images/icons/cubierta.svg" },
+  { id: "chill", icon: "/images/icons/chillout.svg" },
   { id: "garden", icon: "/images/icons/jardineria.svg" },
-  { id: "kitchen", icon: "/images/icons/cocina.svg" },
+  { id: "closets", icon: "/images/icons/armarios.svg" },
   { id: "storage", icon: "/images/icons/trastero.svg" },
-  { id: "elevator", icon: "/images/icons/ascensor.svg" },
+  { id: "aerothermal", icon: "/images/icons/aerotermia.svg" },
   { id: "terraces", icon: "/images/icons/terrazas.svg" },
 ];
 ---
@@ -100,11 +100,6 @@ const features = [
   }
 
   .characteristics__title {
-    font-family: var(--font-heading);
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 400;
-    font-style: italic;
-    line-height: 1.1;
     color: var(--color-white);
   }
 
@@ -137,7 +132,7 @@ const features = [
 
     & img {
       width: 100%;
-      height: 100%;
+      height: 85%;
       object-fit: contain;
     }
   }
@@ -147,7 +142,7 @@ const features = [
     font-size: 0.75rem;
     color: var(--color-white);
     line-height: 1.3;
-    max-width: 100px;
+    max-width: 110px;
   }
 
   /* Tablet */

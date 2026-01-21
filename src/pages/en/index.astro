@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import Welcome from '../../components/Welcome.astro';
+import Characteristics from '../../components/Characteristics.astro';
+import Passivhaus from '../../components/Passivhaus.astro';
+import Location from '../../components/Location.astro';
+import Houses from '../../components/Houses.astro';
+import Timeline from '../../components/Timeline.astro';
+import Calculator from '../../components/Calculator.astro';
+
+const lang = 'en';
+---
+
+<Layout title="Calablanca Residences · Sitges" lang={lang}>
+  <Hero lang={lang} />
+
+  <!-- Welcome Section -->
+  <Welcome lang={lang} />
+
+  <!-- Characteristics Section -->
+  <Characteristics lang={lang} />
+
+  <!-- Passivhaus Section -->
+  <Passivhaus lang={lang} />
+
+  <!-- Location Section -->
+  <Location lang={lang} />
+
+  <!-- Houses Section -->
+  <Houses lang={lang} />
+
+  <!-- Timeline + Contact Section -->
+  <Timeline lang={lang} />
+
+  <!-- Calculator Section -->
+  <Calculator lang={lang} />
+</Layout>
