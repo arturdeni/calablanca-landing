@@ -7,7 +7,7 @@ const isEnglish = lang === 'en';
 const toggleLangUrl = isEnglish ? '/' : '/en/';
 ---
 
-<!-- Header principal (visible siempre, nav desktop solo >= 1120px) -->
+<!-- Header principal (visible siempre, nav desktop solo >= 1220px) -->
 <header class="header">
   <div class="container">
     <div class="header__inner">
@@ -29,7 +29,7 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
   </div>
 </header>
 
-<!-- Mobile bar (solo < 1120px) - Separado para que mix-blend-mode funcione -->
+<!-- Mobile bar (solo < 1220px) - Separado para que mix-blend-mode funcione -->
 <div class="mobile-bar">
   <a href={`/${lang === 'en' ? 'en/' : ''}`} class="mobile-bar__logo">
     <img src="/images/header-logo.svg" alt="Calablanca Residences" />
@@ -41,7 +41,7 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
   </button>
 </div>
 
-<!-- Panel fullscreen mobile (solo < 1120px) -->
+<!-- Panel fullscreen mobile (solo < 1220px) -->
 <nav data-navigation-status="not-active" class="mobile-nav">
   <div class="mobile-nav__tile">
     <ul class="mobile-nav__list">
@@ -80,7 +80,7 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
 
 <style>
   /* ================================
-     HEADER DESKTOP (>= 1120px)
+     HEADER DESKTOP (>= 1220px)
      ================================ */
   .header {
     position: fixed;
@@ -130,7 +130,7 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
 
   .header__nav-list a {
     font-family: var(--font-heading);
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-body);
     font-weight: 400;
     color: #e0e0e0;
     transition: color var(--transition-fast), opacity var(--transition-fast);
@@ -141,7 +141,7 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
   }
 
   /* ================================
-     MOBILE BAR (< 1120px)
+     MOBILE BAR (< 1220px)
      Estructura igual que header desktop
      ================================ */
   .mobile-bar {
@@ -246,7 +246,7 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
   }
 
   /* ================================
-     MOBILE NAV PANEL (< 1120px)
+     MOBILE NAV PANEL (< 1220px)
      ================================ */
   .mobile-nav {
     z-index: 99;
@@ -382,9 +382,9 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
   }
 
   /* ================================
-     RESPONSIVE: Desktop >= 1120px
+     RESPONSIVE: Desktop >= 1220px
      ================================ */
-  @media (min-width: 1120px) {
+  @media (min-width: 1220px) {
     .header {
       display: block;
     }

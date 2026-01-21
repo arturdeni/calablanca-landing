@@ -211,6 +211,7 @@ const t = translations.calculator;
 
 <style>
   .calculator {
+    margin-top: var(--space-lg);
     padding: var(--space-lg) 0;
     background-color: var(--color-calculator-bg);
   }
@@ -246,7 +247,7 @@ const t = translations.calculator;
   }
 
   .calculator__label {
-    font-family: var(--font-body);
+    font-family: var(--font-heading);
     font-size: var(--font-size-base);
     color: var(--color-dark);
   }
@@ -270,7 +271,7 @@ const t = translations.calculator;
     font-family: var(--font-body);
     font-size: var(--font-size-base);
     text-align: center;
-    background-color: var(--color-white);
+    background-color: transparent;
     color: var(--color-dark);
   }
 
@@ -279,7 +280,7 @@ const t = translations.calculator;
   }
 
   .calculator__percentage {
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-body);
     color: rgba(19, 30, 48, 0.6);
   }
 
@@ -328,6 +329,21 @@ const t = translations.calculator;
     cursor: pointer;
     border: 2px solid var(--color-white);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Slider thumb más grande en mobile para mejor usabilidad táctil */
+  @media (max-width: 767px) {
+    .calculator__slider::-webkit-slider-thumb {
+      width: 28px;
+      height: 28px;
+      border-width: 3px;
+    }
+
+    .calculator__slider::-moz-range-thumb {
+      width: 28px;
+      height: 28px;
+      border-width: 3px;
+    }
   }
 
   /* Interest Type */
@@ -463,7 +479,7 @@ const t = translations.calculator;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-body);
 
     & span:first-child {
       text-transform: uppercase;

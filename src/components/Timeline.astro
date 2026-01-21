@@ -344,7 +344,6 @@ const currentStage = t.currentStage ?? 1;
   .contact-section__header-text {
     display: flex;
     flex-direction: column;
-    gap: var(--space-xs);
   }
 
   .contact-section__title {
@@ -352,17 +351,14 @@ const currentStage = t.currentStage ?? 1;
   }
 
   .contact-section__intro {
-    font-size: var(--font-size-small);
-    line-height: 1.7;
+    font-size: var(--font-size-body);
     color: var(--color-primary);
-    opacity: 0.85;
-    margin: 0;
+    margin: var(--space-md) 0 0;
     max-width: 400px;
   }
 
   .contact-section__subtitle {
-    font-size: var(--font-size-small);
-    line-height: 1.7;
+    font-size: var(--font-size-body);
     color: var(--color-primary);
     margin: var(--space-xs) 0 0;
   }
@@ -371,19 +367,15 @@ const currentStage = t.currentStage ?? 1;
   .contact-section__contact-info {
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    margin-top: var(--space-sm);
   }
 
   .contact-section__contact-label {
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.05em;
+    font-weight: 600;
     color: var(--color-primary);
   }
 
   .contact-section__contact-link {
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-body);
     color: var(--color-primary);
 
     &:hover {
@@ -443,7 +435,7 @@ const currentStage = t.currentStage ?? 1;
     display: flex;
     align-items: flex-start;
     gap: var(--space-xs);
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-body);
     cursor: pointer;
   }
 

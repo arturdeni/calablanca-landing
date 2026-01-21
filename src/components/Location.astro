@@ -22,8 +22,8 @@ const t = translations.location;
         </p>
 
         <div class="location__distances">
-          <h4 class="location__distances-title">{t.distancesTitle}</h4>
-          <ul class="location__distances-list">
+          <h4 class="location__distances-title" data-text-reveal="lines">{t.distancesTitle}</h4>
+          <ul class="location__distances-list" data-text-reveal="lines">
             <li>{t.distances.beach}</li>
             <li>{t.distances.airport}</li>
             <li>{t.distances.services}</li>
@@ -89,10 +89,8 @@ const t = translations.location;
   }
 
   .location__description {
-    font-size: var(--font-size-small);
-    line-height: 1.7;
+    font-size: var(--font-size-body);
     color: var(--color-primary);
-    opacity: 0.85;
     margin: 0;
   }
 
@@ -103,18 +101,16 @@ const t = translations.location;
 
   .location__distances-title {
     font-family: var(--font-body);
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-body);
     font-weight: 400;
     margin: 0 0 var(--space-xs);
-    opacity: 0.7;
   }
 
   .location__distances-list {
     list-style: none;
     padding: 0;
     margin: 0;
-    font-size: var(--font-size-small);
-    line-height: 1.8;
+    font-size: var(--font-size-body);
 
     & li {
       position: relative;
@@ -165,7 +161,7 @@ const t = translations.location;
     }
 
     .location__content {
-      grid-template-columns: 3fr 2fr;
+      grid-template-columns: 4fr 2fr;
       grid-template-rows: auto auto;
       align-items: start;
       gap: var(--space-md);
