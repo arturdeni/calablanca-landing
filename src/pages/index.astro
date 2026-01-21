@@ -6,6 +6,8 @@ import Characteristics from '../components/Characteristics.astro';
 import Passivhaus from '../components/Passivhaus.astro';
 import Location from '../components/Location.astro';
 import Houses from '../components/Houses.astro';
+import Timeline from '../components/Timeline.astro';
+import Calculator from '../components/Calculator.astro';
 
 const lang = 'es';
 ---
@@ -28,43 +30,9 @@ const lang = 'es';
   <!-- Houses Section -->
   <Houses lang={lang} />
 
-  <!-- Timeline Section -->
-  <section id="timeline" class="timeline">
-    <div class="container">
-      <!-- TODO: Estado obra - Timeline del estado actual -->
-    </div>
-  </section>
-
-  <!-- Contact Form Section -->
-  <section id="contact" class="contact">
-    <div class="container">
-      <!-- TODO: Formulario contacto - Nombre, apellido, email, teléfono + checkboxes -->
-    </div>
-  </section>
+  <!-- Timeline + Contact Section -->
+  <Timeline lang={lang} />
 
   <!-- Calculator Section -->
-  <section id="calculator" class="calculator">
-    <div class="container">
-      <!-- TODO: Simulador hipoteca - Calculadora interactiva -->
-    </div>
-  </section>
+  <Calculator lang={lang} />
 </Layout>
-
-<style>
-  section {
-    padding: var(--space-xl) 0;
-  }
-
-  /* Placeholder styles */
-  .timeline {
-    background-color: var(--color-white);
-  }
-
-  .contact {
-    background-color: var(--color-light);
-  }
-
-  .calculator {
-    background-color: var(--color-white);
-  }
-</style>

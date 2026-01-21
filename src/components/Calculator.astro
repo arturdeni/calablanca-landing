@@ -1,0 +1,835 @@
+---
+const { lang = "es" } = Astro.props;
+
+const translations = await import(`../i18n/${lang}.json`);
+const t = translations.calculator;
+---
+
+<section class="calculator" id="calculator">
+  <div class="calculator__container">
+    <div class="calculator__content">
+      <!-- Form/Inputs Side -->
+      <div class="calculator__form">
+        <!-- Title -->
+        <h2 class="calculator__title">{t.title}</h2>
+        <!-- Property Price -->
+        <div class="calculator__field">
+          <label class="calculator__label" for="calc-property-price">
+            {t.propertyPrice}
+          </label>
+          <div class="calculator__input-wrapper">
+            <input
+              type="text"
+              id="calc-property-price"
+              class="calculator__input"
+              value="850.000€"
+              readonly
+            />
+          </div>
+          <input
+            type="range"
+            id="calc-property-price-range"
+            class="calculator__slider"
+            min="500000"
+            max="2000000"
+            step="10000"
+            value="850000"
+          />
+        </div>
+
+        <!-- Savings -->
+        <div class="calculator__field">
+          <label class="calculator__label" for="calc-savings">
+            {t.savings}
+          </label>
+          <div
+            class="calculator__input-wrapper calculator__input-wrapper--savings"
+          >
+            <input
+              type="text"
+              id="calc-savings"
+              class="calculator__input"
+              value="200.000€"
+              readonly
+            />
+            <span class="calculator__percentage" id="calc-savings-percentage"
+              >24%</span
+            >
+          </div>
+          <p class="calculator__disclaimer">{t.disclaimer}</p>
+          <input
+            type="range"
+            id="calc-savings-range"
+            class="calculator__slider"
+            min="0"
+            max="850000"
+            step="5000"
+            value="200000"
+          />
+        </div>
+
+        <!-- Years -->
+        <div class="calculator__field">
+          <label class="calculator__label" for="calc-years">
+            {t.years}
+          </label>
+          <div class="calculator__input-wrapper">
+            <input
+              type="text"
+              id="calc-years"
+              class="calculator__input calculator__input--years"
+              value="30"
+              readonly
+            />
+          </div>
+          <input
+            type="range"
+            id="calc-years-range"
+            class="calculator__slider"
+            min="5"
+            max="40"
+            step="1"
+            value="30"
+          />
+        </div>
+
+        <!-- Interest Type -->
+        <div class="calculator__field calculator__field--interest">
+          <label class="calculator__label">
+            {t.interestType}
+          </label>
+          <div class="calculator__interest-controls">
+            <div class="calculator__radio-group">
+              <label class="calculator__radio">
+                <input
+                  type="radio"
+                  name="interest-type"
+                  value="fixed"
+                  checked
+                />
+                <span class="calculator__radio-indicator"></span>
+                <span class="calculator__radio-text">{t.fixed}</span>
+              </label>
+              <label class="calculator__radio">
+                <input type="radio" name="interest-type" value="variable" />
+                <span class="calculator__radio-indicator"></span>
+                <span class="calculator__radio-text">{t.variable}</span>
+              </label>
+            </div>
+            <div class="calculator__interest-rate">
+              <button
+                type="button"
+                class="calculator__rate-btn"
+                id="calc-rate-decrease">−</button
+              >
+              <span class="calculator__rate-value" id="calc-rate-value"
+                >1,85%</span
+              >
+              <button
+                type="button"
+                class="calculator__rate-btn"
+                id="calc-rate-increase">+</button
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Side -->
+      <div class="calculator__results">
+        <div class="calculator__results-main">
+          <span class="calculator__results-label">{t.monthlyPayment}</span>
+          <span class="calculator__results-value" id="calc-monthly-payment"
+            >2.545€</span
+          >
+        </div>
+
+        <div class="calculator__results-details">
+          <div class="calculator__results-row">
+            <span>{t.mortgageAmount}</span>
+            <span id="calc-mortgage-amount">702.993€</span>
+          </div>
+          <div class="calculator__results-row">
+            <span>{t.financingPercentage}</span>
+            <span id="calc-financing-percentage">83€</span>
+          </div>
+        </div>
+
+        <div class="calculator__results-breakdown">
+          <div class="calculator__results-row">
+            <span>{t.propertyPriceLabel}</span>
+            <span id="calc-result-price">850.000€</span>
+          </div>
+          <div class="calculator__results-row">
+            <span>{t.taxesLabel}</span>
+            <span id="calc-result-taxes">52.193€</span>
+          </div>
+          <div class="calculator__results-taxes-detail" id="calc-taxes-detail">
+            <span>Notaría:1.105 €</span>
+            <span>Registro:588 €</span>
+            <span>Gestoría:300 €</span>
+            <span>Impuestos: 51.000 €</span>
+          </div>
+        </div>
+
+        <div class="calculator__results-total">
+          <div
+            class="calculator__results-row calculator__results-row--highlight"
+          >
+            <span>{t.totalCost}</span>
+            <span id="calc-total-cost">902.193€</span>
+          </div>
+        </div>
+
+        <div class="calculator__results-mortgage-detail">
+          <div class="calculator__results-row calculator__results-row--small">
+            <span data-label="savings">{t.savings}</span>
+            <span id="calc-result-savings">200.000 €</span>
+          </div>
+          <div class="calculator__results-row calculator__results-row--small">
+            <span data-label="mortgage">{t.mortgageAmount}</span>
+            <span id="calc-result-mortgage">702.993 €</span>
+          </div>
+          <div class="calculator__results-row calculator__results-row--small">
+            <span data-label="interest"
+              >{t.interestLabel || "Interés hipoteca"}</span
+            >
+            <span id="calc-result-interest">213.561 €</span>
+          </div>
+        </div>
+
+        <div class="calculator__results-final">
+          <div class="calculator__results-row calculator__results-row--final">
+            <span>{t.totalWithMortgage}</span>
+            <span id="calc-total-mortgage">1.116.554€</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .calculator {
+    padding: var(--space-lg) 0;
+    background-color: var(--color-calculator-bg);
+  }
+
+  .calculator__container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--content-padding);
+  }
+
+  .calculator__title {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h2);
+    font-weight: 400;
+    margin: 0;
+    color: var(--color-dark);
+  }
+
+  .calculator__content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  /* Form */
+  .calculator__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .calculator__field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .calculator__label {
+    font-family: var(--font-body);
+    font-size: var(--font-size-base);
+    color: var(--color-dark);
+  }
+
+  .calculator__input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .calculator__input-wrapper--savings {
+    position: relative;
+  }
+
+  .calculator__input {
+    width: 100%;
+    max-width: 200px;
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid rgba(19, 30, 48, 0.2);
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: var(--font-size-base);
+    text-align: center;
+    background-color: var(--color-white);
+    color: var(--color-dark);
+  }
+
+  .calculator__input--years {
+    max-width: 100px;
+  }
+
+  .calculator__percentage {
+    font-size: var(--font-size-small);
+    color: rgba(19, 30, 48, 0.6);
+  }
+
+  .calculator__disclaimer {
+    font-size: 0.75rem;
+    color: rgba(19, 30, 48, 0.5);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* Slider */
+  .calculator__slider {
+    width: 100%;
+    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: linear-gradient(
+      to right,
+      var(--color-dark) 0%,
+      var(--color-dark) var(--slider-progress, 50%),
+      rgba(19, 30, 48, 0.2) var(--slider-progress, 50%),
+      rgba(19, 30, 48, 0.2) 100%
+    );
+    border-radius: 2px;
+    outline: none;
+    margin-top: var(--space-xs);
+  }
+
+  .calculator__slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--color-dark);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid var(--color-white);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .calculator__slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: var(--color-dark);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid var(--color-white);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Interest Type */
+  .calculator__field--interest {
+    gap: var(--space-sm);
+  }
+
+  .calculator__interest-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .calculator__radio-group {
+    display: flex;
+    gap: var(--space-md);
+  }
+
+  .calculator__radio {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-size: var(--font-size-base);
+  }
+
+  .calculator__radio input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .calculator__radio-indicator {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-dark);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+  }
+
+  .calculator__radio-indicator::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: var(--color-dark);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+  }
+
+  .calculator__radio input:checked + .calculator__radio-indicator::after {
+    opacity: 1;
+  }
+
+  .calculator__interest-rate {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid rgba(19, 30, 48, 0.2);
+    border-radius: 8px;
+    padding: 0.25rem;
+    background: var(--color-white);
+  }
+
+  .calculator__rate-btn {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    font-size: 1.25rem;
+    color: var(--color-dark);
+    cursor: pointer;
+    transition: opacity var(--transition-fast);
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  .calculator__rate-value {
+    min-width: 50px;
+    text-align: center;
+    font-size: var(--font-size-base);
+  }
+
+  /* Results */
+  .calculator__results {
+    background-color: var(--color-dark);
+    color: var(--color-white);
+    padding: var(--space-md);
+  }
+
+  .calculator__results-main {
+    text-align: center;
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: var(--space-md);
+  }
+
+  .calculator__results-label {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    margin-bottom: var(--space-xs);
+  }
+
+  .calculator__results-value {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 400;
+  }
+
+  .calculator__results-details,
+  .calculator__results-breakdown,
+  .calculator__results-total,
+  .calculator__results-mortgage-detail,
+  .calculator__results-final {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .calculator__results-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size: var(--font-size-small);
+
+    & span:first-child {
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      font-size: 0.7rem;
+      opacity: 0.8;
+    }
+
+    & span:last-child {
+      font-weight: 500;
+    }
+  }
+
+  .calculator__results-row--highlight {
+    padding-top: var(--space-sm);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+
+    & span:first-child {
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    & span:last-child {
+      font-size: 1.125rem;
+      font-weight: 500;
+    }
+  }
+
+  .calculator__results-row--small {
+    & span:first-child {
+      text-transform: none;
+      font-size: 0.75rem;
+      opacity: 0.7;
+    }
+
+    & span:last-child {
+      font-weight: 400;
+      opacity: 0.9;
+    }
+  }
+
+  .calculator__results-row--final {
+    padding-top: var(--space-sm);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+
+    & span:first-child {
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    & span:last-child {
+      font-size: 1.25rem;
+      font-weight: 500;
+    }
+  }
+
+  .calculator__results-taxes-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding-left: var(--space-sm);
+    font-size: 0.7rem;
+    opacity: 0.6;
+  }
+
+  .calculator__results-total {
+    margin-bottom: var(--space-sm);
+  }
+
+  .calculator__results-mortgage-detail {
+    margin-bottom: var(--space-sm);
+  }
+
+  .calculator__results-final {
+    margin-bottom: 0;
+  }
+
+  /* Desktop */
+  @media (min-width: 768px) {
+    .calculator {
+      padding: var(--space-xl) 0;
+    }
+
+    .calculator__container {
+      padding: 0 0 0 var(--content-padding);
+    }
+
+    .calculator__title {
+      margin-bottom: var(--space-lg);
+    }
+
+    .calculator__content {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+      align-items: start;
+    }
+
+    .calculator__results {
+      padding: var(--space-lg);
+    }
+
+    .calculator__input {
+      max-width: 220px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .calculator__content {
+      grid-template-columns: 1.2fr 1fr;
+    }
+  }
+</style>
+
+<script>
+  function initCalculator() {
+    // Elements
+    const propertyPriceInput = document.getElementById("calc-property-price");
+    const propertyPriceRange = document.getElementById(
+      "calc-property-price-range",
+    );
+    const savingsInput = document.getElementById("calc-savings");
+    const savingsRange = document.getElementById("calc-savings-range");
+    const savingsPercentage = document.getElementById(
+      "calc-savings-percentage",
+    );
+    const yearsInput = document.getElementById("calc-years");
+    const yearsRange = document.getElementById("calc-years-range");
+    const rateValue = document.getElementById("calc-rate-value");
+    const rateDecrease = document.getElementById("calc-rate-decrease");
+    const rateIncrease = document.getElementById("calc-rate-increase");
+    const interestRadios = document.querySelectorAll(
+      'input[name="interest-type"]',
+    );
+
+    // Result elements
+    const monthlyPayment = document.getElementById("calc-monthly-payment");
+    const mortgageAmount = document.getElementById("calc-mortgage-amount");
+    const financingPercentage = document.getElementById(
+      "calc-financing-percentage",
+    );
+    const resultPrice = document.getElementById("calc-result-price");
+    const resultTaxes = document.getElementById("calc-result-taxes");
+    const taxesDetail = document.getElementById("calc-taxes-detail");
+    const totalCost = document.getElementById("calc-total-cost");
+    const resultSavings = document.getElementById("calc-result-savings");
+    const resultMortgage = document.getElementById("calc-result-mortgage");
+    const resultInterest = document.getElementById("calc-result-interest");
+    const totalMortgage = document.getElementById("calc-total-mortgage");
+
+    // State
+    let state = {
+      propertyPrice: 850000,
+      savings: 200000,
+      years: 30,
+      interestRate: 1.85,
+      interestType: "fixed",
+    };
+
+    // Format number with thousands separator
+    function formatNumber(num) {
+      return num.toLocaleString("es-ES");
+    }
+
+    // Format currency
+    function formatCurrency(num) {
+      return formatNumber(Math.round(num)) + "€";
+    }
+
+    // Update slider background
+    function updateSliderBackground(slider) {
+      const min = parseFloat(slider.min);
+      const max = parseFloat(slider.max);
+      const value = parseFloat(slider.value);
+      const percentage = ((value - min) / (max - min)) * 100;
+      slider.style.setProperty("--slider-progress", percentage + "%");
+    }
+
+    // Calculate taxes and expenses
+    function calculateTaxes(price) {
+      const notary = Math.round(price * 0.003); // 0,3%
+      const registry = Math.round(price * 0.0015); // 0,15%
+      const management = 300; // fijo
+      const taxes = Math.round(price * 0.1); // 10% IVA
+      return {
+        notary,
+        registry,
+        management,
+        taxes,
+        total: notary + registry + management + taxes,
+      };
+    }
+
+    // Calculate mortgage
+    function calculateMortgage() {
+      const { propertyPrice, savings, years, interestRate } = state;
+
+      // Mortgage amount
+      const mortgage = propertyPrice - savings;
+
+      // Monthly interest rate
+      const monthlyRate = interestRate / 100 / 12;
+      const numberOfPayments = years * 12;
+
+      // Monthly payment (PMT formula)
+      let monthly;
+      if (monthlyRate === 0) {
+        monthly = mortgage / numberOfPayments;
+      } else {
+        monthly =
+          (mortgage *
+            (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments))) /
+          (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
+      }
+
+      // Total interest
+      const totalInterest = monthly * numberOfPayments - mortgage;
+
+      // Taxes
+      const taxesData = calculateTaxes(propertyPrice);
+
+      // Financing percentage
+      const financePercent = Math.round((mortgage / propertyPrice) * 100);
+
+      // Total cost
+      const totalPropertyCost = propertyPrice + taxesData.total;
+      const totalWithMortgage =
+        savings + mortgage + totalInterest + taxesData.total;
+
+      return {
+        mortgage,
+        monthly,
+        totalInterest,
+        financePercent,
+        taxesData,
+        totalPropertyCost,
+        totalWithMortgage,
+      };
+    }
+
+    // Update UI
+    function updateUI() {
+      const results = calculateMortgage();
+
+      // Update input displays
+      if (propertyPriceInput)
+        propertyPriceInput.value = formatCurrency(state.propertyPrice);
+      if (savingsInput) savingsInput.value = formatCurrency(state.savings);
+      if (savingsPercentage)
+        savingsPercentage.textContent =
+          Math.round((state.savings / state.propertyPrice) * 100) + "%";
+      if (yearsInput) yearsInput.value = state.years;
+      if (rateValue)
+        rateValue.textContent =
+          state.interestRate.toFixed(2).replace(".", ",") + "%";
+
+      // Update results
+      if (monthlyPayment)
+        monthlyPayment.textContent = formatCurrency(results.monthly);
+      if (mortgageAmount)
+        mortgageAmount.textContent = formatCurrency(results.mortgage);
+      if (financingPercentage)
+        financingPercentage.textContent = results.financePercent + "%";
+      if (resultPrice)
+        resultPrice.textContent = formatCurrency(state.propertyPrice);
+      if (resultTaxes)
+        resultTaxes.textContent = formatCurrency(results.taxesData.total);
+
+      // Update taxes detail
+      if (taxesDetail) {
+        taxesDetail.innerHTML = `
+          <span>Notaría: ${formatNumber(results.taxesData.notary)} €</span>
+          <span>Registro: ${formatNumber(results.taxesData.registry)} €</span>
+          <span>Gestoría: ${formatNumber(results.taxesData.management)} €</span>
+          <span>Impuestos: ${formatNumber(results.taxesData.taxes)} €</span>
+        `;
+      }
+
+      if (totalCost)
+        totalCost.textContent = formatCurrency(results.totalPropertyCost);
+      if (resultSavings)
+        resultSavings.textContent = formatNumber(state.savings) + " €";
+      if (resultMortgage)
+        resultMortgage.textContent =
+          formatNumber(Math.round(results.mortgage)) + " €";
+      if (resultInterest)
+        resultInterest.textContent =
+          formatNumber(Math.round(results.totalInterest)) + " €";
+      if (totalMortgage)
+        totalMortgage.textContent = formatCurrency(results.totalWithMortgage);
+
+      // Update sliders background
+      if (propertyPriceRange) updateSliderBackground(propertyPriceRange);
+      if (savingsRange) updateSliderBackground(savingsRange);
+      if (yearsRange) updateSliderBackground(yearsRange);
+    }
+
+    // Event listeners
+    if (propertyPriceRange) {
+      propertyPriceRange.addEventListener("input", (e) => {
+        state.propertyPrice = parseInt(e.target.value);
+        // Adjust max savings
+        if (savingsRange) {
+          savingsRange.max = state.propertyPrice;
+          if (state.savings > state.propertyPrice) {
+            state.savings = state.propertyPrice * 0.2;
+            savingsRange.value = state.savings;
+          }
+        }
+        updateUI();
+      });
+    }
+
+    if (savingsRange) {
+      savingsRange.addEventListener("input", (e) => {
+        state.savings = parseInt(e.target.value);
+        updateUI();
+      });
+    }
+
+    if (yearsRange) {
+      yearsRange.addEventListener("input", (e) => {
+        state.years = parseInt(e.target.value);
+        updateUI();
+      });
+    }
+
+    if (rateDecrease) {
+      rateDecrease.addEventListener("click", () => {
+        if (state.interestRate > 0.25) {
+          state.interestRate =
+            Math.round((state.interestRate - 0.05) * 100) / 100;
+          updateUI();
+        }
+      });
+    }
+
+    if (rateIncrease) {
+      rateIncrease.addEventListener("click", () => {
+        if (state.interestRate < 10) {
+          state.interestRate =
+            Math.round((state.interestRate + 0.05) * 100) / 100;
+          updateUI();
+        }
+      });
+    }
+
+    interestRadios.forEach((radio) => {
+      radio.addEventListener("change", (e) => {
+        state.interestType = e.target.value;
+        // Adjust default rate based on type
+        if (state.interestType === "fixed") {
+          state.interestRate = 1.85;
+        } else {
+          state.interestRate = 1.25;
+        }
+        updateUI();
+      });
+    });
+
+    // Initial render
+    updateUI();
+  }
+
+  // Initialize on DOM ready
+  document.addEventListener("DOMContentLoaded", initCalculator);
+</script>

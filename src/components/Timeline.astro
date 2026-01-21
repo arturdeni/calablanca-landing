@@ -1,0 +1,622 @@
+---
+const { lang = "es" } = Astro.props;
+
+const translations = await import(`../i18n/${lang}.json`);
+const t = translations.timeline;
+const c = translations.contact;
+
+// Current stage (0-indexed, editable here)
+// 0 = Comercialización, 1 = Permisos Obra, 2 = Inicio obra, 3 = Fin Obra, 4 = Entrega de llaves
+const currentStage = t.currentStage ?? 1;
+---
+
+<section class="timeline-section" id="timeline">
+  <div class="timeline-section__container">
+    <!-- Header -->
+    <header class="timeline-section__header">
+      <h2 class="timeline-section__title">{t.title}</h2>
+      <button
+        class="timeline-section__video-btn"
+        type="button"
+        data-video-modal
+      >
+        {t.videoButton}
+      </button>
+    </header>
+
+    <!-- Timeline -->
+    <div
+      class="timeline-section__progress"
+      style={`--current-stage: ${currentStage}; --total-stages: ${t.stages.length}`}
+    >
+      <div class="timeline-section__track">
+        <div class="timeline-section__track-bg"></div>
+        <div class="timeline-section__track-fill"></div>
+      </div>
+      <div class="timeline-section__stages">
+        {
+          t.stages.map((stage, index) => (
+            <div
+              class={`timeline-section__stage ${index < currentStage ? "timeline-section__stage--completed" : ""} ${index === currentStage ? "timeline-section__stage--active" : ""}`}
+            >
+              <span class="timeline-section__stage-dot" />
+              <span class="timeline-section__stage-label">{stage}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section" id="contact">
+  <div class="contact-section__container">
+    <!-- Left: Form -->
+    <div class="contact-section__form-wrapper">
+      <!-- Header row: texts left, contact info right -->
+      <div class="contact-section__header">
+        <div class="contact-section__header-text">
+          <h2 class="contact-section__title">{c.title}</h2>
+          <p class="contact-section__intro">{c.intro}</p>
+          <p class="contact-section__subtitle">{c.subtitle}</p>
+        </div>
+
+        <div class="contact-section__contact-info">
+          <span class="contact-section__contact-label">{c.contactLabel}</span>
+          <a href={`mailto:${c.email}`} class="contact-section__contact-link"
+            >{c.email}</a
+          >
+          <a
+            href={`tel:${c.phone.replace(/\s/g, "")}`}
+            class="contact-section__contact-link">{c.phone}</a
+          >
+        </div>
+      </div>
+
+      <form class="contact-section__form" id="contact-form">
+        <div class="contact-section__form-row">
+          <div class="contact-section__form-group">
+            <label for="firstName" class="contact-section__label"
+              >{c.form.firstName}*</label
+            >
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              required
+              class="contact-section__input"
+            />
+          </div>
+          <div class="contact-section__form-group">
+            <label for="lastName" class="contact-section__label"
+              >{c.form.lastName}*</label
+            >
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              required
+              class="contact-section__input"
+            />
+          </div>
+        </div>
+
+        <div class="contact-section__form-row">
+          <div class="contact-section__form-group">
+            <label for="email" class="contact-section__label"
+              >{c.form.email}*</label
+            >
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              class="contact-section__input"
+            />
+          </div>
+          <div class="contact-section__form-group">
+            <label for="phone" class="contact-section__label"
+              >{c.form.phone}*</label
+            >
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              required
+              class="contact-section__input"
+            />
+          </div>
+        </div>
+
+        <div class="contact-section__checkboxes">
+          <label class="contact-section__checkbox-label">
+            <input
+              type="checkbox"
+              name="privacy"
+              required
+              class="contact-section__checkbox"
+            />
+            <span
+              >{c.form.privacy}
+              <a href="/privacy" class="contact-section__privacy-link"
+                >{c.form.privacyLink}</a
+              >.</span
+            >
+          </label>
+          <label class="contact-section__checkbox-label">
+            <input
+              type="checkbox"
+              name="commercial"
+              class="contact-section__checkbox"
+            />
+            <span>{c.form.commercial}</span>
+          </label>
+        </div>
+
+        <!-- Honeypot field (antispam) - hidden from users -->
+        <input
+          type="text"
+          name="website"
+          class="contact-section__honeypot"
+          tabindex="-1"
+          autocomplete="off"
+        />
+        <!-- Timestamp for time-based validation -->
+        <input type="hidden" name="formLoadedAt" id="formLoadedAt" value="" />
+
+        <button type="submit" class="contact-section__submit"
+          >{c.form.submit}</button
+        >
+      </form>
+    </div>
+
+    <!-- Right: Image -->
+    <div class="contact-section__image-wrapper">
+      <img
+        src="/images/passivhaus-sections/interiores.webp"
+        alt="Interior de Calablanca Residences"
+        class="contact-section__image"
+        loading="lazy"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ============================================
+     TIMELINE SECTION
+     ============================================ */
+  .timeline-section {
+    padding: var(--space-lg) 0;
+    background-color: var(--color-white);
+  }
+
+  .timeline-section__container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--content-padding);
+  }
+
+  /* Header */
+  .timeline-section__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+  }
+
+  .timeline-section__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    margin: 0;
+  }
+
+  .timeline-section__video-btn {
+    padding: var(--space-xs) var(--space-xs);
+    border: 1px solid var(--color-primary);
+    border-radius: 8px;
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    background: transparent;
+    color: var(--color-primary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+
+    &:hover {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+    }
+  }
+
+  /* Timeline Progress */
+  .timeline-section__progress {
+    position: relative;
+  }
+
+  /* Track container */
+  .timeline-section__track {
+    position: absolute;
+    top: 7px;
+    left: 8px;
+    right: 8px;
+    height: 2px;
+  }
+
+  .timeline-section__track-bg {
+    position: absolute;
+    inset: 0;
+    background-color: #e0e0e0;
+  }
+
+  .timeline-section__track-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: var(--color-primary);
+    /* Calculate width based on current stage */
+    width: calc(var(--current-stage) / (var(--total-stages) - 1) * 100%);
+  }
+
+  /* Stages container */
+  .timeline-section__stages {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+  }
+
+  .timeline-section__stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .timeline-section__stage:first-child {
+    align-items: flex-start;
+  }
+
+  .timeline-section__stage:last-child {
+    align-items: flex-end;
+  }
+
+  .timeline-section__stage-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--color-primary);
+    background-color: var(--color-white);
+    flex-shrink: 0;
+    transition: all var(--transition-fast);
+  }
+
+  .timeline-section__stage--completed .timeline-section__stage-dot,
+  .timeline-section__stage--active .timeline-section__stage-dot {
+    background-color: var(--color-primary);
+  }
+
+  .timeline-section__stage-label {
+    margin-top: var(--space-xs);
+    font-size: 0.75rem;
+    color: var(--color-primary);
+    text-align: center;
+    max-width: 100px;
+    line-height: 1.3;
+  }
+
+  .timeline-section__stage:first-child .timeline-section__stage-label {
+    text-align: left;
+  }
+
+  .timeline-section__stage:last-child .timeline-section__stage-label {
+    text-align: right;
+  }
+
+  /* ============================================
+     CONTACT SECTION
+     ============================================ */
+  .contact-section {
+    background-color: var(--color-white);
+  }
+
+  .contact-section__container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--content-padding);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  /* Form wrapper */
+  .contact-section__form-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  /* Header (title/intro + contact info) */
+  .contact-section__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .contact-section__header-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .contact-section__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  .contact-section__intro {
+    font-size: var(--font-size-small);
+    line-height: 1.7;
+    color: var(--color-primary);
+    opacity: 0.85;
+    margin: 0;
+    max-width: 400px;
+  }
+
+  .contact-section__subtitle {
+    font-size: var(--font-size-small);
+    line-height: 1.7;
+    color: var(--color-primary);
+    margin: var(--space-xs) 0 0;
+  }
+
+  /* Contact info */
+  .contact-section__contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: var(--space-sm);
+  }
+
+  .contact-section__contact-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--color-primary);
+  }
+
+  .contact-section__contact-link {
+    font-size: var(--font-size-small);
+    color: var(--color-primary);
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  /* Form */
+  .contact-section__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+  }
+
+  .contact-section__form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .contact-section__form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .contact-section__label {
+    font-size: 0.875rem;
+    color: var(--color-primary);
+  }
+
+  .contact-section__input {
+    padding: var(--space-sm);
+    border: 1px solid #e0e0e0;
+    border-radius: 0;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-primary);
+    background-color: var(--color-white);
+    transition: border-color var(--transition-fast);
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
+  }
+
+  /* Checkboxes */
+  .contact-section__checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .contact-section__checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-xs);
+    font-size: var(--font-size-small);
+    cursor: pointer;
+  }
+
+  .contact-section__checkbox {
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+  }
+
+  .contact-section__privacy-link {
+    text-decoration: underline;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  /* Honeypot - hidden from users, visible to bots */
+  .contact-section__honeypot {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    height: 0;
+    width: 0;
+    z-index: -1;
+  }
+
+  /* Submit button */
+  .contact-section__submit {
+    padding: var(--space-sm) var(--space-lg);
+    border: 1px solid var(--color-primary);
+    border-radius: 8px;
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    background: transparent;
+    color: var(--color-primary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    align-self: flex-start;
+
+    &:hover {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+    }
+  }
+
+  /* Image wrapper */
+  .contact-section__image-wrapper {
+    display: none;
+  }
+
+  .contact-section__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* ============================================
+     TABLET AND UP
+     ============================================ */
+  @media (min-width: 768px) {
+    .timeline-section {
+      padding: var(--space-xl) 0;
+    }
+
+    .timeline-section__video-btn {
+      padding: var(--space-xs) var(--space-md);
+    }
+
+    .timeline-section__track {
+      top: 9px;
+      left: 10px;
+      right: 10px;
+    }
+
+    .timeline-section__stage-dot {
+      width: 20px;
+      height: 20px;
+    }
+
+    .timeline-section__stage-label {
+      font-size: 0.875rem;
+      max-width: 120px;
+    }
+
+    .contact-section {
+      padding: var(--space-xl) 0;
+    }
+
+    .contact-section__form-row {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* Header: two columns with contact-info at bottom right */
+    .contact-section__header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: var(--space-lg);
+    }
+
+    .contact-section__contact-info {
+      text-align: right;
+      margin-top: 0;
+      flex-shrink: 0;
+    }
+
+    .contact-section__submit {
+      align-self: flex-end;
+    }
+  }
+
+  /* ============================================
+     DESKTOP
+     ============================================ */
+  @media (min-width: 1080px) {
+    .timeline-section__stage-label {
+      font-size: 1rem;
+      max-width: 140px;
+    }
+
+    .contact-section__container {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+      align-items: start;
+      padding: 0 0 0 var(--content-padding);
+    }
+
+    .contact-section__image-wrapper {
+      display: block;
+      height: 100%;
+      overflow: hidden;
+    }
+  }
+</style>
+
+<script>
+  // Antispam: Set timestamp when form loads
+  const formLoadedAt = document.querySelector('#formLoadedAt');
+  if (formLoadedAt instanceof HTMLInputElement) {
+    formLoadedAt.value = Date.now().toString();
+  }
+
+  // Form validation with antispam checks
+  const contactForm = document.querySelector('#contact-form');
+  if (contactForm instanceof HTMLFormElement) {
+    contactForm.addEventListener('submit', (e) => {
+      const honeypot = contactForm.querySelector('[name="website"]');
+      const timestamp = contactForm.querySelector('[name="formLoadedAt"]');
+
+      // Check honeypot (should be empty)
+      if (honeypot instanceof HTMLInputElement && honeypot.value) {
+        e.preventDefault();
+        return;
+      }
+
+      // Check time elapsed (minimum 3 seconds to fill form)
+      if (timestamp instanceof HTMLInputElement && timestamp.value) {
+        const elapsed = Date.now() - parseInt(timestamp.value, 10);
+        if (elapsed < 3000) {
+          e.preventDefault();
+          return;
+        }
+      }
+    });
+  }
+</script>

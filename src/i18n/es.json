@@ -139,24 +139,31 @@
     "checkAll": "Consulta todas las unidades disponibles."
   },
   "timeline": {
-    "title": "Estado obra",
+    "title": "Estado Obra",
+    "videoButton": "Ver video",
+    "currentStage": 1,
     "stages": [
       "Comercialización",
-      "Permisos",
-      "Obra Iniciada",
-      "Últimos toques",
-      "Terminada"
+      "Permisos Obra",
+      "Inicio obra",
+      "Fin Obra",
+      "Entrega de llaves"
     ]
   },
   "contact": {
-    "title": "Calablanca Residences",
+    "title": "Cala Blanca Residences",
+    "intro": "Un equilibrio perfecto entre arquitectura, confort y entorno. Una nueva forma de vivir en un piso sin renunciar al lujo.",
     "subtitle": "Deja tu contacto para acceder al proceso de Venta Privada.",
+    "contactLabel": "CONTACTO",
+    "email": "patri@axpartners.fund",
+    "phone": "606 985 146",
     "form": {
       "firstName": "Nombre",
       "lastName": "Apellido",
       "email": "Email",
       "phone": "Teléfono",
-      "privacy": "Acepto la política de privacidad.",
+      "privacy": "Acepto la",
+      "privacyLink": "política de privacidad",
       "commercial": "Acepto recibir información comercial.",
       "submit": "Enviar"
     }
@@ -176,6 +183,7 @@
     "taxesLabel": "IMPUESTOS Y GASTOS COMPRA",
     "totalCost": "COSTE TOTAL DEL INMUEBLE",
     "totalWithMortgage": "COSTE TOTAL CON HIPOTECA",
+    "interestLabel": "Interés hipoteca",
     "disclaimer": "Recuerda que los bancos suelen pedir una aportación mínima del 10% más gastos."
   },
   "footer": {

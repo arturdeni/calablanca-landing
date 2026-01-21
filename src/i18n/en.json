@@ -139,24 +139,31 @@
     "checkAll": "Check all available units."
   },
   "timeline": {
-    "title": "Construction status",
+    "title": "Construction Status",
+    "videoButton": "Watch video",
+    "currentStage": 1,
     "stages": [
       "Marketing",
-      "Permits",
+      "Building Permits",
       "Construction Started",
-      "Final touches",
-      "Completed"
+      "Construction End",
+      "Key Handover"
     ]
   },
   "contact": {
-    "title": "Calablanca Residences",
+    "title": "Cala Blanca Residences",
+    "intro": "A perfect balance between architecture, comfort and surroundings. A new way of living in an apartment without giving up luxury.",
     "subtitle": "Leave your contact to access the Private Sale process.",
+    "contactLabel": "CONTACT",
+    "email": "patri@axpartners.fund",
+    "phone": "606 985 146",
     "form": {
       "firstName": "First name",
       "lastName": "Last name",
       "email": "Email",
       "phone": "Phone",
-      "privacy": "I accept the privacy policy.",
+      "privacy": "I accept the",
+      "privacyLink": "privacy policy",
       "commercial": "I accept receiving commercial information.",
       "submit": "Send"
     }
@@ -176,6 +183,7 @@
     "taxesLabel": "TAXES AND PURCHASE EXPENSES",
     "totalCost": "TOTAL PROPERTY COST",
     "totalWithMortgage": "TOTAL COST WITH MORTGAGE",
+    "interestLabel": "Mortgage interest",
     "disclaimer": "Remember that banks usually require a minimum contribution of 10% plus expenses."
   },
   "footer": {
