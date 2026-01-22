@@ -18,8 +18,8 @@ const galleryImages = [
     <div class="welcome__content">
       <h2 class="welcome__title" data-text-reveal="lines">{t.title}</h2>
 
-      <div class="welcome__text" data-text-reveal="lines">
-        {t.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      <div class="welcome__text">
+        {t.paragraphs.map((paragraph) => <p data-text-reveal="lines">{paragraph}</p>)}
       </div>
     </div>
 
@@ -109,6 +109,10 @@ const galleryImages = [
     display: grid;
     gap: var(--space-md);
   }
+
+  .welcome__content {
+    max-width: 400px;
+  }
   .welcome__title {
     margin-bottom: var(--space-md);
   }
@@ -120,8 +124,13 @@ const galleryImages = [
 
   .welcome__text p {
     font-size: var(--font-size-body);
-    line-height: 1.7;
+    line-height: 1.5;
     color: var(--color-primary);
+    margin-bottom: var(--space-sm);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   /* Gallery (right column) */
@@ -252,7 +261,7 @@ const galleryImages = [
   /* Tablet and up */
   @media (min-width: 768px) {
     .welcome__container {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 3fr 4fr;
       gap: var(--space-xl);
       align-items: start;
     }
@@ -261,7 +270,7 @@ const galleryImages = [
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: var(--space-xl);
+      gap: var(--space-lg);
     }
 
     .welcome__cta {

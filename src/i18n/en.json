@@ -9,27 +9,26 @@
   "hero": {
     "title": "A new way of luxury living",
     "subtitle": "Calablanca Residences · Sitges",
-    "cta": "Request Information"
+    "description": "An exclusive collection of homes where comfort, architecture and the Mediterranean coexist in harmony."
   },
   "welcome": {
     "title": "Welcome to Cala Blanca Residences",
     "paragraphs": [
-      "A new development property by AX Partners, consisting of two residential buildings with 29 homes and a commercial space, located in La Plana, one of the quietest and most valued areas of Sitges.",
-      "A place designed to enjoy space, natural light and well-being, without giving up luxury.",
-      "Most homes are over 100 m², featuring open interiors and spacious terraces with open views of the Mediterranean surroundings.",
-      "Each layout has been carefully designed to offer a comfortable, functional and elegant living experience. Homes with 1 to 4 bedrooms, terraces and private gardens, noble materials and high-quality finishes."
+      "A new development property by AX Partners in La Plana, one of the best areas of Sitges, designed for those who value space, natural light and tranquility.",
+      "A collection of 29 homes, distributed in two carefully designed buildings, with spacious and open interiors, terraces and private gardens in an unbeatable setting.",
+      "Homes with 2 to 4 bedrooms, high-quality finishes and architecture designed to offer comfort, elegance and well-being."
     ],
-    "galleryTitle": "Spaces designed for comfort",
+    "galleryTitle": "Spaces Designed for Comfort",
     "priceLabel": "Price from",
     "priceValue": "€850,000",
     "surfaceLabel": "Surface from",
     "surfaceValue": "100 m2",
     "bedroomsLabel": "Bedrooms",
-    "bedroomsValue": "1-4",
+    "bedroomsValue": "2-4",
     "cta": "Request Information"
   },
   "characteristics": {
-    "title": "Development features",
+    "title": "Development Features",
     "features": {
       "parking": "Community parking",
       "pool": "Community pool",
@@ -47,7 +46,7 @@
       {
         "id": "passivhaus",
         "title": "Passivhaus",
-        "tagline": "A home that cares for you and the environment",
+        "tagline": "A Home that Cares for You and the Environment",
         "description": "Calablanca Residences has been designed under Passivhaus standards, guaranteeing minimal energy consumption together with high interior comfort.",
         "features": [
           "Stable temperature throughout the year",
@@ -60,8 +59,8 @@
       {
         "id": "zonas-comunes",
         "title": "Common Areas",
-        "tagline": "Spaces designed for gathering",
-        "description": "A residential environment where every common space has been carefully designed to foster community and the well-being of all residents.",
+        "tagline": "Spaces Designed for Gathering",
+        "description": "A residential environment where every common space has been carefully designed to foster community living and the well-being of all residents.",
         "features": [
           "Community pool with solarium area",
           "Gardens and landscaped areas",
@@ -73,7 +72,7 @@
       {
         "id": "interiores",
         "title": "Interiors",
-        "tagline": "Design that inspires calm",
+        "tagline": "Design that Inspires Calm",
         "description": "Bright and functional interiors, where every detail has been selected to create an atmosphere of comfort and timeless elegance.",
         "features": [
           "Open kitchen to living dining room",
@@ -87,7 +86,7 @@
   },
   "location": {
     "title": "Location",
-    "subtitle": "Sitges · Mediterranean in its purest form",
+    "subtitle": "Sitges · Mediterranean in its Purest Form",
     "description": "Just 30 minutes from Barcelona, Sitges is an elegant and sophisticated coastal enclave, surrounded by the Garraf natural park and known for its Mediterranean lifestyle.",
     "distancesTitle": "Calablanca Residences is located:",
     "distances": {
@@ -145,7 +144,7 @@
     "stages": [
       "Marketing",
       "Building Permits",
-      "Construction Started",
+      "Construction Start",
       "Construction End",
       "Key Handover"
     ]

@@ -14,18 +14,17 @@
   "welcome": {
     "title": "Bienvenidos a Cala Blanca Residences",
     "paragraphs": [
-      "Una promoción de obra nueva, propiedad de AX Partners, compuesta por dos bloques residenciales de 29 viviendas y un local comercial, situados en La Plana, una de las zonas más tranquilas y valoradas de Sitges.",
-      "Un lugar pensado para disfrutar del espacio, la luz natural y el bienestar, sin renunciar al lujo.",
-      "Las viviendas, en su mayoría de más de 100 m², destacan por sus interiores diáfanos y sus amplias terrazas con vistas abiertas al entorno mediterráneo.",
-      "Cada distribución ha sido cuidadosamente diseñada para ofrecer una experiencia de vida cómoda, funcional y elegante. Viviendas de 1 a 4 dormitorios, terrazas y jardines privados, materiales nobles y acabados de alta calidad."
+      "Una promoción de obra nueva, propiedad de AX Partners,  en La Plana, una de las mejores zonas de Sitges, concebida para quienes valoran el espacio, la luz natural y la tranquilidad.",
+      "Un conjunto de 29 viviendas, distribuidas en dos bloques cuidadosamente diseñados, con interiores amplios y abiertos, terrazas y jardines privados en un entorno inmejorable.",
+      "Viviendas de 2 a 4 dormitorios, con acabados de alta calidady una arquitectura pensada para ofrecer confort, elegancia y bienestar."
     ],
-    "galleryTitle": "Espacios diseñados para el confort",
+    "galleryTitle": "Espacios Diseñados para el Confort",
     "priceLabel": "Precio desde",
     "priceValue": "850.000€",
     "surfaceLabel": "Superficie desde",
     "surfaceValue": "100 m2",
     "bedroomsLabel": "Dormitorios",
-    "bedroomsValue": "1-4",
+    "bedroomsValue": "2-4",
     "cta": "Solicitar Información"
   },
   "characteristics": {
@@ -47,7 +46,7 @@
       {
         "id": "passivhaus",
         "title": "Passivhaus",
-        "tagline": "Un hogar que cuida de ti y del entorno",
+        "tagline": "Un Hogar que Cuida de Ti y del Entorno",
         "description": "Calablanca Residences ha sido diseñada bajo los estándares Passivhaus, garantizando un consumo energético mínimo junto a un elevado confort interior.",
         "features": [
           "Temperatura estable durante todo el año",
@@ -60,7 +59,7 @@
       {
         "id": "zonas-comunes",
         "title": "Zonas Comunes",
-        "tagline": "Espacios pensados para el encuentro",
+        "tagline": "Espacios Pensados para el Encuentro",
         "description": "Un entorno residencial donde cada espacio común ha sido cuidadosamente diseñado para fomentar la convivencia y el bienestar de todos los residentes.",
         "features": [
           "Piscina comunitaria con zona de solárium",
@@ -73,7 +72,7 @@
       {
         "id": "interiores",
         "title": "Interiores",
-        "tagline": "Diseño que inspira calma",
+        "tagline": "Diseño que Inspira Calma",
         "description": "Interiores luminosos y funcionales, donde cada detalle ha sido seleccionado para crear un ambiente de confort y elegancia atemporal.",
         "features": [
           "Cocina abierta al salón comedor",

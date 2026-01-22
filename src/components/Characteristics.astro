@@ -206,6 +206,9 @@ const features = [
   const features = document.querySelectorAll(".characteristics__feature");
 
   if (features.length) {
+    // Different start values for mobile vs desktop
+    const isMobile = window.innerWidth < 768;
+
     gsap.to(features, {
       opacity: 1,
       y: 0,
@@ -213,8 +216,8 @@ const features = [
       stagger: 0.1,
       ease: "power2.out",
       scrollTrigger: {
-        trigger: ".characteristics",
-        start: "top 70%",
+        trigger: ".characteristics__features",
+        start: isMobile ? "top 60%" : "top 80%",
         once: true,
       },
     });

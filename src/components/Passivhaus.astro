@@ -131,7 +131,7 @@ const sectionImages = [
 
   .passivhaus__tagline {
     font-family: var(--font-heading);
-    font-style: italic;
+    font-size: 18px;
     margin: 0;
   }
 
@@ -233,6 +233,7 @@ const sectionImages = [
     .passivhaus__text-item {
       min-height: 100vh;
       display: flex;
+      max-width: 480px;
       flex-direction: column;
       justify-content: center;
     }
@@ -275,10 +276,11 @@ const sectionImages = [
       right: var(--content-padding);
       top: 50%;
       transform: translateY(-50%);
+      max-width: 210px;
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      text-align: right;
+      text-align: center;
       gap: var(--space-sm);
       z-index: 2;
     }
@@ -287,23 +289,19 @@ const sectionImages = [
       position: relative;
       width: 100%;
       min-width: 200px;
-      height: 2em;
     }
 
     .passivhaus__taglines .passivhaus__tagline {
       position: absolute;
       top: 0;
       right: 0;
-      white-space: nowrap;
-      transform: translateY(100%);
       opacity: 0;
-      transition:
-        transform 0.2s ease-out,
-        opacity 0.2s ease-out;
+      max-width: 100%;
+      transition: opacity 0.2s ease-out;
     }
 
     .passivhaus__taglines .passivhaus__tagline.is-active {
-      transform: translateY(0);
+      position: relative;
       opacity: 1;
     }
   }

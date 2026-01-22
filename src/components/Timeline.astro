@@ -1,5 +1,7 @@
 ---
-const { lang = "es" } = Astro.props;
+import VideoModal from "./VideoModal.astro";
+
+const { lang = "es", vimeoId = "1019191082" } = Astro.props;
 
 const translations = await import(`../i18n/${lang}.json`);
 const t = translations.timeline;
@@ -18,7 +20,8 @@ const currentStage = t.currentStage ?? 1;
       <button
         class="timeline-section__video-btn"
         type="button"
-        data-video-modal
+        data-vimeo-lightbox-control="open"
+        data-vimeo-lightbox-id={vimeoId}
       >
         {t.videoButton}
       </button>
@@ -32,6 +35,10 @@ const currentStage = t.currentStage ?? 1;
       <div class="timeline-section__track">
         <div class="timeline-section__track-bg"></div>
         <div class="timeline-section__track-fill"></div>
+        <!-- SVG for zigzag lines (mobile only) -->
+        <svg class="timeline-section__track-svg" preserveAspectRatio="none">
+          <!-- Lines will be drawn via JS -->
+        </svg>
       </div>
       <div class="timeline-section__stages">
         {
@@ -48,6 +55,9 @@ const currentStage = t.currentStage ?? 1;
     </div>
   </div>
 </section>
+
+<!-- Video Modal -->
+<VideoModal vimeoId={vimeoId} />
 
 <!-- Contact Section -->
 <section class="contact-section" id="contact">
@@ -230,53 +240,69 @@ const currentStage = t.currentStage ?? 1;
   /* Timeline Progress */
   .timeline-section__progress {
     position: relative;
+    /* Height for zigzag: space for dots at top + line + dots at bottom + labels */
+    height: 140px;
   }
 
-  /* Track container */
+  /* Track container - zigzag SVG path for mobile */
   .timeline-section__track {
     position: absolute;
-    top: 7px;
-    left: 8px;
-    right: 8px;
-    height: 2px;
-  }
-
-  .timeline-section__track-bg {
-    position: absolute;
     inset: 0;
-    background-color: #e0e0e0;
+    overflow: visible;
   }
 
+  .timeline-section__track-bg,
   .timeline-section__track-fill {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    background-color: var(--color-primary);
-    /* Calculate width based on current stage */
-    width: calc(var(--current-stage) / (var(--total-stages) - 1) * 100%);
+    display: none;
   }
 
-  /* Stages container */
+  /* SVG zigzag line */
+  .timeline-section__track-svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .timeline-section__track-svg line {
+    stroke-width: 2;
+  }
+
+  .timeline-section__track-svg .track-bg {
+    stroke: #e0e0e0;
+  }
+
+  .timeline-section__track-svg .track-fill {
+    stroke: var(--color-primary);
+  }
+
+  /* Stages container - zigzag layout for mobile */
   .timeline-section__stages {
     display: flex;
     justify-content: space-between;
     position: relative;
     z-index: 2;
+    height: 100%;
+    align-items: center;
   }
 
   .timeline-section__stage {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
   }
 
-  .timeline-section__stage:first-child {
-    align-items: flex-start;
+  /* Zigzag: odd items (1st, 3rd, 5th) at top, even items (2nd, 4th) at bottom */
+  .timeline-section__stage:nth-child(odd) {
+    align-self: flex-start;
+    padding-top: 0;
   }
 
-  .timeline-section__stage:last-child {
-    align-items: flex-end;
+  .timeline-section__stage:nth-child(even) {
+    align-self: flex-end;
+    flex-direction: column-reverse;
+    padding-bottom: 0;
   }
 
   .timeline-section__stage-dot {
@@ -295,20 +321,21 @@ const currentStage = t.currentStage ?? 1;
   }
 
   .timeline-section__stage-label {
-    margin-top: var(--space-xs);
     font-size: 0.75rem;
     color: var(--color-primary);
     text-align: center;
-    max-width: 100px;
+    max-width: 80px;
     line-height: 1.3;
   }
 
-  .timeline-section__stage:first-child .timeline-section__stage-label {
-    text-align: left;
+  /* Labels for odd items go below dot */
+  .timeline-section__stage:nth-child(odd) .timeline-section__stage-label {
+    margin-top: var(--space-xs);
   }
 
-  .timeline-section__stage:last-child .timeline-section__stage-label {
-    text-align: right;
+  /* Labels for even items go above dot (but since flex-direction is reversed, margin-top still works) */
+  .timeline-section__stage:nth-child(even) .timeline-section__stage-label {
+    margin-bottom: var(--space-xs);
   }
 
   /* ============================================
@@ -496,7 +523,7 @@ const currentStage = t.currentStage ?? 1;
   }
 
   /* ============================================
-     TABLET AND UP
+     TABLET AND UP - Back to horizontal timeline
      ============================================ */
   @media (min-width: 768px) {
     .timeline-section {
@@ -507,10 +534,65 @@ const currentStage = t.currentStage ?? 1;
       padding: var(--space-xs) var(--space-md);
     }
 
+    .timeline-section__progress {
+      height: auto;
+    }
+
     .timeline-section__track {
+      position: absolute;
       top: 9px;
       left: 10px;
       right: 10px;
+      height: 2px;
+    }
+
+    .timeline-section__track-bg {
+      display: block;
+      position: absolute;
+      inset: 0;
+      background-color: #e0e0e0;
+    }
+
+    .timeline-section__track-fill {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background-color: var(--color-primary);
+      width: calc(var(--current-stage) / (var(--total-stages) - 1) * 100%);
+    }
+
+    .timeline-section__track-svg {
+      display: none;
+    }
+
+    .timeline-section__stages {
+      height: auto;
+      align-items: stretch;
+    }
+
+    .timeline-section__stage {
+      flex-direction: column;
+    }
+
+    .timeline-section__stage:nth-child(odd),
+    .timeline-section__stage:nth-child(even) {
+      align-self: auto;
+      flex-direction: column;
+      padding: 0;
+    }
+
+    .timeline-section__stage:nth-child(n) {
+      align-items: center;
+    }
+
+    .timeline-section__stage:first-child {
+      align-items: flex-start;
+    }
+
+    .timeline-section__stage:last-child {
+      align-items: flex-end;
     }
 
     .timeline-section__stage-dot {
@@ -521,6 +603,16 @@ const currentStage = t.currentStage ?? 1;
     .timeline-section__stage-label {
       font-size: 0.875rem;
       max-width: 120px;
+      margin-top: var(--space-xs);
+      margin-bottom: 0;
+    }
+
+    .timeline-section__stage:first-child .timeline-section__stage-label {
+      text-align: left;
+    }
+
+    .timeline-section__stage:last-child .timeline-section__stage-label {
+      text-align: right;
     }
 
     .contact-section {
@@ -575,6 +667,117 @@ const currentStage = t.currentStage ?? 1;
 </style>
 
 <script>
+  // Timeline zigzag lines for mobile
+  function drawZigzagLines() {
+    const svg = document.querySelector('.timeline-section__track-svg');
+    const stages = document.querySelectorAll('.timeline-section__stage');
+    const progress = document.querySelector('.timeline-section__progress');
+
+    if (!svg || stages.length < 2 || !progress) return;
+
+    // Only draw on mobile (< 768px)
+    if (window.innerWidth >= 768) {
+      svg.innerHTML = '';
+      return;
+    }
+
+    const progressRect = progress.getBoundingClientRect();
+    const currentStage = parseInt(getComputedStyle(progress).getPropertyValue('--current-stage')) || 0;
+
+    let linesHtml = '';
+
+    for (let i = 0; i < stages.length - 1; i++) {
+      const dot1 = stages[i].querySelector('.timeline-section__stage-dot');
+      const dot2 = stages[i + 1].querySelector('.timeline-section__stage-dot');
+
+      if (!dot1 || !dot2) continue;
+
+      const rect1 = dot1.getBoundingClientRect();
+      const rect2 = dot2.getBoundingClientRect();
+
+      // Calculate center of dots relative to progress container
+      const x1 = rect1.left + rect1.width / 2 - progressRect.left;
+      const y1 = rect1.top + rect1.height / 2 - progressRect.top;
+      const x2 = rect2.left + rect2.width / 2 - progressRect.left;
+      const y2 = rect2.top + rect2.height / 2 - progressRect.top;
+
+      // Background line (gray) - inline styles because scoped CSS doesn't apply to dynamic elements
+      linesHtml += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#e0e0e0" stroke-width="2" />`;
+
+      // Filled line (only for completed segments)
+      if (i < currentStage) {
+        linesHtml += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="var(--color-primary, #1a365d)" stroke-width="2" />`;
+      }
+    }
+
+    svg.innerHTML = linesHtml;
+  }
+
+  // Calculate track fill width for desktop (to reach exact bullet position)
+  function updateTrackFill() {
+    const track = document.querySelector('.timeline-section__track');
+    const trackFill = document.querySelector('.timeline-section__track-fill');
+    const stages = document.querySelectorAll('.timeline-section__stage');
+    const progress = document.querySelector('.timeline-section__progress');
+
+    if (!track || !trackFill || !stages.length || !progress) return;
+
+    // Only for desktop (>= 768px)
+    if (window.innerWidth < 768) return;
+
+    const currentStage = parseInt(getComputedStyle(progress).getPropertyValue('--current-stage')) || 0;
+
+    if (currentStage === 0) {
+      trackFill.style.width = '0%';
+      return;
+    }
+
+    const trackRect = track.getBoundingClientRect();
+    const activeDot = stages[currentStage]?.querySelector('.timeline-section__stage-dot');
+
+    if (!activeDot) return;
+
+    const dotRect = activeDot.getBoundingClientRect();
+    const dotCenter = dotRect.left + dotRect.width / 2;
+    const fillWidth = dotCenter - trackRect.left;
+
+    trackFill.style.width = `${fillWidth}px`;
+  }
+
+  // Draw on load and resize (with delay to ensure layout is ready)
+  function initTimeline() {
+    // Use requestAnimationFrame to wait for layout
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        drawZigzagLines();
+        updateTrackFill();
+      });
+    });
+  }
+
+  // Run on DOMContentLoaded or immediately if already loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTimeline);
+  } else {
+    initTimeline();
+  }
+
+  // Also run on window load (for images/fonts that might affect layout)
+  window.addEventListener('load', () => {
+    drawZigzagLines();
+    updateTrackFill();
+  });
+
+  // Redraw on resize with debounce
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      drawZigzagLines();
+      updateTrackFill();
+    }, 100);
+  });
+
   // Antispam: Set timestamp when form loads
   const formLoadedAt = document.querySelector('#formLoadedAt');
   if (formLoadedAt instanceof HTMLInputElement) {
