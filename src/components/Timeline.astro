@@ -16,7 +16,7 @@ const currentStage = t.currentStage ?? 1;
   <div class="timeline-section__container">
     <!-- Header -->
     <header class="timeline-section__header">
-      <h2 class="timeline-section__title">{t.title}</h2>
+      <h2 class="timeline-section__title" data-text-reveal="words">{t.title}</h2>
       <button
         class="timeline-section__video-btn"
         type="button"
@@ -67,7 +67,7 @@ const currentStage = t.currentStage ?? 1;
       <!-- Header row: texts left, contact info right -->
       <div class="contact-section__header">
         <div class="contact-section__header-text">
-          <h2 class="contact-section__title">{c.title}</h2>
+          <h2 class="contact-section__title" data-text-reveal="words">{c.title}</h2>
           <p class="contact-section__intro">{c.intro}</p>
           <p class="contact-section__subtitle">{c.subtitle}</p>
         </div>
@@ -240,8 +240,9 @@ const currentStage = t.currentStage ?? 1;
   /* Timeline Progress */
   .timeline-section__progress {
     position: relative;
-    /* Height for zigzag: space for dots at top + line + dots at bottom + labels */
-    height: 140px;
+    /* Height for stepped layout: 3 rows of dots + labels */
+    height: auto;
+    min-height: 180px;
   }
 
   /* Track container - zigzag SVG path for mobile */
@@ -276,14 +277,15 @@ const currentStage = t.currentStage ?? 1;
     stroke: var(--color-primary);
   }
 
-  /* Stages container - zigzag layout for mobile */
+  /* Stages container - stepped layout for mobile (3 rows) */
   .timeline-section__stages {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    row-gap: var(--space-md);
     position: relative;
     z-index: 2;
     height: 100%;
-    align-items: center;
   }
 
   .timeline-section__stage {
@@ -293,16 +295,37 @@ const currentStage = t.currentStage ?? 1;
     position: relative;
   }
 
-  /* Zigzag: odd items (1st, 3rd, 5th) at top, even items (2nd, 4th) at bottom */
-  .timeline-section__stage:nth-child(odd) {
-    align-self: flex-start;
-    padding-top: 0;
+  /* Row 1: Point 1 (left), Point 2 (center) */
+  .timeline-section__stage:nth-child(1) {
+    grid-column: 1;
+    grid-row: 1;
+    align-items: flex-start;
   }
 
-  .timeline-section__stage:nth-child(even) {
-    align-self: flex-end;
-    flex-direction: column-reverse;
-    padding-bottom: 0;
+  .timeline-section__stage:nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+    align-items: center;
+  }
+
+  /* Row 2: Point 3 (right) */
+  .timeline-section__stage:nth-child(3) {
+    grid-column: 3;
+    grid-row: 2;
+    align-items: flex-end;
+  }
+
+  /* Row 3: Point 4 (center), Point 5 (left) */
+  .timeline-section__stage:nth-child(4) {
+    grid-column: 2;
+    grid-row: 3;
+    align-items: center;
+  }
+
+  .timeline-section__stage:nth-child(5) {
+    grid-column: 1;
+    grid-row: 3;
+    align-items: flex-start;
   }
 
   .timeline-section__stage-dot {
@@ -328,14 +351,9 @@ const currentStage = t.currentStage ?? 1;
     line-height: 1.3;
   }
 
-  /* Labels for odd items go below dot */
-  .timeline-section__stage:nth-child(odd) .timeline-section__stage-label {
+  /* Labels below dots for all stages in mobile */
+  .timeline-section__stage-label {
     margin-top: var(--space-xs);
-  }
-
-  /* Labels for even items go above dot (but since flex-direction is reversed, margin-top still works) */
-  .timeline-section__stage:nth-child(even) .timeline-section__stage-label {
-    margin-bottom: var(--space-xs);
   }
 
   /* ============================================
@@ -568,19 +586,16 @@ const currentStage = t.currentStage ?? 1;
     }
 
     .timeline-section__stages {
+      display: flex;
+      justify-content: space-between;
       height: auto;
       align-items: stretch;
     }
 
     .timeline-section__stage {
       flex-direction: column;
-    }
-
-    .timeline-section__stage:nth-child(odd),
-    .timeline-section__stage:nth-child(even) {
-      align-self: auto;
-      flex-direction: column;
-      padding: 0;
+      grid-column: auto;
+      grid-row: auto;
     }
 
     .timeline-section__stage:nth-child(n) {
@@ -667,7 +682,7 @@ const currentStage = t.currentStage ?? 1;
 </style>
 
 <script>
-  // Timeline zigzag lines for mobile
+  // Timeline stepped lines for mobile (rectangular path)
   function drawZigzagLines() {
     const svg = document.querySelector('.timeline-section__track-svg');
     const stages = document.querySelectorAll('.timeline-section__stage');
@@ -684,31 +699,57 @@ const currentStage = t.currentStage ?? 1;
     const progressRect = progress.getBoundingClientRect();
     const currentStage = parseInt(getComputedStyle(progress).getPropertyValue('--current-stage')) || 0;
 
+    // Get all dot positions
+    const dots = [];
+    stages.forEach((stage) => {
+      const dot = stage.querySelector('.timeline-section__stage-dot');
+      if (dot) {
+        const rect = dot.getBoundingClientRect();
+        dots.push({
+          x: rect.left + rect.width / 2 - progressRect.left,
+          y: rect.top + rect.height / 2 - progressRect.top
+        });
+      }
+    });
+
+    if (dots.length < 5) return;
+
     let linesHtml = '';
 
-    for (let i = 0; i < stages.length - 1; i++) {
-      const dot1 = stages[i].querySelector('.timeline-section__stage-dot');
-      const dot2 = stages[i + 1].querySelector('.timeline-section__stage-dot');
+    // Helper to draw a path segment (background and fill if completed)
+    function drawSegment(points, segmentIndex) {
+      const pathData = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
 
-      if (!dot1 || !dot2) continue;
-
-      const rect1 = dot1.getBoundingClientRect();
-      const rect2 = dot2.getBoundingClientRect();
-
-      // Calculate center of dots relative to progress container
-      const x1 = rect1.left + rect1.width / 2 - progressRect.left;
-      const y1 = rect1.top + rect1.height / 2 - progressRect.top;
-      const x2 = rect2.left + rect2.width / 2 - progressRect.left;
-      const y2 = rect2.top + rect2.height / 2 - progressRect.top;
-
-      // Background line (gray) - inline styles because scoped CSS doesn't apply to dynamic elements
-      linesHtml += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#e0e0e0" stroke-width="2" />`;
+      // Background line (gray)
+      linesHtml += `<path d="${pathData}" stroke="#e0e0e0" stroke-width="2" fill="none" />`;
 
       // Filled line (only for completed segments)
-      if (i < currentStage) {
-        linesHtml += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="var(--color-primary, #1a365d)" stroke-width="2" />`;
+      if (segmentIndex < currentStage) {
+        linesHtml += `<path d="${pathData}" stroke="var(--color-primary, #1a365d)" stroke-width="2" fill="none" />`;
       }
     }
+
+    // Segment 1→2: horizontal line (same row)
+    drawSegment([dots[0], dots[1]], 0);
+
+    // Segment 2→3: from center to right-bottom
+    // Go horizontal first to x of dot3, then vertical down to dot3
+    drawSegment([
+      dots[1],
+      { x: dots[2].x, y: dots[1].y },  // horizontal to x of dot3
+      dots[2]                           // vertical down to dot3
+    ], 1);
+
+    // Segment 3→4: from right to center-bottom
+    // Go vertical down first to y of dot4, then horizontal left to dot4
+    drawSegment([
+      dots[2],
+      { x: dots[2].x, y: dots[3].y },  // vertical down to y of dot4
+      dots[3]                           // horizontal left to dot4
+    ], 2);
+
+    // Segment 4→5: horizontal line (same row)
+    drawSegment([dots[3], dots[4]], 3);
 
     svg.innerHTML = linesHtml;
   }
