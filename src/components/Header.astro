@@ -425,15 +425,11 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
       mobileBar?.classList.remove('mobile-bar--top');
       mobileBar?.classList.add('mobile-bar--scrolled');
 
-      // Solo ocultar si el menú no está abierto
-      if (!mobileBar?.classList.contains('mobile-bar--menu-open')) {
-        if (currentScrollY > lastScrollY) {
-          header?.classList.add('header--hidden');
-          mobileBar?.classList.add('mobile-bar--hidden');
-        } else {
-          header?.classList.remove('header--hidden');
-          mobileBar?.classList.remove('mobile-bar--hidden');
-        }
+      // Solo ocultar header desktop, mobile-bar siempre visible
+      if (currentScrollY > lastScrollY) {
+        header?.classList.add('header--hidden');
+      } else {
+        header?.classList.remove('header--hidden');
       }
     }
 
