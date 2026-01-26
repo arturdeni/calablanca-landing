@@ -9,6 +9,15 @@ const { lang = 'es' } = Astro.props;
       alt="Calablanca Residences"
       class="footer__logo"
     />
+
+    <div class="footer__developer">
+      <span class="footer__developer-text">A Development by +</span>
+      <img
+        src="/images/logo-AXpartners.webp"
+        alt="AX Partners - Private Equity Real Estate"
+        class="footer__developer-logo"
+      />
+    </div>
   </div>
 </footer>
 
@@ -23,14 +32,32 @@ const { lang = 'es' } = Astro.props;
     margin: 0 auto;
     padding: 0 var(--content-padding);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
   }
 
   .footer__logo {
-    width: 20%;
-    max-width: 150px;
-    min-width: 100px;
+    max-width: 250px;
     height: auto;
+  }
+
+  .footer__developer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: var(--space-md);
+  }
+
+  .footer__developer-text {
+    font-family: var(--font-secondary);
+    font-size: 0.875rem;
+    color: var(--color-white);
+    font-weight: 300;
+  }
+
+  .footer__developer-logo {
+    height: 2rem;
+    width: auto;
   }
 </style>
