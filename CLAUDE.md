@@ -53,7 +53,7 @@ const { lang = 'es' } = Astro.props;
 Según el diseño (ver /docs/design.pdf):
 
 1. **Header** - Logo + navegación + selector idioma ES/EN
-2. **Hero** - "A new way of luxury living" + imagen fondo + CTA
+2. **Hero** - "A New Way of Luxury Living" + imagen fondo + CTA
 3. **Bienvenidos** - Intro + datos (precio, superficie, dormitorios) + galería
 4. **Arquitectura** - Sección fondo oscuro + imagen complejo + texto
 5. **Passivhaus** - Beneficios casa pasiva + imagen interior

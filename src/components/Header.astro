@@ -29,11 +29,15 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
   </div>
 </header>
 
-<!-- Mobile bar (solo < 1220px) - Separado para que mix-blend-mode funcione -->
-<div class="mobile-bar">
-  <a href={`/${lang === 'en' ? 'en/' : ''}`} class="mobile-bar__logo">
+<!-- Mobile logo (solo < 1220px) - Posición inicial, se va con scroll -->
+<div class="mobile-logo">
+  <a href={`/${lang === 'en' ? 'en/' : ''}`} class="mobile-logo__link">
     <img src="/images/header-logo.svg" alt="Calablanca Residences" />
   </a>
+</div>
+
+<!-- Mobile hamburger (solo < 1220px) - Siempre fijo -->
+<div class="mobile-bar">
   <button data-navigation-toggle="toggle" class="mobile-bar__hamburger" aria-label="Menu">
     <div class="mobile-bar__hamburger-line"></div>
     <div class="mobile-bar__hamburger-line"></div>
@@ -141,20 +145,40 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
   }
 
   /* ================================
+     MOBILE LOGO (< 1220px)
+     Posición inicial, se va con scroll
+     ================================ */
+  .mobile-logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: var(--space-md);
+    z-index: 100;
+  }
+
+  .mobile-logo__link {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+  }
+
+  .mobile-logo__link img {
+    height: 2rem;
+    width: auto;
+  }
+
+  /* ================================
      MOBILE BAR (< 1220px)
-     Estructura igual que header desktop
+     Solo hamburguesa, siempre fijo
      ================================ */
   .mobile-bar {
     position: fixed;
     top: 0;
-    left: 0;
     right: 0;
     z-index: 100;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     padding: var(--space-md);
-    transition: transform 0.3s ease;
   }
 
   /* Estado inicial: sin blend, blanco puro */
@@ -165,21 +189,6 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
   /* Estado scrolled: con blend para contraste */
   .mobile-bar--scrolled {
     mix-blend-mode: exclusion;
-  }
-
-  /* Ocultar bar al hacer scroll hacia abajo */
-  .mobile-bar--hidden {
-    transform: translateY(-100%);
-  }
-
-  .mobile-bar__logo {
-    display: flex;
-    align-items: center;
-  }
-
-  .mobile-bar__logo img {
-    height: 2rem;
-    width: auto;
   }
 
   /* Hamburger */
@@ -389,6 +398,7 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
       display: block;
     }
 
+    .mobile-logo,
     .mobile-bar,
     .mobile-nav {
       display: none;
@@ -416,7 +426,6 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
 
       mobileBar?.classList.add('mobile-bar--top');
       mobileBar?.classList.remove('mobile-bar--scrolled');
-      mobileBar?.classList.remove('mobile-bar--hidden');
     } else {
       // Estado scrolled
       header?.classList.remove('header--top');
