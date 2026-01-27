@@ -12,16 +12,16 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
   <div class="container">
     <div class="header__inner">
       <a href={`/${lang === 'en' ? 'en/' : ''}`} class="header__logo">
-        <img src="/images/header-logo.svg" alt="Calablanca Residences" class="header__logo-img" />
+        <img src="/images/header-logo.svg" alt="Cala Blanca Residences" class="header__logo-img" />
       </a>
 
       <nav class="header__nav">
         <ul class="header__nav-list">
           <li><a href="#residence">{t('nav.residence')}</a></li>
+          <li><a href="#characteristics">{t('nav.characteristics')}</a></li>
           <li><a href="#location">{t('nav.location')}</a></li>
           <li><a href="#houses">{t('nav.houses')}</a></li>
           <li><a href="#contact">{t('nav.contact')}</a></li>
-          <li><a href="#calculator">{t('nav.calculator')}</a></li>
           <li><a href={toggleLangUrl}>{isEnglish ? 'ES' : 'EN'}</a></li>
         </ul>
       </nav>
@@ -32,7 +32,7 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
 <!-- Mobile logo (solo < 1220px) - Posición inicial, se va con scroll -->
 <div class="mobile-logo">
   <a href={`/${lang === 'en' ? 'en/' : ''}`} class="mobile-logo__link">
-    <img src="/images/header-logo.svg" alt="Calablanca Residences" />
+    <img src="/images/header-logo.svg" alt="Cala Blanca Residences" />
   </a>
 </div>
 
@@ -55,6 +55,11 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
         </a>
       </li>
       <li class="mobile-nav__item">
+        <a href="#characteristics" data-navigation-toggle="close" class="mobile-nav__link">
+          <span class="mobile-nav__link-text">{t('nav.characteristics')}</span>
+        </a>
+      </li>
+      <li class="mobile-nav__item">
         <a href="#location" data-navigation-toggle="close" class="mobile-nav__link">
           <span class="mobile-nav__link-text">{t('nav.location')}</span>
         </a>
@@ -67,11 +72,6 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
       <li class="mobile-nav__item">
         <a href="#contact" data-navigation-toggle="close" class="mobile-nav__link">
           <span class="mobile-nav__link-text">{t('nav.contact')}</span>
-        </a>
-      </li>
-      <li class="mobile-nav__item">
-        <a href="#calculator" data-navigation-toggle="close" class="mobile-nav__link">
-          <span class="mobile-nav__link-text">{t('nav.calculator')}</span>
         </a>
       </li>
     </ul>

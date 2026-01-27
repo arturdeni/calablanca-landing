@@ -2,7 +2,7 @@
 
 ## Proyecto
 
-Landing page estática para Calablanca Residences, una promoción inmobiliaria de lujo en Sitges (Barcelona) de la empresa AX Partners.
+Landing page estática para Cala Blanca Residences, una promoción inmobiliaria de lujo en Sitges (Barcelona) de la empresa AX Partners.
 
 ## Stack
 

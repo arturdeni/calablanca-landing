@@ -1,14 +1,14 @@
 {
   "nav": {
-    "residence": "Residence",
+    "residence": "Cala Blanca Residences",
+    "characteristics": "Characteristics",
     "location": "Location",
-    "houses": "House options",
-    "calculator": "Calculate your mortgage",
-    "contact": "Request information"
+    "houses": "Available Units",
+    "contact": "Request Information"
   },
   "hero": {
     "title": "A New Way of Luxury Living",
-    "subtitle": "Calablanca Residences · Sitges",
+    "subtitle": "Cala Blanca Residences · Sitges",
     "description": "An exclusive collection of homes where comfort, architecture and the Mediterranean coexist in harmony."
   },
   "welcome": {
@@ -20,7 +20,7 @@
     ],
     "galleryTitle": "Spaces Designed for Comfort",
     "priceLabel": "Price from",
-    "priceValue": "€850,000",
+    "priceValue": "€741,000",
     "surfaceLabel": "Surface from",
     "surfaceValue": "100 m²",
     "bedroomsLabel": "Bedrooms",
@@ -47,7 +47,7 @@
         "id": "passivhaus",
         "title": "Passivhaus",
         "tagline": "A Home that Cares for You and the Environment",
-        "description": "Calablanca Residences has been designed under Passivhaus standards, guaranteeing minimal energy consumption together with high interior comfort.",
+        "description": "Cala Blanca Residences has been designed under Passivhaus standards, guaranteeing minimal energy consumption together with high interior comfort.",
         "features": [
           "Stable temperature throughout the year",
           "High performance thermal and acoustic insulation",
@@ -88,14 +88,14 @@
     "title": "Location",
     "subtitle": "Sitges · Mediterranean in its Purest Form",
     "description": "Just 30 minutes from Barcelona, Sitges is an elegant and sophisticated coastal enclave, surrounded by the Garraf natural park and known for its Mediterranean lifestyle.",
-    "distancesTitle": "Calablanca Residences is located:",
+    "distancesTitle": "Cala Blanca Residences is located:",
     "distances": {
       "beach": "A few minutes from the beach and Sitges center",
       "airport": "20 minutes from the airport",
       "services": "Close to international schools and services"
     },
     "cta": "Request Information",
-    "mapAlt": "Location map of Calablanca Residences in Sitges",
+    "mapAlt": "Location map of Cala Blanca Residences in Sitges",
     "poi": [
       "Aiguadolç Marina",
       "Train Station",
@@ -169,20 +169,20 @@
   },
   "calculator": {
     "title": "Mortgage Calculator",
-    "propertyPrice": "Property price",
-    "savings": "Savings contributed",
-    "years": "Term in years",
-    "interestType": "Interest type",
+    "propertyPrice": "Property Price",
+    "savings": "Savings Contributed",
+    "years": "Term in Years",
+    "interestType": "Interest Type",
     "fixed": "Fixed",
     "variable": "Variable",
-    "monthlyPayment": "Your monthly payment",
+    "monthlyPayment": "Your Monthly Payment",
     "mortgageAmount": "MORTGAGE AMOUNT",
     "financingPercentage": "FINANCING PERCENTAGE",
     "propertyPriceLabel": "PROPERTY PRICE",
     "taxesLabel": "TAXES AND PURCHASE EXPENSES",
     "totalCost": "TOTAL PROPERTY COST",
     "totalWithMortgage": "TOTAL COST WITH MORTGAGE",
-    "interestLabel": "Mortgage interest",
+    "interestLabel": "Mortgage Interest",
     "disclaimer": "Remember that banks usually require a minimum contribution of 10% plus expenses."
   },
   "footer": {

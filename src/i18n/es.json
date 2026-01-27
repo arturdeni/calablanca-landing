@@ -1,14 +1,14 @@
 {
   "nav": {
-    "residence": "Residence",
+    "residence": "Cala Blanca Residences",
+    "characteristics": "Características",
     "location": "Ubicación",
-    "houses": "Opciones casas",
-    "calculator": "Calcula tu hipoteca",
-    "contact": "Solicitar información"
+    "houses": "Unidades Disponibles",
+    "contact": "Solicitar Información"
   },
   "hero": {
     "title": "A New Way of Luxury Living",
-    "subtitle": "Calablanca Residences · Sitges",
+    "subtitle": "Cala Blanca Residences · Sitges",
     "description": "Una colección exclusiva de viviendas donde el confort, la arquitectura y el Mediterráneo conviven en equilibrio."
   },
   "welcome": {
@@ -16,11 +16,11 @@
     "paragraphs": [
       "Una promoción de obra nueva, propiedad de AX Partners,  en La Plana, una de las mejores zonas de Sitges, concebida para quienes valoran el espacio, la luz natural y la tranquilidad.",
       "Un conjunto de 29 viviendas, distribuidas en dos bloques cuidadosamente diseñados, con interiores amplios y abiertos, terrazas y jardines privados en un entorno inmejorable.",
-      "Viviendas de 2 a 4 dormitorios, con acabados de alta calidady una arquitectura pensada para ofrecer confort, elegancia y bienestar."
+      "Viviendas de 2 a 4 dormitorios, con acabados de alta calidad y una arquitectura pensada para ofrecer confort, elegancia y bienestar."
     ],
     "galleryTitle": "Espacios Diseñados para el Confort",
     "priceLabel": "Precio desde",
-    "priceValue": "850.000€",
+    "priceValue": "741.000€",
     "surfaceLabel": "Superficie desde",
     "surfaceValue": "100 m²",
     "bedroomsLabel": "Dormitorios",
@@ -47,7 +47,7 @@
         "id": "passivhaus",
         "title": "Passivhaus",
         "tagline": "Un Hogar que Cuida de Ti y del Entorno",
-        "description": "Calablanca Residences ha sido diseñada bajo los estándares Passivhaus, garantizando un consumo energético mínimo junto a un elevado confort interior.",
+        "description": "Cala Blanca Residences ha sido diseñada bajo los estándares Passivhaus, garantizando un consumo energético mínimo junto a un elevado confort interior.",
         "features": [
           "Temperatura estable durante todo el año",
           "Aislamiento térmico y acústico de altas prestaciones",
@@ -86,16 +86,16 @@
   },
   "location": {
     "title": "Ubicación",
-    "subtitle": "Sitges · Mediterráneo en estado puro",
+    "subtitle": "Sitges · Mediterráneo en Estado Puro",
     "description": "A solo 30 minutos de Barcelona, Sitges es un enclave costero elegante y sofisticado, rodeado por el parque natural del Garraf y conocido por su estilo de vida mediterráneo.",
-    "distancesTitle": "Calablanca Residences se encuentra a:",
+    "distancesTitle": "Cala Blanca Residences se encuentra a:",
     "distances": {
       "beach": "A pocos minutos de la playa y del centro de Sitges",
       "airport": "20 minutos del aeropuerto",
       "services": "Cerca de colegios internacionales y servicios"
     },
     "cta": "Solicitar Información",
-    "mapAlt": "Mapa de ubicación de Calablanca Residences en Sitges",
+    "mapAlt": "Mapa de ubicación de Cala Blanca Residences en Sitges",
     "poi": [
       "Puerto deportivo Aiguadolç",
       "Estación de tren",
@@ -144,7 +144,7 @@
     "stages": [
       "Comercialización",
       "Permisos Obra",
-      "Inicio obra",
+      "Inicio Obra",
       "Fin Obra",
       "Entrega de llaves"
     ]
@@ -169,20 +169,20 @@
   },
   "calculator": {
     "title": "Simulador de Hipoteca",
-    "propertyPrice": "Precio del inmueble",
-    "savings": "Ahorro aportado",
-    "years": "Plazo en años",
-    "interestType": "Tipo de interés",
+    "propertyPrice": "Precio del Inmueble",
+    "savings": "Ahorro Aportado",
+    "years": "Plazo en Años",
+    "interestType": "Tipo de Interés",
     "fixed": "Fijo",
     "variable": "Variable",
-    "monthlyPayment": "Tu cuota mensual",
+    "monthlyPayment": "Tu Cuota Mensual",
     "mortgageAmount": "IMPORTE HIPOTECA",
     "financingPercentage": "PORCENTAJE DE FINANCIACIÓN",
     "propertyPriceLabel": "PRECIO DEL INMUEBLE",
     "taxesLabel": "IMPUESTOS Y GASTOS COMPRA",
     "totalCost": "COSTE TOTAL DEL INMUEBLE",
     "totalWithMortgage": "COSTE TOTAL CON HIPOTECA",
-    "interestLabel": "Interés hipoteca",
+    "interestLabel": "Interés Hipoteca",
     "disclaimer": "Recuerda que los bancos suelen pedir una aportación mínima del 10% más gastos."
   },
   "footer": {
