@@ -54,33 +54,31 @@
           "Ventilación mecánica con recuperación de calor",
           "Ahorro energético de hasta un 75%"
         ],
-        "closing": "Vivir mejor también es vivir de forma más eficiente."
+        "closing": "Vivir mejor también es vivir de forma más eficiente"
       },
       {
         "id": "zonas-comunes",
         "title": "Zonas Comunes",
-        "tagline": "Espacios Pensados para el Encuentro",
+        "tagline": "Un Oasis Pensado para Disfrutar",
         "description": "Un entorno residencial donde cada espacio común ha sido cuidadosamente diseñado para fomentar la convivencia y el bienestar de todos los residentes.",
         "features": [
           "Piscina comunitaria con zona de solárium",
           "Jardines y zonas ajardinadas",
-          "Cubierta chill out con vistas",
+          "Cubierta chill out con vistas y lámina de agua",
           "Parking comunitario subterráneo"
-        ],
-        "closing": "Disfrutar de lo mejor de la vida en comunidad."
+        ]
       },
       {
         "id": "interiores",
         "title": "Interiores",
-        "tagline": "Diseño que Inspira Calma",
+        "tagline": "Espacios para Vivir y Compartir",
         "description": "Interiores luminosos y funcionales, donde cada detalle ha sido seleccionado para crear un ambiente de confort y elegancia atemporal.",
         "features": [
           "Cocina abierta al salón comedor",
           "Acabados de alta calidad",
-          "Amplias terrazas con vistas",
+          "Terrazas y jardines privados",
           "Materiales nobles y sostenibles"
-        ],
-        "closing": "Un hogar donde cada detalle cuenta."
+        ]
       }
     ]
   },
@@ -91,7 +89,7 @@
     "distancesTitle": "Cala Blanca Residences se encuentra a:",
     "distances": {
       "beach": "A pocos minutos de la playa y del centro de Sitges",
-      "airport": "20 minutos del aeropuerto",
+      "airport": "20 minutos del aeropuerto del Prat",
       "services": "Cerca de colegios internacionales y servicios"
     },
     "cta": "Solicitar Información",
@@ -144,7 +142,7 @@
     "stages": [
       "Comercialización",
       "Permisos Obra",
-      "Inicio Obra",
+      "Inicio Obra\nQ1 2026",
       "Fin Obra",
       "Entrega de llaves"
     ]
@@ -154,8 +152,8 @@
     "intro": "Un equilibrio perfecto entre arquitectura, confort y entorno. Una nueva forma de vivir en un piso sin renunciar al lujo.",
     "subtitle": "Deja tu contacto para acceder al proceso de Venta Privada.",
     "contactLabel": "CONTACTO",
-    "email": "patri@axpartners.fund",
-    "phone": "606 985 146",
+    "email": "patricia@axpartners.fund",
+    "phone": "+34 606 985 146",
     "form": {
       "firstName": "Nombre",
       "lastName": "Apellido",

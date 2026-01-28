@@ -59,28 +59,26 @@
       {
         "id": "zonas-comunes",
         "title": "Common Areas",
-        "tagline": "Spaces Designed for Gathering",
+        "tagline": "An Oasis Designed for Enjoyment",
         "description": "A residential environment where every common space has been carefully designed to foster community living and the well-being of all residents.",
         "features": [
           "Community pool with solarium area",
           "Gardens and landscaped areas",
-          "Chill out rooftop with views",
+          "Chill out rooftop with views and water feature",
           "Underground community parking"
-        ],
-        "closing": "Enjoying the best of community life."
+        ]
       },
       {
         "id": "interiores",
         "title": "Interiors",
-        "tagline": "Design that Inspires Calm",
+        "tagline": "Spaces for Living and Sharing",
         "description": "Bright and functional interiors, where every detail has been selected to create an atmosphere of comfort and timeless elegance.",
         "features": [
           "Open kitchen to living dining room",
           "High quality finishes",
-          "Spacious terraces with views",
+          "Private terraces and gardens",
           "Noble and sustainable materials"
-        ],
-        "closing": "A home where every detail matters."
+        ]
       }
     ]
   },
@@ -91,7 +89,7 @@
     "distancesTitle": "Cala Blanca Residences is located:",
     "distances": {
       "beach": "A few minutes from the beach and Sitges center",
-      "airport": "20 minutes from the airport",
+      "airport": "20 minutes from Barcelona airport",
       "services": "Close to international schools and services"
     },
     "cta": "Request Information",
@@ -144,7 +142,7 @@
     "stages": [
       "Marketing",
       "Building Permits",
-      "Construction Start",
+      "Construction Start\nQ1 2026",
       "Construction End",
       "Key Handover"
     ]
@@ -154,8 +152,8 @@
     "intro": "A perfect balance between architecture, comfort and surroundings. A new way of living in an apartment without giving up luxury.",
     "subtitle": "Leave your contact to access the Private Sale process.",
     "contactLabel": "CONTACT",
-    "email": "patri@axpartners.fund",
-    "phone": "606 985 146",
+    "email": "patricia@axpartners.fund",
+    "phone": "+34 606 985 146",
     "form": {
       "firstName": "First name",
       "lastName": "Last name",

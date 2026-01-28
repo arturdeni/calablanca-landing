@@ -11,7 +11,6 @@ const { lang = 'es' } = Astro.props;
     />
 
     <div class="footer__developer">
-      <span class="footer__developer-text">A Development by +</span>
       <img
         src="/images/logo-AXpartners.webp"
         alt="AX Partners - Private Equity Real Estate"
@@ -43,21 +42,11 @@ const { lang = 'es' } = Astro.props;
   }
 
   .footer__developer {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
     margin-top: var(--space-md);
   }
 
-  .footer__developer-text {
-    font-family: var(--font-secondary);
-    font-size: 0.875rem;
-    color: var(--color-white);
-    font-weight: 300;
-  }
-
   .footer__developer-logo {
-    height: 2rem;
+    height: 5rem;
     width: auto;
   }
 </style>
