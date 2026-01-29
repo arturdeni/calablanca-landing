@@ -12,7 +12,7 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
   <div class="container">
     <div class="header__inner">
       <a href={`/${lang === 'en' ? 'en/' : ''}`} class="header__logo">
-        <img src="/images/header-logo.svg" alt="Cala Blanca Residences" class="header__logo-img" />
+        <img src="/images/header-logo.webp" alt="Cala Blanca Residences" class="header__logo-img" />
       </a>
 
       <nav class="header__nav">
@@ -32,7 +32,7 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
 <!-- Mobile logo (solo < 1220px) - Posición inicial, se va con scroll -->
 <div class="mobile-logo">
   <a href={`/${lang === 'en' ? 'en/' : ''}`} class="mobile-logo__link">
-    <img src="/images/header-logo.svg" alt="Cala Blanca Residences" />
+    <img src="/images/header-logo.webp" alt="Cala Blanca Residences" />
   </a>
 </div>
 
@@ -121,7 +121,7 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
   }
 
   .header__logo-img {
-    height: 2rem;
+    height: 4rem;
     width: auto;
   }
 
@@ -152,18 +152,18 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
     position: absolute;
     top: 0;
     left: 0;
-    padding: var(--space-md);
+    padding: var(--space-sm);
     z-index: 100;
   }
 
   .mobile-logo__link {
     display: flex;
     align-items: center;
-    margin-top: 5px;
+    margin-top: 15px;
   }
 
   .mobile-logo__link img {
-    height: 2rem;
+    height: 4rem;
     width: auto;
   }
 
