@@ -39,7 +39,7 @@ const t = translations.houses;
             <span class="houses__cell houses__cell--terrace" data-label={t.columns.terrace}>{unit.terrace} m²</span>
             <span class="houses__cell houses__cell--price" data-label={t.columns.price}>{unit.price} &euro;</span>
             <span class="houses__cell houses__cell--plan" data-label={t.columns.plan}>
-              <a href="#contact" class="houses__download">{t.download}</a>
+              <a href={unit.pdf} class="houses__download" download>{t.download}</a>
             </span>
           </div>
         </div>
