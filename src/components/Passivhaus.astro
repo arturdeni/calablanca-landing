@@ -42,7 +42,6 @@ const sectionImages = [
         </div>
 
         <div class="passivhaus__footer">
-          <p class="passivhaus__tagline">{section.tagline}</p>
           <a href="#contact" class="passivhaus__cta">{t.cta}</a>
         </div>
       </article>
@@ -197,6 +196,12 @@ const sectionImages = [
     flex-direction: column;
     gap: var(--space-md);
     margin-top: auto;
+  }
+
+  /* En mobile, solo mostrar footer en la tercera card (Interiores) */
+  .passivhaus__card:nth-child(1) .passivhaus__footer,
+  .passivhaus__card:nth-child(2) .passivhaus__footer {
+    display: none;
   }
 
   /* =============================================

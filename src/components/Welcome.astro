@@ -308,13 +308,45 @@ const galleryImages = [
     }
   }
 
-  prevBtn?.addEventListener("click", () => {
+  function goToPrev() {
     currentIndex = currentIndex === 0 ? totalSlides - 1 : currentIndex - 1;
     updateSlider();
-  });
+  }
 
-  nextBtn?.addEventListener("click", () => {
+  function goToNext() {
     currentIndex = currentIndex === totalSlides - 1 ? 0 : currentIndex + 1;
     updateSlider();
-  });
+  }
+
+  prevBtn?.addEventListener("click", goToPrev);
+  nextBtn?.addEventListener("click", goToNext);
+
+  // Touch/swipe support for mobile
+  const slider = document.querySelector(".welcome__gallery-slider") as HTMLElement | null;
+  let touchStartX = 0;
+  let touchEndX = 0;
+  const swipeThreshold = 50; // Minimum distance to trigger swipe
+
+  slider?.addEventListener("touchstart", (e) => {
+    touchStartX = (e as TouchEvent).changedTouches[0].screenX;
+  }, { passive: true });
+
+  slider?.addEventListener("touchend", (e) => {
+    touchEndX = (e as TouchEvent).changedTouches[0].screenX;
+    handleSwipe();
+  }, { passive: true });
+
+  function handleSwipe() {
+    const swipeDistance = touchEndX - touchStartX;
+
+    if (Math.abs(swipeDistance) > swipeThreshold) {
+      if (swipeDistance < 0) {
+        // Swiped left -> next slide
+        goToNext();
+      } else {
+        // Swiped right -> previous slide
+        goToPrev();
+      }
+    }
+  }
 </script>
