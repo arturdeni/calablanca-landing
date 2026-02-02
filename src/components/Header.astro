@@ -77,7 +77,6 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
     </ul>
     <div class="mobile-nav__bottom">
       <a href={toggleLangUrl} class="mobile-nav__lang">{isEnglish ? 'ES' : 'EN'}</a>
-      <p class="mobile-nav__info">info@calablanca.es</p>
     </div>
   </div>
 </nav>
@@ -361,7 +360,7 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
 
   /* Bottom */
   .mobile-nav__bottom {
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
     padding: var(--space-lg);
@@ -369,13 +368,6 @@ const toggleLangUrl = isEnglish ? '/' : '/en/';
     position: absolute;
     bottom: 0;
     left: 0;
-  }
-
-  .mobile-nav__info {
-    opacity: 0.5;
-    margin-bottom: 0;
-    font-size: 1rem;
-    color: var(--color-white);
   }
 
   .mobile-nav__lang {

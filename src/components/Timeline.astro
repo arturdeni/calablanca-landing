@@ -22,6 +22,7 @@ const currentStage = t.currentStage ?? 1;
         type="button"
         data-vimeo-lightbox-control="open"
         data-vimeo-lightbox-id={vimeoId}
+        disabled
       >
         {t.videoButton}
       </button>
@@ -175,10 +176,23 @@ const currentStage = t.currentStage ?? 1;
         <!-- Timestamp for time-based validation -->
         <input type="hidden" name="formLoadedAt" id="formLoadedAt" value="" />
 
-        <button type="submit" class="contact-section__submit"
-          >{c.form.submit}</button
-        >
+        <div class="contact-section__form-footer">
+          <button type="submit" class="contact-section__submit"
+            >{c.form.submit}</button
+          >
+          <div class="contact-section__message" id="form-message" aria-live="polite"></div>
+        </div>
       </form>
+
+      <!-- Form translations for JS -->
+      <script is:inline type="application/json" id="form-translations">
+        {JSON.stringify({
+          sending: c.form.sending,
+          success: c.form.success,
+          error: c.form.error,
+          submit: c.form.submit
+        })}
+      </script>
     </div>
 
     <!-- Right: Image -->
@@ -231,9 +245,14 @@ const currentStage = t.currentStage ?? 1;
     cursor: pointer;
     transition: all var(--transition-fast);
 
-    &:hover {
+    &:hover:not(:disabled) {
       background-color: var(--color-primary);
       color: var(--color-white);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
     }
   }
 
@@ -308,11 +327,17 @@ const currentStage = t.currentStage ?? 1;
     align-items: center;
   }
 
-  /* Row 2: Point 3 (right) */
+  /* Row 2: Point 3 (right) - label to the left of dot on mobile */
   .timeline-section__stage:nth-child(3) {
     grid-column: 3;
     grid-row: 2;
-    align-items: flex-end;
+    flex-direction: row-reverse;
+  }
+
+  .timeline-section__stage:nth-child(3) .timeline-section__stage-label {
+    margin-top: 0;
+    margin-right: var(--space-xs);
+    text-align: right;
   }
 
   /* Row 3: Point 4 (center), Point 5 (left) */
@@ -345,7 +370,6 @@ const currentStage = t.currentStage ?? 1;
   .timeline-section__stage-label {
     font-size: 0.75rem;
     color: var(--color-primary);
-    text-align: center;
     max-width: 80px;
     line-height: 1.3;
     white-space: pre-line;
@@ -510,6 +534,14 @@ const currentStage = t.currentStage ?? 1;
     z-index: -1;
   }
 
+  /* Form footer */
+  .contact-section__form-footer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    align-items: flex-start;
+  }
+
   /* Submit button */
   .contact-section__submit {
     padding: var(--space-sm) var(--space-lg);
@@ -521,11 +553,33 @@ const currentStage = t.currentStage ?? 1;
     color: var(--color-primary);
     cursor: pointer;
     transition: all var(--transition-fast);
-    align-self: flex-start;
 
-    &:hover {
+    &:hover:not(:disabled) {
       background-color: var(--color-primary);
       color: var(--color-white);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  /* Form message */
+  .contact-section__message {
+    font-size: 0.875rem;
+    line-height: 1.4;
+
+    &:empty {
+      display: none;
+    }
+
+    &.contact-section__message--success {
+      color: #2e7d32;
+    }
+
+    &.contact-section__message--error {
+      color: #c62828;
     }
   }
 
@@ -622,6 +676,16 @@ const currentStage = t.currentStage ?? 1;
       margin-bottom: 0;
     }
 
+    /* Reset stage 3 mobile overrides */
+    .timeline-section__stage:nth-child(3) {
+      flex-direction: column;
+    }
+
+    .timeline-section__stage:nth-child(3) .timeline-section__stage-label {
+      margin-right: 0;
+      text-align: center;
+    }
+
     .timeline-section__stage:first-child .timeline-section__stage-label {
       text-align: left;
     }
@@ -651,8 +715,8 @@ const currentStage = t.currentStage ?? 1;
       flex-shrink: 0;
     }
 
-    .contact-section__submit {
-      align-self: flex-end;
+    .contact-section__form-footer {
+      align-items: flex-end;
     }
   }
 
@@ -663,6 +727,7 @@ const currentStage = t.currentStage ?? 1;
     .timeline-section__stage-label {
       font-size: 1rem;
       max-width: 140px;
+      text-align: center;
     }
 
     .contact-section__container {
@@ -824,16 +889,26 @@ const currentStage = t.currentStage ?? 1;
     formLoadedAt.value = Date.now().toString();
   }
 
-  // Form validation with antispam checks
+  // Google Apps Script Web App URL
+  // TODO: Replace with your client's Google Apps Script deployment URL
+  const GOOGLE_SCRIPT_URL = 'PENDING_GOOGLE_APPS_SCRIPT_URL';
+
+  // Form submission with Google Sheets integration
   const contactForm = document.querySelector('#contact-form');
+  const formMessage = document.querySelector('#form-message');
+  const translationsEl = document.querySelector('#form-translations');
+  const translations = translationsEl ? JSON.parse(translationsEl.textContent || '{}') : {};
+
   if (contactForm instanceof HTMLFormElement) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
       const honeypot = contactForm.querySelector('[name="website"]');
       const timestamp = contactForm.querySelector('[name="formLoadedAt"]');
+      const submitBtn = contactForm.querySelector('.contact-section__submit');
 
       // Check honeypot (should be empty)
       if (honeypot instanceof HTMLInputElement && honeypot.value) {
-        e.preventDefault();
         return;
       }
 
@@ -841,8 +916,73 @@ const currentStage = t.currentStage ?? 1;
       if (timestamp instanceof HTMLInputElement && timestamp.value) {
         const elapsed = Date.now() - parseInt(timestamp.value, 10);
         if (elapsed < 3000) {
-          e.preventDefault();
           return;
+        }
+      }
+
+      // Get form data
+      const formData = new FormData(contactForm);
+      const data = {
+        firstName: formData.get('firstName'),
+        lastName: formData.get('lastName'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        commercial: formData.get('commercial') === 'on',
+        timestamp: new Date().toISOString()
+      };
+
+      // Update UI - show loading state
+      if (submitBtn instanceof HTMLButtonElement) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = translations.sending || 'Enviando...';
+      }
+      if (formMessage) {
+        formMessage.textContent = '';
+        formMessage.className = 'contact-section__message';
+      }
+
+      try {
+        // Check if URL is configured
+        if (GOOGLE_SCRIPT_URL === 'PENDING_GOOGLE_APPS_SCRIPT_URL') {
+          throw new Error('Google Apps Script URL not configured');
+        }
+
+        // Send data to Google Apps Script
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors', // Required for Google Apps Script
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+
+        // With no-cors mode, we can't read the response, so we assume success
+        // Show success message
+        if (formMessage) {
+          formMessage.textContent = translations.success || '¡Gracias! Hemos recibido tu solicitud.';
+          formMessage.className = 'contact-section__message contact-section__message--success';
+        }
+
+        // Reset form
+        contactForm.reset();
+
+        // Reset timestamp for antispam
+        if (timestamp instanceof HTMLInputElement) {
+          timestamp.value = Date.now().toString();
+        }
+
+      } catch (error) {
+        console.error('Form submission error:', error);
+        if (formMessage) {
+          formMessage.textContent = translations.error || 'Ha ocurrido un error. Por favor, inténtalo de nuevo.';
+          formMessage.className = 'contact-section__message contact-section__message--error';
+        }
+      } finally {
+        // Restore button
+        if (submitBtn instanceof HTMLButtonElement) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = translations.submit || 'Enviar';
         }
       }
     });

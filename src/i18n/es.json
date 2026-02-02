@@ -52,9 +52,9 @@
           "Temperatura estable durante todo el año",
           "Aislamiento térmico y acústico de altas prestaciones",
           "Ventilación mecánica con recuperación de calor",
-          "Ahorro energético de hasta un 75%"
-        ],
-        "closing": "Vivir mejor también es vivir de forma más eficiente"
+          "Ahorro energético de hasta un 75%",
+          "Producción de ACS mediante aerotermia"
+        ]
       },
       {
         "id": "zonas-comunes",
@@ -89,7 +89,7 @@
     "distancesTitle": "Cala Blanca Residences se encuentra a:",
     "distances": {
       "beach": "A pocos minutos de la playa y del centro de Sitges",
-      "airport": "20 minutos del aeropuerto del Prat",
+      "airport": "A 20 minutos del aeropuerto del Prat",
       "services": "Cerca de colegios internacionales y servicios"
     },
     "cta": "Solicitar Información",
@@ -124,9 +124,9 @@
     "units": [
       { "floor": "Baja", "bedrooms": 2, "bathrooms": 2, "surface": "83,40", "terrace": "53,44", "price": "752.000", "pdf": "/documents/CB Bajo 1 - A - 752.000EUROS.pdf" },
       { "floor": "Baja", "bedrooms": 3, "bathrooms": 2, "surface": "106,30", "terrace": "229", "price": "999.000", "pdf": "/documents/CB Bajo 4 - A - 999.000 EUROS.pdf" },
+      { "floor": "Baja", "bedrooms": 3, "bathrooms": 2, "surface": "113,45", "terrace": "107,04", "price": "994.000", "pdf": "/documents/CB Bajo 1 - B - 994.000EUROS.pdf" },
       { "floor": "Primera", "bedrooms": 3, "bathrooms": 2, "surface": "113,45", "terrace": "47,3", "price": "987.000", "pdf": "/documents/CB 1-2 , A - 987.000 EUROS.pdf" },
       { "floor": "Primera", "bedrooms": 4, "bathrooms": 2, "surface": "120,00", "terrace": "35,47", "price": "909.000", "pdf": "/documents/CB 1-3 , A - 909.000 EUROS.pdf" },
-      { "floor": "Baja", "bedrooms": 3, "bathrooms": 2, "surface": "113,45", "terrace": "107,04", "price": "994.000", "pdf": "/documents/CB Bajo 1 - B - 994.000EUROS.pdf" },
       { "floor": "Primera", "bedrooms": 4, "bathrooms": 2, "surface": "120,00", "terrace": "52,28", "price": "896.000", "pdf": "/documents/CB 1-3 , B -  896.000 EUROS.pdf" },
       { "floor": "Primera", "bedrooms": 3, "bathrooms": 2, "surface": "106,30", "terrace": "37,28", "price": "741.000", "pdf": "/documents/CB 1-4 , B - 741.000 EUROS.pdf" },
       { "floor": "Segunda", "bedrooms": 4, "bathrooms": 2, "surface": "120,00", "terrace": "52,14", "price": "1.110.000", "pdf": "/documents/CB 2-3 , B - 1.110.000 EUROS.pdf" }
@@ -144,7 +144,7 @@
       "Permisos Obra",
       "Inicio Obra\nQ1 2026",
       "Fin Obra",
-      "Entrega de llaves"
+      "Entrega de Llaves"
     ]
   },
   "contact": {
@@ -162,7 +162,10 @@
       "privacy": "Acepto la",
       "privacyLink": "política de privacidad",
       "commercial": "Acepto recibir información comercial.",
-      "submit": "Enviar"
+      "submit": "Enviar",
+      "sending": "Enviando...",
+      "success": "¡Gracias! Hemos recibido tu solicitud. Nos pondremos en contacto contigo pronto.",
+      "error": "Ha ocurrido un error. Por favor, inténtalo de nuevo o contacta directamente con nosotros."
     }
   },
   "calculator": {
