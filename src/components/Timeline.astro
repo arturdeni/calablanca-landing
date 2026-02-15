@@ -1,7 +1,7 @@
 ---
 import VideoModal from "./VideoModal.astro";
 
-const { lang = "es", vimeoId = "1019191082" } = Astro.props;
+const { lang = "es", vimeoId = "1162162944" } = Astro.props;
 
 const translations = await import(`../i18n/${lang}.json`);
 const t = translations.timeline;
@@ -22,7 +22,6 @@ const currentStage = t.currentStage ?? 1;
         type="button"
         data-vimeo-lightbox-control="open"
         data-vimeo-lightbox-id={vimeoId}
-        disabled
       >
         {t.videoButton}
       </button>
