@@ -18,8 +18,20 @@ const { title = "Cala Blanca Residences · Sitges", lang = "es" } = Astro.props;
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <!-- Preload fonts for performance -->
-    <link rel="preload" href="/fonts/lora-regular.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/roboto-regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link
+      rel="preload"
+      href="/fonts/lora-regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/roboto-regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta
@@ -29,11 +41,48 @@ const { title = "Cala Blanca Residences · Sitges", lang = "es" } = Astro.props;
 
     <!-- Force scroll to top on page load - must be in head to run before browser restores scroll -->
     <script is:inline>
-      if ('scrollRestoration' in history) {
-        history.scrollRestoration = 'manual';
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
       }
       window.scrollTo(0, 0);
     </script>
+    <!-- Meta Pixel Code -->
+    <script is:inline>
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        "script",
+        "https://connect.facebook.net/en_US/fbevents.js",
+      );
+      fbq("init", "705579942381925");
+      fbq("track", "PageView");
+    </script>
+    <noscript
+      ><img
+        height="1"
+        width="1"
+        style="display:none"
+        src="https://www.facebook.com/tr?id=705579942381925&ev=PageView&noscript=1"
+      /></noscript
+    >
+    <!-- End Meta Pixel Code -->
   </head>
   <body>
     <Loader />
