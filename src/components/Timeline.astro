@@ -84,7 +84,14 @@ const currentStage = t.currentStage ?? 1;
         </div>
       </div>
 
-      <form class="contact-section__form" id="contact-form">
+      <form
+        class="contact-section__form"
+        id="contact-form"
+        data-t-sending={c.form.sending}
+        data-t-success={c.form.success}
+        data-t-error={c.form.error}
+        data-t-submit={c.form.submit}
+      >
         <div class="contact-section__form-row">
           <div class="contact-section__form-group">
             <label for="firstName" class="contact-section__label"
@@ -183,15 +190,6 @@ const currentStage = t.currentStage ?? 1;
         </div>
       </form>
 
-      <!-- Form translations for JS -->
-      <script is:inline type="application/json" id="form-translations">
-        {JSON.stringify({
-          sending: c.form.sending,
-          success: c.form.success,
-          error: c.form.error,
-          submit: c.form.submit
-        })}
-      </script>
     </div>
 
     <!-- Right: Image -->
@@ -205,6 +203,11 @@ const currentStage = t.currentStage ?? 1;
     </div>
   </div>
 </section>
+
+<!-- Toast notification -->
+<div class="toast" id="form-toast" role="alert" aria-live="polite">
+  <span class="toast__message"></span>
+</div>
 
 <style>
   /* ============================================
@@ -742,9 +745,41 @@ const currentStage = t.currentStage ?? 1;
       overflow: hidden;
     }
   }
+
+  /* ============================================
+     TOAST
+     ============================================ */
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 500;
+    padding: var(--space-sm) var(--space-md);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    max-width: 320px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+    transform: translateY(calc(100% + 2rem));
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .toast--visible {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .toast--error {
+    background-color: #c62828;
+  }
 </style>
 
-<script>
+<script is:inline>
   // Timeline stepped lines for mobile (rectangular path)
   function drawZigzagLines() {
     const svg = document.querySelector('.timeline-section__track-svg');
@@ -882,112 +917,80 @@ const currentStage = t.currentStage ?? 1;
     }, 100);
   });
 
-  // Antispam: Set timestamp when form loads
-  const formLoadedAt = document.querySelector('#formLoadedAt');
-  if (formLoadedAt instanceof HTMLInputElement) {
-    formLoadedAt.value = Date.now().toString();
+  // Toast notification
+  function showToast(message, type) {
+    var toast = document.querySelector('#form-toast');
+    if (!toast) return;
+    var messageEl = toast.querySelector('.toast__message');
+    if (messageEl) messageEl.textContent = message;
+    toast.className = 'toast toast--visible' + (type === 'error' ? ' toast--error' : '');
+    setTimeout(function() { toast.classList.remove('toast--visible'); }, 5000);
   }
 
-  // Google Apps Script Web App URL
-  // TODO: Replace with your client's Google Apps Script deployment URL
-  const GOOGLE_SCRIPT_URL = 'PENDING_GOOGLE_APPS_SCRIPT_URL';
+  // Antispam: set timestamp on load
+  var formLoadedAt = document.querySelector('#formLoadedAt');
+  if (formLoadedAt) formLoadedAt.value = Date.now().toString();
 
-  // Form submission with Google Sheets integration
-  const contactForm = document.querySelector('#contact-form');
-  const formMessage = document.querySelector('#form-message');
-  const translationsEl = document.querySelector('#form-translations');
-  const translations = translationsEl ? JSON.parse(translationsEl.textContent || '{}') : {};
+  // Form submission - listener on document to avoid querySelector timing issues
+  var GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzm4ysRjSQhxIzMlP7KL-Mo8cxSE6hCkeV8G7Xe9Jc-psWvwfY0gQn4SR4SVDJfWCQRVA/exec';
 
-  if (contactForm instanceof HTMLFormElement) {
-    contactForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
+  document.addEventListener('submit', function(e) {
+    if (!e.target || e.target.id !== 'contact-form') return;
+    e.preventDefault();
 
-      const honeypot = contactForm.querySelector('[name="website"]');
-      const timestamp = contactForm.querySelector('[name="formLoadedAt"]');
-      const submitBtn = contactForm.querySelector('.contact-section__submit');
+    var contactForm = e.target;
+    var honeypot = contactForm.querySelector('[name="website"]');
+    var timestamp = contactForm.querySelector('[name="formLoadedAt"]');
+    var submitBtn = contactForm.querySelector('.contact-section__submit');
+    var translations = {
+      sending: contactForm.dataset.tSending,
+      success: contactForm.dataset.tSuccess,
+      error: contactForm.dataset.tError,
+      submit: contactForm.dataset.tSubmit
+    };
 
-      // Check honeypot (should be empty)
-      if (honeypot instanceof HTMLInputElement && honeypot.value) {
-        return;
-      }
+    if (honeypot && honeypot.value) return;
+    if (timestamp && timestamp.value) {
+      var elapsed = Date.now() - parseInt(timestamp.value, 10);
+      if (elapsed < 3000) return;
+    }
 
-      // Check time elapsed (minimum 3 seconds to fill form)
-      if (timestamp instanceof HTMLInputElement && timestamp.value) {
-        const elapsed = Date.now() - parseInt(timestamp.value, 10);
-        if (elapsed < 3000) {
-          return;
-        }
-      }
+    var formData = new FormData(contactForm);
+    var data = {
+      firstName: formData.get('firstName'),
+      lastName: formData.get('lastName'),
+      email: formData.get('email'),
+      phone: formData.get('phone'),
+      commercial: formData.get('commercial') === 'on',
+      timestamp: new Date().toISOString()
+    };
 
-      // Get form data
-      const formData = new FormData(contactForm);
-      const data = {
-        firstName: formData.get('firstName'),
-        lastName: formData.get('lastName'),
-        email: formData.get('email'),
-        phone: formData.get('phone'),
-        commercial: formData.get('commercial') === 'on',
-        timestamp: new Date().toISOString()
-      };
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = translations.sending || 'Enviando...';
+    }
 
-      // Update UI - show loading state
-      if (submitBtn instanceof HTMLButtonElement) {
-        submitBtn.disabled = true;
-        submitBtn.textContent = translations.sending || 'Enviando...';
-      }
-      if (formMessage) {
-        formMessage.textContent = '';
-        formMessage.className = 'contact-section__message';
-      }
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Lead');
+    }
 
-      try {
-        // Check if URL is configured
-        if (GOOGLE_SCRIPT_URL === 'PENDING_GOOGLE_APPS_SCRIPT_URL') {
-          throw new Error('Google Apps Script URL not configured');
-        }
-
-        if (typeof fbq !== 'undefined') {
-          fbq('track', 'Lead'); // o 'Contact', 'Submit', etc.
-        }
-
-        // Send data to Google Apps Script
-        await fetch(GOOGLE_SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors', // Required for Google Apps Script
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        });
-
-        // With no-cors mode, we can't read the response, so we assume success
-        // Show success message
-        if (formMessage) {
-          formMessage.textContent = translations.success || '¡Gracias! Hemos recibido tu solicitud.';
-          formMessage.className = 'contact-section__message contact-section__message--success';
-        }
-
-        // Reset form
-        contactForm.reset();
-
-        // Reset timestamp for antispam
-        if (timestamp instanceof HTMLInputElement) {
-          timestamp.value = Date.now().toString();
-        }
-
-      } catch (error) {
-        console.error('Form submission error:', error);
-        if (formMessage) {
-          formMessage.textContent = translations.error || 'Ha ocurrido un error. Por favor, inténtalo de nuevo.';
-          formMessage.className = 'contact-section__message contact-section__message--error';
-        }
-      } finally {
-        // Restore button
-        if (submitBtn instanceof HTMLButtonElement) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = translations.submit || 'Enviar';
-        }
+    fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(function() {
+      showToast(translations.success || '¡Gracias! Hemos recibido tu solicitud.');
+      contactForm.reset();
+      if (timestamp) timestamp.value = Date.now().toString();
+    }).catch(function(err) {
+      console.error('Form error:', err);
+      showToast(translations.error || 'Ha ocurrido un error. Por favor, inténtalo de nuevo.', 'error');
+    }).finally(function() {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = translations.submit || 'Enviar';
       }
     });
-  }
+  });
 </script>
