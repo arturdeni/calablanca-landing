@@ -138,11 +138,11 @@
   "timeline": {
     "title": "Estado Obra",
     "videoButton": "Ver video",
-    "currentStage": 1,
+    "currentStage": 2,
     "stages": [
       "Comercialización",
       "Permisos Obra",
-      "Inicio Obra\nQ1 2026",
+      "Inicio Obra\n12 de marzo",
       "Fin Obra",
       "Entrega de Llaves"
     ]

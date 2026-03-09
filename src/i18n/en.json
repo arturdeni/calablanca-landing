@@ -138,11 +138,11 @@
   "timeline": {
     "title": "Construction Status",
     "videoButton": "Watch video",
-    "currentStage": 1,
+    "currentStage": 2,
     "stages": [
       "Marketing",
       "Building Permits",
-      "Construction Start\nQ1 2026",
+      "Construction Start\nMarch 12",
       "Construction End",
       "Key Handover"
     ]
