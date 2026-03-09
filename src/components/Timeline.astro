@@ -932,7 +932,7 @@ const currentStage = t.currentStage ?? 1;
   if (formLoadedAt) formLoadedAt.value = Date.now().toString();
 
   // Form submission - listener on document to avoid querySelector timing issues
-  var GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxMg0EGyTQ_f-4wCI31AJzySY8C06wLuPqG18VXHCbU9GRFSLo81HyjZAFFo3b6bGnnUQ/exec';
+  var GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyEpkD_7VGqckzd9dpFriXccRTZvh96gkxqYnngVrn4oDRa5k3OPnIhnqvU-dMMoX72Ow/exec';
 
   document.addEventListener('submit', function(e) {
     if (!e.target || e.target.id !== 'contact-form') return;
