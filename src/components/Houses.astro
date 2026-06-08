@@ -9,7 +9,10 @@ const t = translations.houses;
   <div class="houses__container">
     <!-- Header -->
     <header class="houses__header">
-      <h2 class="houses__title" data-text-reveal="words">{t.title}</h2>
+      <div class="houses__heading">
+        <h2 class="houses__title" data-text-reveal="words">{t.title}</h2>
+        <p class="houses__subtitle">{t.subtitle}</p>
+      </div>
       <a href="#calculator" class="houses__calculator-cta">{t.calculatorCta}</a>
     </header>
 
@@ -79,8 +82,23 @@ const t = translations.houses;
     margin-bottom: var(--space-lg);
   }
 
+  .houses__heading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
   .houses__title {
     margin: 0;
+  }
+
+  .houses__subtitle {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--color-white);
+    opacity: 0.7;
+    max-width: 60ch;
   }
 
   .houses__calculator-cta {
