@@ -110,7 +110,7 @@
   },
   "houses": {
     "title": "Selection of Development Units",
-    "subtitle": "This table shows a representative selection of units. To check current availability, please contact us.",
+    "subtitle": "This table shows a representative selection of units.\nTo check current availability, please contact us.",
     "calculatorCta": "Calculate Mortgage",
     "columns": {
       "floor": "Floor",

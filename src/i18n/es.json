@@ -110,7 +110,7 @@
   },
   "houses": {
     "title": "Selección de Unidades de la Promoción",
-    "subtitle": "La presente tabla muestra una selección representativa de unidades. Para consultar la disponibilidad actualizada, ponte en contacto con nosotros.",
+    "subtitle": "La presente tabla muestra una selección representativa de unidades.\nPara consultar la disponibilidad actualizada, ponte en contacto con nosotros.",
     "calculatorCta": "Calcular Hipoteca",
     "columns": {
       "floor": "Planta",
